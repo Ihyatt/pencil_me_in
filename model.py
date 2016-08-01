@@ -59,7 +59,7 @@ class UserImage(db.Model):
 class Event(db.Model):
 	"""User's events"""
 
-	___tablename___ = 'events'
+	___tablename___ = "events"
 
 	event_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 	event_title = db.Column(db.String(100), nullable=True)
@@ -89,7 +89,7 @@ class EventImage(db.Model):
 class EventRequest(db.Model):
 	"""User's events request"""
 
-	___tablename___ = 'event_requests'
+	___tablename___ = "event_requests"
 
 	event_request_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 	user_id =  db.Column(db.Integer, db.ForeignKey('users.user_id'))
