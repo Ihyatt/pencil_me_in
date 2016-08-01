@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<img src="/static/images/{{image.image}}" class="img-thumbnail img-responsive" alt="Cinque Terre" width="300"> <br>
+
+First Name: {{user.first_name}}<br>
+Last Name: {{user.last_name}}<br>
+email: {{user.email}}<br>
+
 
 {% endblock %}

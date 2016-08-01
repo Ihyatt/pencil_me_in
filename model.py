@@ -3,7 +3,10 @@
 from flask_sqlalchemy import SQLAlchemy
 import bcrypt
 import os
-
+from sqlalchemy import Column, ForeignKey, Integer, String, Date, Float
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
 from flask import Flask
 
 db = SQLAlchemy()
@@ -59,7 +62,7 @@ class UserImage(db.Model):
 class Event(db.Model):
 	"""User's events"""
 
-	___tablename___ = "events"
+	__tablename__ = "events"
 
 	event_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 	event_title = db.Column(db.String(100), nullable=True)
@@ -70,7 +73,7 @@ class Event(db.Model):
 	address = db.Column(db.String(100), nullable=True)
 
 	event_image = db.relationship('EventImage', uselist = False, backref=db.backref("events"))
-	user = db.relationship('User', backref="events")
+	user = db.relationship('User', backref=db.backref("events"))
 
 
 ##############################################################################
@@ -89,15 +92,15 @@ class EventImage(db.Model):
 class EventRequest(db.Model):
 	"""User's events request"""
 
-	___tablename___ = "event_requests"
+	__tablename__ = "event_requests"
 
 	event_request_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 	user_id =  db.Column(db.Integer, db.ForeignKey('users.user_id'))
 	event_id = db.Column(db.Integer, db.ForeignKey('events.event_id'))
 	accepted = db.Column(db.Boolean, nullable = True)
 
-	user = db.relationship('User', backref="event_requests")
-	event = db.relationship('Event', backref="event_requests")
+	user = db.relationship('User', backref=db.backref("event_requests"))
+	event = db.relationship('Event', backref=db.backref("event_requests"))
 
 
 ##############################################################################
@@ -118,6 +121,7 @@ if __name__ == "__main__":
 	from server import app
 	connect_to_db(app)
 	print "Connected to DB."
+
 
 
 	

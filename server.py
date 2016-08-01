@@ -10,11 +10,11 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from model import User, UserImage, Event, EventImage, EventRequest, connect_to_db, db
 from werkzeug import secure_filename
-import smtplib
-from email.mime.text import MIMEText
 
 
-UPLOAD_FOLDER = '/Users/Inashyatt1/desktop/camp-buddy/static/images'
+
+
+UPLOAD_FOLDER = '/Users/Inashyatt1/desktop/pencilmein/static/images'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
@@ -31,6 +31,12 @@ app.jinja_env.undefined = StrictUndefined
 def localhost():
 
 	return render_template("homepage.html")
+
+@app.route('/register', methods=['GET'])
+def register_form():
+    """Shows user sign-up"""
+
+    return render_template("register.html")
 
 @app.route('/register', methods=['POST'])
 def register_process():
@@ -67,29 +73,30 @@ def register_process():
 		flash('You were successfully logged in')
 
 
-	if file_:
-		filename = secure_filename(file_.filename)
-		file_.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+		if file_:
+			filename = secure_filename(file_.filename)
+			file_.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-	user = User(email=email, password=password, first_name=first_name, last_name=last_name)
-	db.session.add(user)
-  
-	session["user_id"] = user.user_id
+		user = User(email=email, password=password, first_name=first_name, last_name=last_name)
+		db.session.add(user)
+	  
+		session["user_id"] = user.user_id
 
-	user_image = UserImage(user_id=session["user_id"], image=filename)
+		user_image = UserImage(user_id=session["user_id"], image=filename)
+		db.session.add(user_image)
 
-	db.session.commit()
+		db.session.commit()
 
-	flash("Hello %s!" % user.username)
+		flash("Hello %s!" % user.username)
 
-	return redirect("/users/%s" % user.user_id)
+		return redirect("/users/%s" % user.user_id)
 
 
 @app.route('/login', methods=['GET'])
 def login_form():
 	"""Show login form"""
 
-	return render_template("log_in.html")
+	return render_template("login.html")
 
 
 @app.route('/login', methods=['POST'])
@@ -128,8 +135,9 @@ def user_page(user_id):
 	"""Users profile page"""
    
 	user = User.query.get(user_id)
+ 	image = user.user_image
 	   
-	return render_template("profile.html", user=user)
+	return render_template("profile.html", user=user, image=image)
 
 
 
@@ -147,5 +155,6 @@ if __name__ == "__main__":
 	if app.debug:
 		DebugToolbarExtension(app)
 
-	app.run()
+	app.run(debug=True)
+	print 'I am here'
 
