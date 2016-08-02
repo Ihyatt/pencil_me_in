@@ -27,17 +27,17 @@ class User(db.Model):
 	last_name = db.Column(db.String(20), nullable=True)
 	salt = db.Column(db.String(50), nullable=True)
 
-	user_image = db.relationship('UserImage', uselist = False, backref=db.backref("users"))
+	user_image = db.relationship('UserImage', uselist=False, backref=db.backref("users"))
 
 
-	def __init__(self, email, password, first_name, list_name):
+	def __init__(self, email, password, first_name, last_name):
 		"""initializer"""
 
 		self.salt = bcrypt.gensalt()
 		self.email = email
-		self.password = bcrypt.hashpw(password.encode('utf-8'), self.salt)
 		self.first_name = first_name
 		self.last_name = last_name
+		self.password = bcrypt.hashpw(password.encode('utf-8'), self.salt)
 
 	def verify_password(self, password):
 		"""verifies user's password"""
@@ -55,6 +55,8 @@ class UserImage(db.Model):
 	user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
 	image = db.Column(db.String(1500), nullable=True)
 
+	user = db.relationship('User', backref=db.backref("user_images"))
+
 
 
 ##############################################################################
@@ -65,6 +67,7 @@ class Event(db.Model):
 	__tablename__ = "events"
 
 	event_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+	user_id = user_id =  db.Column(db.Integer, db.ForeignKey('users.user_id'))
 	event_title = db.Column(db.String(100), nullable=True)
 	event_date = db.Column(db.String(100), nullable=True)
 	study_location = db.Column(db.String(100), nullable=True)
@@ -83,8 +86,10 @@ class EventImage(db.Model):
 	__tablename__ = "event_images"
 
 	image_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-	event_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+	event_id = db.Column(db.Integer, db.ForeignKey('events.event_id'))
 	image = db.Column(db.String(1500), nullable=True)
+
+	event = db.relationship('Event', backref=db.backref("event_images"))
 
 
 ##############################################################################

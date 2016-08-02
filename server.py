@@ -20,6 +20,7 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 app = Flask(__name__)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
 app.secret_key = os.getenv("SECRET_KEY", "19kittiesareawesome89")
@@ -50,23 +51,23 @@ def register_process():
 
 	if User.query.filter(User.email == email).all():
 		flash('You are already a user!')
-		return render_template("log_in.html")
+		return render_template("login.html")
 
 	elif password == '':
 		flash('Please type in a password')
-		return render_template("register_form.html")
+		return render_template("register.html")
 
 	elif email == '':
 		flash('Please type in your email')
-		return render_template("register_form.html")
+		return render_template("register.html")
 
 	elif first_name == '':
 		flash('Please type in your first name')
-		return render_template("register_form.html")
+		return render_template("register.html")
 
 	elif last_name == '':
 		flash('Please type in your last name')
-		return render_template("register_form.html")
+		return render_template("register.html")
 
 	else:
 		
@@ -79,6 +80,7 @@ def register_process():
 
 		user = User(email=email, password=password, first_name=first_name, last_name=last_name)
 		db.session.add(user)
+		db.session.commit()
 	  
 		session["user_id"] = user.user_id
 
@@ -87,7 +89,7 @@ def register_process():
 
 		db.session.commit()
 
-		flash("Hello %s!" % user.username)
+		flash("Hello %s!" % user.first_name)
 
 		return redirect("/users/%s" % user.user_id)
 
@@ -136,6 +138,7 @@ def user_page(user_id):
    
 	user = User.query.get(user_id)
  	image = user.user_image
+ 	
 	   
 	return render_template("profile.html", user=user, image=image)
 
