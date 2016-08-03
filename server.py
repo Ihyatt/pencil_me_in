@@ -11,6 +11,12 @@ from flask_debugtoolbar import DebugToolbarExtension
 from model import User, UserImage, Event, EventImage, EventRequest, connect_to_db, db
 from werkzeug import secure_filename
 
+import cgi
+import logging
+import sys
+import psycopg2
+import urlparse
+
 
 
 
@@ -148,9 +154,10 @@ def update_image():
 	"""Updates image"""
 
 	user = User.query.get(session["user_id"])
-	email = request.form.get("email")
+
+	user_email = request.args.get("email")
 	print "poop"
-	print email 
+	print user_email 
 	print user
 	u_image = user.user_image
 	print u_image
@@ -180,13 +187,13 @@ def update_image():
 
 if __name__ == "__main__":
   
-	app.debug = True
+	app.debug = False
 
 	connect_to_db(app)
 
 	if app.debug:
 		DebugToolbarExtension(app)
 
-	app.run(debug=True)
+	app.run()
 	print 'I am here'
 

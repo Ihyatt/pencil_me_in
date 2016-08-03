@@ -58,15 +58,11 @@ Last Name: {{user.last_name}}<br>
 
             reader.onload = function (e) {
                 $('.profile-pic').attr('src', e.target.result);
-
             }
-    
             reader.readAsDataURL(input.files[0]);
-
         }
     }
     
-
     $(".file-upload").on('change', function(){
         readURL(this);
     });
@@ -81,14 +77,14 @@ function showImage(results){
 }
 
 function submitImage(){
-	var image = $('.profile-pic').val()
+	var image = $('#upload').val()
 	var email = $('#user-email').val()
 
 	var imageInfo = {
-		"image":image,
+		"image": image,
 		"email": email
 	};
-	
+
 	$.post('/edit_image', imageInfo, showImage)
 }
 
