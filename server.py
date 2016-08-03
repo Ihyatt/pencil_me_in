@@ -143,6 +143,35 @@ def user_page(user_id):
 	return render_template("profile.html", user=user, image=image)
 
 
+@app.route("/edit_image", methods=['POST'])
+def update_image():
+	"""Updates image"""
+
+	user = User.query.get(session["user_id"])
+	email = request.form.get("email")
+	print "poop"
+	print email 
+	print user
+	u_image = user.user_image
+	print u_image
+
+	file_ = request.files.get("image")
+	print file_
+
+	if file_:
+		filename = secure_filename(file_.filename)
+		file_.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+		# db.session.add(u_image)
+		u_image.image = filename
+		
+		db.session.commit()
+
+	return "image added"
+    
+
+
+
 
 
 
