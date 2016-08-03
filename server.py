@@ -187,13 +187,13 @@ def update_image():
 
 if __name__ == "__main__":
   
-	app.debug = False
+	app.debug = True
 
 	connect_to_db(app)
 
 	if app.debug:
 		DebugToolbarExtension(app)
 
-	app.run()
+	app.run(debug=True)
 	print 'I am here'
 
