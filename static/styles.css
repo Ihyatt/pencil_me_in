@@ -1,0 +1,27 @@
+/*profile page*/
+#wrapper .text {
+position:relative;
+bottom:30px;
+left:0px;
+visibility:hidden;
+}
+
+#wrapper:hover .text {
+visibility:visible;
+}
+
+.hover:hover {
+    opacity: 0.5;
+}
+/*upload button for profile image*/
+.upload-button {
+border:2px solid black;
+
+margin: 10px;
+}
+
+.save-button{
+	border:2px solid black;
+
+margin: 10px;
+}
