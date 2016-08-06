@@ -2,7 +2,7 @@
 
 import os
 from datetime import datetime
-from jinja2 import StrictUndefined
+# from jinja2 import StrictUndefined
 # from flask import send_from_directory
 # using Katie L. info
 import psycopg2
@@ -15,15 +15,15 @@ import sys
 
 
 from flask import Flask, render_template, redirect, request, flash, session, jsonify, abort
-from flask_debugtoolbar import DebugToolbarExtension
+# from flask_debugtoolbar import DebugToolbarExtension
 # using to hash passwords
 
 
 # gets access to yelp.py file
-# import yelp
+import yelp
 # import uber
-# import logging
-# import sys
+import logging
+import sys
 
 from model import User, UserImage, Event, EventImage, EventRequest, connect_to_db, db
 from werkzeug import secure_filename
@@ -42,7 +42,9 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
-app.secret_key = os.getenv("SECRET_KEY", "19kittiesareawesome89")
+app.secret_key = "19kittiesareawesome89"
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.DEBUG)
 
 urlparse.uses_netloc.append("postgres")
 url = urlparse.urlparse(os.environ["DATABASE_URL"])
@@ -238,14 +240,12 @@ def create_event():
 
 
 if __name__ == "__main__":
-  
-	app.debug = True
-
-	connect_to_db(app)
-
-	if app.debug:
-		DebugToolbarExtension(app)
-
-	app.run(debug=True)
-	print 'I am here'
+	app.debug = False
+	app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+	connect_to_db(app, os.environ.get("DATABASE_URL"))
+	# Use the DebugToolbar
+	# DebugToolbarExtension(app)
+	DEBUG = "NO_DEBUG" not in os.environ
+	PORT = int(os.environ.get("PORT", 5000))
+	app.run(host="0.0.0.0", port=PORT, debug=DEBUG)
 

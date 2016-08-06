@@ -2,7 +2,7 @@ from yelpapi import YelpAPI
 import os
 
 yelp_api = YelpAPI(
-    consumer_key=os.environ['yelp_consumer_key'],
+    consumer_key=os.environ["yelp_consumer_key"],
     consumer_secret=os.environ['yelp_consumer_secret'],
     token=os.environ['yelp_token'],
     token_secret=os.environ['yelp_token_secret']
