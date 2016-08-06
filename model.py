@@ -3,11 +3,6 @@
 from flask_sqlalchemy import SQLAlchemy
 import bcrypt
 import os
-from sqlalchemy import Column, ForeignKey, Integer, String, Date, Float
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
-from flask import Flask
 
 db = SQLAlchemy()
 

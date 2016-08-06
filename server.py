@@ -2,20 +2,33 @@
 
 import os
 from datetime import datetime
-from jinja2 import StrictUndefined 
+from jinja2 import StrictUndefined
+# from flask import send_from_directory
+# using Katie L. info
+import psycopg2
+import urlparse
+import yelp
+import logging
+import sys
+
+
+
 
 from flask import Flask, render_template, redirect, request, flash, session, jsonify, abort
-
 from flask_debugtoolbar import DebugToolbarExtension
+# using to hash passwords
+
+
+# gets access to yelp.py file
+# import yelp
+# import uber
+# import logging
+# import sys
 
 from model import User, UserImage, Event, EventImage, EventRequest, connect_to_db, db
 from werkzeug import secure_filename
 
-import cgi
-import logging
-import sys
-import psycopg2
-import urlparse
+
 
 
 
@@ -30,6 +43,17 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
 app.secret_key = os.getenv("SECRET_KEY", "19kittiesareawesome89")
+
+urlparse.uses_netloc.append("postgres")
+url = urlparse.urlparse(os.environ["DATABASE_URL"])
+
+conn = psycopg2.connect(
+    database=url.path[1:],
+    user=url.username,
+    password=url.password,
+    host=url.hostname,
+    port=url.port
+)
 
 
 app.jinja_env.undefined = StrictUndefined
@@ -149,22 +173,46 @@ def user_page(user_id):
 	return render_template("profile.html", user=user, image=image)
 
 
-@app.route("/edit_image", methods=['POST'])
-def update_image():
-	"""Updates image"""
+# @app.route("/uploadajax", methods=['POST'])
+# def update_image():
+# 	"""Updates image"""
+
+# 	image_info = request.form.get("imageInfo")
+# 	# user_email = image_info["email"]
+
+# 	user = User.query.get(session["user_id"])
+# 	user_email = request.form.get("email")
+
+
+# 	print image_info
+# 	print "poop"
+# 	print user_email 
+# 	print user
+# 	u_image = user.user_image
+# 	print u_image
+
+# 	# file_ = request.files.args.get("image")
+# 	# print file_
+
+# 	# if file_:
+# 	# 	filename = secure_filename(file_.filename)
+# 	# 	file_.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+# 	# 	# db.session.add(u_image)
+# 	# 	u_image.image = filename
+		
+# 	# 	db.session.commit()
+
+# 	return "image added"
+    
+
+@app.route('/upload-image', methods=['POST'])
+def image_update():
 
 	user = User.query.get(session["user_id"])
-
-	user_email = request.args.get("email")
-	print "poop"
-	print user_email 
-	print user
 	u_image = user.user_image
-	print u_image
-
-	file_ = request.files.get("image")
+	file_ = request.files["image-upload"]
 	print file_
-
 	if file_:
 		filename = secure_filename(file_.filename)
 		file_.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
@@ -174,10 +222,14 @@ def update_image():
 		
 		db.session.commit()
 
-	return "image added"
-    
+	return redirect("/users/%s" % user.user_id)
 
 
+@app.route('/create_event', methods=['GET'])
+def create_event():
+    """Show event creation page"""
+
+    return render_template("event.html")
 
 
 

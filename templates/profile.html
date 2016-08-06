@@ -18,6 +18,7 @@
   	
 
   <!-- Modal -->
+  <form action="/upload-image" method="POST" enctype="multipart/form-data">
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
@@ -30,7 +31,9 @@
         	<img src="/static/images/{{image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="300"> 
 
 			<div class="upload-button" style="cursor:pointer">Upload Image</div>
-			<div class="save-button" style="cursor:pointer">Save</div>
+    <!--   <button id="upload-file-btn" type="button">Upload</button> -->
+       <button type="submit" class="btn btn-default" value="Submit">Submit</button>
+			<!-- <div class="save-button" style="cursor:pointer">Save</div> -->
 		
        		<input type="file" name="image-upload" class="file-upload" id="upload" style="display: none;" accept="image/*" >
        
@@ -41,13 +44,17 @@
       </div>
     </div>
   </div>
+  </form>
 </div>
+
 
 
 
 First Name: {{user.first_name}}<br>
 Last Name: {{user.last_name}}<br>
 <span id="user-email"> Email: {{user.email}} </span><br>
+<a href="/create_event">Create Event</a>
+
 
 
 <script>
@@ -71,25 +78,48 @@ Last Name: {{user.last_name}}<br>
        $(".file-upload").click();
     });
 
-function showImage(results){
-  console.log("image added");
+
+
+
+
+// $(function() {
+//     $('#upload-file-btn').click(function() {
+//         var form_data = new FormData($('#upload-file')[0]);
+//         $.ajax({
+//             type: 'POST',
+//             url: '/uploadajax',
+//             data: form_data,
+//             contentType: false,
+//             cache: false,
+//             processData: false,
+//             async: false,
+//             success: function(data) {
+//                 console.log('Success!');
+//             },
+//         });
+//     });
+// });
+
+// function showImage(results){
+//   console.log("image added");
   
-}
+// };
 
-function submitImage(){
-	var image = $('#upload').val()
-	var email = $('#user-email').val()
+// function submitImage(){
+// 	var image = $('#upload').val()
+// 	var email = $('#user-email').val()
+//   console.log(email);
 
-	var imageInfo = {
-		"image": image,
-		"email": email
-	};
+// 	var imageInfo = {
+// 		"image": image,
+// 		"email": email
+// 	};
 
-	$.post('/edit_image', imageInfo, showImage)
-}
+// 	$.post('/edit_image', imageInfo, showImage)
+// };
 
 
-$(".save-button").click(submitImage)
+// $(".save-button").click(submitImage)
 
 
 
