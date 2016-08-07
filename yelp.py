@@ -1,12 +1,23 @@
 from yelpapi import YelpAPI
+import yelpapi
 import os
 
+
+try:
+    consumer_key = os.environ['yelp_consumer_key']
+    consumer_secret = os.environ['yelp_consumer_secret']
+    token = os.environ['yelp_token']
+    token_secret = os.environ['yelp_token_secret']    
+except KeyError:
+    print "\n\nSECRETS NOT FOUND. SOURCE THEM.\n\n"
+
+
 yelp_api = YelpAPI(
-    consumer_key=os.environ["yelp_consumer_key"],
-    consumer_secret=os.environ['yelp_consumer_secret'],
-    token=os.environ['yelp_token'],
-    token_secret=os.environ['yelp_token_secret']
-)
+    consumer_key,
+    consumer_secret,
+    token,
+    token_secret
+    )
 
 
 def get_results(location, term):
@@ -35,7 +46,7 @@ def get_results(location, term):
                             'neighborhoods': None,
                             'address': restaurant['location']['address'],
                             'url': restaurant['url']})
-    # print results
-    return results
+    print results
+    # return results
 
-# get_results("chicago", "food")
+get_results("chicago", "food")

@@ -2,7 +2,7 @@
 
 import os
 from datetime import datetime
-# from jinja2 import StrictUndefined
+from jinja2 import StrictUndefined
 # from flask import send_from_directory
 # using Katie L. info
 import psycopg2
@@ -14,8 +14,8 @@ import sys
 
 
 
-from flask import Flask, render_template, redirect, request, flash, session, jsonify, abort
-# from flask_debugtoolbar import DebugToolbarExtension
+from flask import Flask, render_template, redirect, request, flash, session, jsonify
+from flask_debugtoolbar import DebugToolbarExtension
 # using to hash passwords
 
 
@@ -39,23 +39,23 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 app = Flask(__name__)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['TEMPLATES_AUTO_RELOAD'] = True
+# app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
 app.secret_key = "19kittiesareawesome89"
-app.logger.addHandler(logging.StreamHandler(sys.stdout))
-app.logger.setLevel(logging.DEBUG)
+# app.logger.addHandler(logging.StreamHandler(sys.stdout))
+# app.logger.setLevel(logging.DEBUG)
 
-urlparse.uses_netloc.append("postgres")
-url = urlparse.urlparse(os.environ["DATABASE_URL"])
+# urlparse.uses_netloc.append("postgres")
+# url = urlparse.urlparse(os.environ["DATABASE_URL"])
 
-conn = psycopg2.connect(
-    database=url.path[1:],
-    user=url.username,
-    password=url.password,
-    host=url.hostname,
-    port=url.port
-)
+# conn = psycopg2.connect(
+#     database=url.path[1:],
+#     user=url.username,
+#     password=url.password,
+#     host=url.hostname,
+#     port=url.port
+# )
 
 
 app.jinja_env.undefined = StrictUndefined
@@ -240,12 +240,20 @@ def create_event():
 
 
 if __name__ == "__main__":
-	app.debug = False
-	app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
-	connect_to_db(app, os.environ.get("DATABASE_URL"))
+
+	app.debug = True
+	connect_to_db(app)
 	# Use the DebugToolbar
-	# DebugToolbarExtension(app)
-	DEBUG = "NO_DEBUG" not in os.environ
-	PORT = int(os.environ.get("PORT", 5000))
-	app.run(host="0.0.0.0", port=PORT, debug=DEBUG)
+	DebugToolbarExtension(app)
+	app.run()
+
+
+	# app.debug = False
+	# app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+	# connect_to_db(app, os.environ.get("DATABASE_URL"))
+	# # Use the DebugToolbar
+	# # DebugToolbarExtension(app)
+	# DEBUG = "NO_DEBUG" not in os.environ
+	# PORT = int(os.environ.get("PORT", 5000))
+	# app.run(host="0.0.0.0", port=PORT, debug=DEBUG)
 
