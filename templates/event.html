@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+
+	<img src="/static/img/pinata.jpg" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="300"> 
+
+	<div class="upload-button">Upload Image</div>
+       	<input type="file" name="image-upload" class="file-upload" id="upload" style="display: none;" accept="image/*" > <br>
+
+
+
+<div class="search-form panel">
+        <h2>Search for places to try</h2>
+        <form action='/search-restaurant.json' method='POST' id="search">
+          <label for="location">where: </label>
+          <br>
+          <input type="text" name="location" id="location" placeholder="e.g. San Francisco">
+          <br>
+          <label for="term">what: </label>
+          <br>
+          <input type="text" name="term" id="term" placeholder="e.g. pizza">
+          <br>
+          <input class="btn btn-primary yelp-search" type="submit" value="Search">
+        </form>
+      </div> 
+
+<div class="panel hidden results" id="yelpResultsPanel">
+        <div class="panel-body fixed-panel">
+          <div class="tab-content">
+                <div class="tab-pane active" id="results">
+                </div>
+            </div>
+        </div>
+      </div>
+
+
+
+<script src="/static/yelp.js"></script>
+
+
+{% endblock %}

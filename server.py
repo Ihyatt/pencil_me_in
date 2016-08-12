@@ -39,23 +39,11 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 app = Flask(__name__)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-# app.config['TEMPLATES_AUTO_RELOAD'] = True
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
 app.secret_key = "19kittiesareawesome89"
-# app.logger.addHandler(logging.StreamHandler(sys.stdout))
-# app.logger.setLevel(logging.DEBUG)
 
-# urlparse.uses_netloc.append("postgres")
-# url = urlparse.urlparse(os.environ["DATABASE_URL"])
-
-# conn = psycopg2.connect(
-#     database=url.path[1:],
-#     user=url.username,
-#     password=url.password,
-#     host=url.hostname,
-#     port=url.port
-# )
 
 
 app.jinja_env.undefined = StrictUndefined
@@ -235,6 +223,17 @@ def create_event():
 
 
 
+@app.route('/search-restaurant.json', methods=['POST'])
+def search_restaurant():
+    """Allows user to search restaurant based on location and food term"""
+
+    location = request.form.get('location')
+    term = request.form.get('term')
+
+    results = yelp.get_results(location=location, term=term)
+    return jsonify(results=results)
+
+
 
 
 
@@ -248,12 +247,5 @@ if __name__ == "__main__":
 	app.run()
 
 
-	# app.debug = False
-	# app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
-	# connect_to_db(app, os.environ.get("DATABASE_URL"))
-	# # Use the DebugToolbar
-	# # DebugToolbarExtension(app)
-	# DEBUG = "NO_DEBUG" not in os.environ
-	# PORT = int(os.environ.get("PORT", 5000))
-	# app.run(host="0.0.0.0", port=PORT, debug=DEBUG)
+	
 
