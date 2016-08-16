@@ -2,11 +2,12 @@
 
 // This goes at the top because it needs to be defined to get called when results are displayed
 function scheduleEventListerForRestaurantButtons(){
-  // 
-  // $('.restaurant-button').click(showRestaurantInfo);
+ 
   $('.add-button').click(addRestaurant);
+  console.log("here");
 
 }
+
 
 // AJAX to display results of query using Yelp API response
 function displayResults(data) {
@@ -94,6 +95,7 @@ $("#search").on("submit", submitSearch);
 
 // sends restaurant data to server to add restaurant to list
 function addRestaurant(evt){
+  console.log("poop");
 
     var id = this.id; // this is the id on the button we clicked, which is the image's id
     var restaurantName = $(this).data('restaurant-name');
@@ -108,22 +110,190 @@ function addRestaurant(evt){
 
     console.log(restaurantName);
 
-    $.post("/add-restaurant.json", {'id': id,
+   
+
+    $.post("/add-restaurant", {'id': id,
                                'restaurant_name': restaurantName,
                                'yelp_rating': yelp_rating,
                                'latitude': latitude,
                                'longitude': longitude,
                                'list_id': listId,
                                'address': address,
+                               'event_id': getEventId,
                                'categories': categories,
                                'neighborhoods': neighborhoods,
                                'url': url},
                                getRestaurantsFromDB);
+    function getEventId() {
+    var componenets = window.location.href.split("/");
+    var idx = componenets.length - 1
+    return componenets[idx]
+    }
 
     $('.add-button').html("Added!");
     
 }
 
+
+// ########################################################################
+
+function getRestaurantsFromDB(data){
+  // var listId = $('#list-info').data('listid');
+  // var id = data.id;
+  console.log("in the get restaurants from db function");
+  // $.post('/return-restaurants.json', {'list_id': listId, 'id':id}, addRestaurantToDBsuccess);
+
+}
+
+// function addRestaurantToDBsuccess(data){
+
+//     console.log(data.status);
+//     var id = data.id;
+
+//     $('.add-button').addClass('btn-success');
+
+//     // JUST TESTING OUT SOME PAGE RELOAD STUFF 
+//     // window.location.reload();
+//     var listings = "";
+
+//     for (var i = 0; i < data.results.length; i++) {
+//       listings = listings + 
+//       "<li id=" + "'" + data.results[i].restaurant_id + "'" + 
+//       " data-lat="+ "'" + data.results[i].latitude + "'" + 
+//       " data-lng=" + "'" + data.results[i].longitude + "'" + 
+//       " data-name="+ '"' + data.results[i].restaurant_name + '"' + 
+//       " data-yelp="+ "'" + data.results[i].yelp_rating + "'" + ">" +
+//       "<table><tr><td><button class='remove-restaurant btn btn-danger' type='button' data-restid=" + 
+//       "'" + data.results[i].restaurant_id + "'" + ">X</button></td>" +
+//       "<td><button class='visited-restaurant btn btn-warning' type='button' data-restid=" + 
+//       "'" + data.results[i].restaurant_id + "'"+ ">Visited</button></td><td>" +
+//       data.results[i].restaurant_name + "</td></tr></table></li>";
+//     }
+//     // console.log(listings);
+//     $('#restaurant-list').html(listings);
+//     $(".remove-restaurant").click(removeRestaurant);
+//     $(".star-restaurant").click(starRestaurant);
+//     $(".visited-restaurant").click(markAsVisited);
+//     initMap();
+// }
+
+// #######################################################################
+// sends restaurant id and list id to server to remove restaurant from list
+// function removeRestaurantSuccess(result) {
+//     console.log(result.status);
+//     window.location.reload();
+
+// }
+
+// function removeRestaurant(evt) {
+//     console.log('in remove function')
+//     var remove = confirm("are you sure you want to remove this restaurant?")
+//     var restaurantId = $(this).data('restid');
+//     var listId = $("#list-info").data('listid');
+
+//     if (remove) {
+//       $.post("/delete-restaurant.json", {'restaurant_id': restaurantId,
+//                                  'list_id': listId},
+//                                   removeRestaurantSuccess);
+//     }
+
+// }
+
+// $(".remove-restaurant").click(removeRestaurant);
+
+// ###############################################################
+// sends list info to server to remove list
+// function removeListSuccess(result) {
+//     console.log(result.status);
+//     window.location.reload();
+
+// }
+
+// function removeList(evt) {
+//     console.log("made it to the function");
+//     var remove = confirm("are you sure you want to remove this category?")
+//     console.log(remove);
+
+//     var listId = $(this).data('listid');
+
+//     if (remove) {
+//       $.post("/delete-list.json", {'list_id': listId},
+//                                   removeListSuccess);
+//     }
+
+// }
+
+// $(".remove-list").click(removeList);
+
+// ################################################################
+// sends group info to server to remove user from group
+// function leaveGroupSuccess(result) {
+//     console.log(result.status);
+//     window.location.reload();
+// }
+
+// function leaveGroup(evt) {
+//     console.log("made it to the function");
+//     var remove = confirm("are you sure you want to leave this group?")
+//     console.log(remove);
+
+//     var groupId = $(this).data('groupid');
+
+//     if (remove) {
+//       $.post("/leave-group", {'group_id': groupId},
+//                                   leaveGroupSuccess);
+//     }
+
+// }
+
+// $(".leave-group").click(leaveGroup);
+
+// ################################################################
+// STAR RESTAURANT FUNCTIONS
+
+// function starRestaurantSuccess(result){
+
+//     console.log(result.status);
+
+//     var id = result.id;
+
+//     $('#'+ id + '.star-restaurant').toggleClass("starred"); // give our user some feedback
+// }
+
+// function starRestaurant(evt){
+
+//     var restId = $(this).data('restid');
+
+//     console.log("in star restaurant function")
+
+//     $.post("/star-restaurant.json", {'rest_id': restId},
+//                                starRestaurantSuccess);
+    
+// }
+
+// $('.star-restaurant').click(starRestaurant);
+
+// ###################################################################
+// marks a restaurant as visited
+
+// function markAsVisitedSuccess(data) {
+//   var id = data.id;
+
+//   // $('#' + id).css('color', 'red');
+//   window.location.reload();
+// }
+
+// function markAsVisited(evt) {
+//   var restId = $(this).data('restid');
+//   var listId = $('#restaurant-list').data('listid');
+
+//   console.log("in markAsVisited function");
+
+//   $.post("/mark-visited.json", {'rest_id': restId, 'list_id': listId},
+//                           markAsVisitedSuccess);
+// }
+
+// $(".visited-restaurant").click(markAsVisited);
 
 // #################################################################
 // vanish flash messages

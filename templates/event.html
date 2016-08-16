@@ -6,7 +6,7 @@
 	<div class="upload-button">Upload Image</div>
        	<input type="file" name="image-upload" class="file-upload" id="upload" style="display: none;" accept="image/*" > <br>
 
-
+<div class="panel" id="my-map"></div>
 
 <div class="search-form panel">
         <h2>Search for places to try</h2>
@@ -32,9 +32,17 @@
         </div>
       </div>
 
+<div class="panel hidden title" id="infobox"></div>
 
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 
 <script src="/static/yelp.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKhBZl1OisONHaKSXbMVF0evV3XsVqmlE"></script>
+<script src="/static/googlemaps.js"></script>
+<script src="https://code.jquery.com/jquery.js"></script>
 
 
 {% endblock %}

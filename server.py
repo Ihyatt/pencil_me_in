@@ -218,8 +218,21 @@ def image_update():
 @app.route('/create_event', methods=['GET'])
 def create_event():
     """Show event creation page"""
+    event = Event(user_id=session["user_id"], event_title="", event_date="", study_location="", latitude=0.1, longitude=0.1, address="")
+    db.session.add(event)
+    db.session.commit()
 
-    return render_template("event.html")
+    return redirect("/event/%s" % event.event_id)
+
+@app.route("/event/<int:event_id>")
+def event_page(event_id):
+	"""Users event page"""
+   
+	event = Event.query.get(event_id)
+ 	
+ 	
+	   
+	return render_template("event.html", event=event)
 
 
 
@@ -234,7 +247,26 @@ def search_restaurant():
     return jsonify(results=results)
 
 
+@app.route('/add-restaurant', methods=['POST'])
+def add_restaurant():
+    """Allows user to add restaurant to a list"""
 
+    event_id = request.form.get('event_id')
+ 
+    event = Event.query.get(event_id)
+  
+    item_id = request.form.get('id')
+    event.study_location = request.form.get('restaurant_name')
+    event.latitude = request.form.get('latitude')
+    event.longitude = request.form.get('longitude')
+    event.address = request.form.get('address')
+    neighborhoods = request.form.get('neighborhoods')
+    print neighborhoods
+
+    db.session.commit()
+
+    return "success"
+  
 
 
 

@@ -27,3 +27,12 @@ margin: 10px;
 }
 
 
+#my-map.small {
+    height: 400px;
+}
+
+#my-map {
+    height: 400px;
+    width: 400px;
+
+}
