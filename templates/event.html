@@ -15,8 +15,8 @@
     <div class='col-md-5'>
         <div class="form-group">
             <div class='input-group date' id='datetimepicker6'>
-                <input type='text' class="form-control" />
-                <span class="input-group-addon">
+                <input type='text' id='start-date'class="form-control" />
+                <span class="input-group-addon" id="start">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
             </div>
@@ -25,8 +25,8 @@
     <div class='col-md-5'>
         <div class="form-group">
             <div class='input-group date' id='datetimepicker7'>
-                <input type='text' class="form-control" />
-                <span class="input-group-addon">
+                <input type='text' id='end-date' class="form-control" />
+                <span class="input-group-addon" id="end">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
             </div>
@@ -34,11 +34,21 @@
     </div>
 </div>
 
+<ul id="friends">
+  {% for friend in friends %}
+  <li>
+    <div>
+      {{friend.first_name}}
+      <button type="button" class="request" data-friend-id="{{friend.user_id}}" id="{{friend.user_id}}">send request</button>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
 
 
 <div class="search-form panel">
-        <h2>Search for places to try</h2>
-        <form action='/search-restaurant.json' method='POST' id="search">
+        <h2>Search for study spots!</h2>
+        <form action='/search-location.json' method='POST' id="search">
           <label for="location">where: </label>
           <br>
           <input type="text" name="location" id="location" placeholder="e.g. San Francisco">
@@ -67,44 +77,16 @@
 
 
 
-<script src="/static/yelp.js"></script>
-<script src="/static/googlemaps.js"></script>
-
-
-<script type="text/javascript">
-$('#datetimepicker6').datetimepicker();
-            $('#datetimepicker7').datetimepicker({
-                useCurrent: false //Important! See issue #1075
-            });
-            $("#datetimepicker6").on("dp.change", function (e) {
-                $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
-            });
-            $("#datetimepicker7").on("dp.change", function (e) {
-                $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
-            });
 
 
 
-   var readURL = function(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
 
-            reader.onload = function (e) {
-                $('.profile-pic').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    
-    $(".file-upload").on('change', function(){
-        readURL(this);
-    });
-    
-    $(".upload-button").on('click', function() {
-       $(".file-upload").click();
-    });
+<script src="/static/js/yelp.js"></script>
+<script src="/static/js/googlemaps.js"></script>
+<script src="/static/js/image.js"></script>
+<script src="/static/js/calendar.js"></script>
 
-</script>
+
 
 
 

@@ -58,75 +58,9 @@ Last Name: {{user.last_name}}<br>
 
 
 
-<script>
-
-    var readURL = function(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('.profile-pic').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    
-    $(".file-upload").on('change', function(){
-        readURL(this);
-    });
-    
-    $(".upload-button").on('click', function() {
-       $(".file-upload").click();
-    });
 
 
 
-
-
-// $(function() {
-//     $('#upload-file-btn').click(function() {
-//         var form_data = new FormData($('#upload-file')[0]);
-//         $.ajax({
-//             type: 'POST',
-//             url: '/uploadajax',
-//             data: form_data,
-//             contentType: false,
-//             cache: false,
-//             processData: false,
-//             async: false,
-//             success: function(data) {
-//                 console.log('Success!');
-//             },
-//         });
-//     });
-// });
-
-// function showImage(results){
-//   console.log("image added");
-  
-// };
-
-// function submitImage(){
-// 	var image = $('#upload').val()
-// 	var email = $('#user-email').val()
-//   console.log(email);
-
-// 	var imageInfo = {
-// 		"image": image,
-// 		"email": email
-// 	};
-
-// 	$.post('/edit_image', imageInfo, showImage)
-// };
-
-
-// $(".save-button").click(submitImage)
-
-
-
-
-
-</script>
-
+<script type="/static/js/image.js"></script>
 
 {% endblock %}

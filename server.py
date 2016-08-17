@@ -218,7 +218,7 @@ def image_update():
 @app.route('/create_event', methods=['GET'])
 def create_event():
     """Show event creation page"""
-    event = Event(user_id=session["user_id"], event_title="", event_date="", study_location="", latitude=0.1, longitude=0.1, address="")
+    event = Event(user_id=session["user_id"], event_title="", event_start_date="", event_end_date="", study_location="", latitude=0.1, longitude=0.1, address="", neighborhood="")
     db.session.add(event)
     db.session.commit()
 
@@ -227,16 +227,20 @@ def create_event():
 @app.route("/event/<int:event_id>")
 def event_page(event_id):
 	"""Users event page"""
-   
+   	user = User.query.get(session["user_id"])
+
 	event = Event.query.get(event_id)
+	friends = User.query.filter(User.first_name != user.first_name).all()
+	
+	
  	
  	
 	   
-	return render_template("event.html", event=event)
+	return render_template("event.html", event=event, friends=friends)
 
 
 
-@app.route('/search-restaurant.json', methods=['POST'])
+@app.route('/search-location.json', methods=['POST'])
 def search_restaurant():
     """Allows user to search restaurant based on location and food term"""
 
@@ -255,18 +259,50 @@ def add_restaurant():
  
     event = Event.query.get(event_id)
   
-    item_id = request.form.get('id')
+    # item_id = request.form.get('id')
     event.study_location = request.form.get('restaurant_name')
     event.latitude = request.form.get('latitude')
     event.longitude = request.form.get('longitude')
     event.address = request.form.get('address')
-    neighborhoods = request.form.get('neighborhoods')
-    print neighborhoods
+    event.neighborhoods = request.form.get('neighborhoods')
+    
 
     db.session.commit()
 
     return "success"
-  
+
+# @app.route("/add-start", methods=['POST'])
+# def add_start_date():
+# 	"""updates start date"""
+# 	print " i am here"
+
+# 	event_id = request.form.get('event_id')
+# 	print event_id
+# 	event = Event.query.get(event_id)
+# 	print event
+
+# 	event_start_date = str(request.form.get('date'))
+# 	event.event_start_date = event_start_date
+
+# 	db.session.commit()
+# 	return "success"
+
+
+@app.route("/send-request", methods=['POST'])
+def send_request():
+	"""send request"""
+
+	event_id = request.form.get('event_id')
+	friend_id = request.form.get('request')
+
+	event_request = EventRequest(user_id=friend_id, event_id=event_id, accepted=True)
+
+	db.session.add(event_request)
+	db.session.commit()
+	return "friend added"
+
+	
+
 
 
 
