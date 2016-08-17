@@ -6,9 +6,9 @@ function sendRequest(evt) {
 
  function getEventId() {
     var components = window.location.href.split("/");
-    var lastSet = components[components.length - 1]
-    var idx = lastSet.slice(0,-1);
-    return idx
+    var componenets = window.location.href.split("/")
+    var idx = componenets.length - 1
+    return componenets[idx]
     }
   var requestItem = {
     "request": $(evt.target).data("friend-id"),

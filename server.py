@@ -20,10 +20,10 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 
 # gets access to yelp.py file
-import yelp
+# import yelp
 # import uber
-import logging
-import sys
+# import logging
+# import sys
 
 from model import User, UserImage, Event, EventImage, EventRequest, connect_to_db, db
 from werkzeug import secure_filename

@@ -124,11 +124,9 @@ function addRestaurant(evt){
                                },
                                getRestaurantsFromDB);
     function getEventId() {
-    var components = window.location.href.split("/");
-    var lastSet = components[components.length - 1]
-
-    var idx = lastSet.slice(0,-1);
-    return idx
+    var componenets = window.location.href.split("/")
+    var idx = componenets.length - 1
+    return componenets[idx]
     }
 
     $('.add-button').html("Added!");
@@ -139,70 +137,12 @@ function addRestaurant(evt){
 // ########################################################################
 
 function getRestaurantsFromDB(data){
-  // var listId = $('#list-info').data('listid');
-  // var id = data.id;
+ 
   console.log("in the get restaurants from db function");
-  // $.post('/return-restaurants.json', {'list_id': listId, 'id':id}, addRestaurantToDBsuccess);
+
 
 }
 
-// #########################################################################
-// get start and end date
-
-// function dateAdded(){
-//   console.log("date added");
-// }
-
-
-// function submitDate() {
-
-
-//  var date = $('#start-date').val();
-
-
-// function getEventId() {
-//     var componenets = window.location.href.split("/");
-//     var idx = componenets.length - 1
-//     return componenets[idx]
-//     }
-// var dateInfo = {
-//   "date" : date,
-//   "event_id" : getEventId
-// }
-
-
-// $.post("/add-start", dateInfo, dateAdded);
-
-// }
-
-
-// $('#start-date').click( submitDate)
-
-// #################################################################
-// send request
-// function requestSent() {
-//   console.log("request sent");
-// }
-
-// function sendRequest(evt) {
-
-//   function getEventId() {
-//     var componenets = window.location.href.split("/");
-//     var idx = componenets.length - 1
-//     return componenets[idx]
-//     }
-//   var requestItem = {
-//     "request": $(evt.target).data("friend-id"),
-//     "event_id": getEventId
-//   }
-
-// $.post("/send-request", requestItem, requestSent);
-
-//  $('.request').html("Added!");
-
-// }
-
-// $(".request").click(sendRequest);
 // #################################################################
 // vanish flash messages
 
