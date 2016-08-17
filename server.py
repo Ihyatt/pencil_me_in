@@ -256,10 +256,12 @@ def add_restaurant():
     """Allows user to add restaurant to a list"""
 
     event_id = request.form.get('event_id')
+    print event_id
  
     event = Event.query.get(event_id)
+    print event
   
-    # item_id = request.form.get('id')
+  
     event.study_location = request.form.get('restaurant_name')
     event.latitude = request.form.get('latitude')
     event.longitude = request.form.get('longitude')

@@ -16,9 +16,11 @@ function displayResults(data) {
       text = text + "<button class='restaurant-button btn' type='button'id=" + "'button" + i + "'" + 
                              "data-restaurant-name=" + '"' + data.results[i].name + '"' +
                              "data-address=" + "'" + data.results[i].address + "'" +
+                          
                              "data-neighborhoods=" + '"' + data.results[i].neighborhoods + '"' +
                              "data-latitude=" + "'" + data.results[i].latitude + "'" +
                              "data-longitude=" + "'" + data.results[i].longitude + "'" + 
+                             
                              ">" +
                       "<span>" + data.results[i].name + "</span>" + 
                     "</button>";
@@ -29,27 +31,27 @@ function displayResults(data) {
 
     $('.restaurant-button').click(function() {
       var name = $(this).data('restaurant-name');
-      var yelp = $(this).data('yelp-rating');
+ 
       var address = $(this).data('address');
-      var categories = $(this).data('categories');
+   
       var neighborhoods = $(this).data('neighborhoods') ? ($(this).data('neighborhoods')).split(",") : null;
       var latitude = $(this).data('latitude');
       var longitude = $(this).data('longitude');
-      var url = $(this).data('url');
+   
       var infobox = "<table class='table'><tr><td class='title'>" + name + "</td></tr>" + 
-                             "<tr><td class='title'>Yelp Rating: " + yelp + "</td></tr>" + 
+                             
                              "<tr><td class='title'>Address: " + address + "</td></tr>" + 
                              "<tr><td class='title'>Neighborhood: " + ( neighborhoods ? neighborhoods.join(", ") : "None" ) + 
                              "</td></tr></table>" + 
                              "<button type='button' class='add-button btn' id='button' " + 
                              "data-restaurant-name=" + '"' + name + '"' +
-                             "data-yelp-rating=" + "'" + yelp + "'" +
+                           
                              "data-address=" + "'" + address + "'" +
-                             "data-categories=" + "'" + categories + "'" +
+                           
                              "data-neighborhoods=" + '"' + neighborhoods + '"' +
                              "data-latitude=" + "'" + latitude + "'" +
-                             "data-longitude=" + "'" + longitude + "'" +
-                             "data-url=" + "'" + url + "'" + ">" +
+                             "data-longitude=" + "'" + longitude + "'" 
+                             + ">" +
                              "Add " + name +"</button>";
       console.log(infobox);
       $('#infobox').removeClass('hidden').html(infobox);
@@ -82,7 +84,7 @@ function submitSearch(evt) {
     };
     $('#yelpResultsPanel').removeClass('hidden');
     $('#results').html("searching...");;
-    $.post("/search-restaurant.json",
+    $.post("/search-location.json",
            formInputs,
            displayResults
            );
@@ -94,37 +96,39 @@ $("#search").on("submit", submitSearch);
 function addRestaurant(evt){
   console.log("poop");
 
-    var id = this.id; // this is the id on the button we clicked, which is the image's id
+    // var id = this.id; // this is the id on the button we clicked, which is the image's id
     var restaurantName = $(this).data('restaurant-name');
-    var yelp_rating = $(this).data('yelp-rating');
+
     var latitude = $(this).data('latitude');
     var longitude = $(this).data('longitude');
-    var listId = $("#list-info").data('listid');
+
     var address = $(this).data('address');
-    var categories = $(this).data('categories');
+  
     var neighborhoods = $(this).data('neighborhoods');
-    var url = $(this).data('url');
+ 
 
     console.log(restaurantName);
 
    
 
-    $.post("/add-restaurant", {'id': id,
+    $.post("/add-restaurant", {
                                'restaurant_name': restaurantName,
-                               'yelp_rating': yelp_rating,
+                               
                                'latitude': latitude,
                                'longitude': longitude,
-                               'list_id': listId,
+                               
                                'address': address,
                                'event_id': getEventId,
-                               'categories': categories,
+                    
                                'neighborhoods': neighborhoods,
-                               'url': url},
+                               },
                                getRestaurantsFromDB);
     function getEventId() {
-    var componenets = window.location.href.split("/");
-    var idx = componenets.length - 1
-    return componenets[idx]
+    var components = window.location.href.split("/");
+    var lastSet = components[components.length - 1]
+
+    var idx = lastSet.slice(0,-1);
+    return idx
     }
 
     $('.add-button').html("Added!");
@@ -176,29 +180,29 @@ function getRestaurantsFromDB(data){
 
 // #################################################################
 // send request
-function requestSent() {
-  console.log("request sent");
-}
+// function requestSent() {
+//   console.log("request sent");
+// }
 
-function sendRequest(evt) {
+// function sendRequest(evt) {
 
-  function getEventId() {
-    var componenets = window.location.href.split("/");
-    var idx = componenets.length - 1
-    return componenets[idx]
-    }
-  var requestItem = {
-    "request": $(evt.target).data("friend-id"),
-    "event_id": getEventId
-  }
+//   function getEventId() {
+//     var componenets = window.location.href.split("/");
+//     var idx = componenets.length - 1
+//     return componenets[idx]
+//     }
+//   var requestItem = {
+//     "request": $(evt.target).data("friend-id"),
+//     "event_id": getEventId
+//   }
 
-$.post("/send-request", requestItem, requestSent);
+// $.post("/send-request", requestItem, requestSent);
 
- $('.request').html("Added!");
+//  $('.request').html("Added!");
 
-}
+// }
 
-$(".request").click(sendRequest);
+// $(".request").click(sendRequest);
 // #################################################################
 // vanish flash messages
 
