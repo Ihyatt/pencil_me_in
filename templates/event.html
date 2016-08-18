@@ -41,7 +41,7 @@
   <li>
     <div>
       {{friend.first_name}}
-      <button type="button" class="request" data-friend-id="{{friend.user_id}}" id="{{friend.user_id}}">send request</button>
+      <button type="button" class="request" data-friend-id="{{friend.user_id}}" data-event-id="{{event.event_id}}">send request</button>
     </div>
   </li>
   {% endfor %}
@@ -53,7 +53,7 @@
         <form action='/search-location.json' method='POST' id="search">
           <label for="location">where: </label>
           <br>
-          <input type="text" name="location" id="location" placeholder="e.g. San Francisco">
+          <input type="text" name="location" id="location"  placeholder="e.g. San Francisco">
           <br>
           <label for="term">what: </label>
           <br>

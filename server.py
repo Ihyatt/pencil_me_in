@@ -19,12 +19,6 @@ from flask_debugtoolbar import DebugToolbarExtension
 # using to hash passwords
 
 
-# gets access to yelp.py file
-# import yelp
-# import uber
-# import logging
-# import sys
-
 from model import User, UserImage, Event, EventImage, EventRequest, connect_to_db, db
 from werkzeug import secure_filename
 
@@ -163,37 +157,6 @@ def user_page(user_id):
 	return render_template("profile.html", user=user, image=image)
 
 
-# @app.route("/uploadajax", methods=['POST'])
-# def update_image():
-# 	"""Updates image"""
-
-# 	image_info = request.form.get("imageInfo")
-# 	# user_email = image_info["email"]
-
-# 	user = User.query.get(session["user_id"])
-# 	user_email = request.form.get("email")
-
-
-# 	print image_info
-# 	print "poop"
-# 	print user_email 
-# 	print user
-# 	u_image = user.user_image
-# 	print u_image
-
-# 	# file_ = request.files.args.get("image")
-# 	# print file_
-
-# 	# if file_:
-# 	# 	filename = secure_filename(file_.filename)
-# 	# 	file_.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-
-# 	# 	# db.session.add(u_image)
-# 	# 	u_image.image = filename
-		
-# 	# 	db.session.commit()
-
-# 	return "image added"
     
 
 @app.route('/upload-image', methods=['POST'])
@@ -232,10 +195,6 @@ def event_page(event_id):
 	event = Event.query.get(event_id)
 	friends = User.query.filter(User.first_name != user.first_name).all()
 	
-	
- 	
- 	
-	   
 	return render_template("event.html", event=event, friends=friends)
 
 
@@ -246,8 +205,11 @@ def search_restaurant():
 
     location = request.form.get('location')
     term = request.form.get('term')
-
+  
+   
     results = yelp.get_results(location=location, term=term)
+   
+
     return jsonify(results=results)
 
 

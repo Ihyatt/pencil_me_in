@@ -26,7 +26,11 @@ function addRestaurant(evt){
     function getEventId() {
     var componenets = window.location.href.split("/")
     var idx = componenets.length - 1
-    return componenets[idx]
+    var eventId = componenets[idx]
+    if ([-1] == "#"){
+      return eventId.slice(0,-1)
+    }
+    return eventId
     }
 
     $('.add-button').html("Added!");
