@@ -4,7 +4,6 @@
 
 
 
-
 	<img src="/static/img/pinata.jpg" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="300"> 
 
 	<div class="upload-button">Upload Image</div>
@@ -16,9 +15,10 @@
         <div class="form-group">
             <div class='input-group date' id='datetimepicker6'>
                 <input type='text' id='start-date'class="form-control" />
-                <span class="input-group-addon" id="start">
+                <span class="input-group-addon"> 
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
+                <button class="start" data-event-id="{{event.event_id}}" type="button">save</button>
             </div>
         </div>
     </div>
@@ -26,9 +26,10 @@
         <div class="form-group">
             <div class='input-group date' id='datetimepicker7'>
                 <input type='text' id='end-date' class="form-control" />
-                <span class="input-group-addon" id="end">
+                <span class="input-group-addon"> 
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
+                <button class="end" data-event-id="{{event.event_id}}" type="button">save</button>
             </div>
         </div>
     </div>
@@ -62,6 +63,7 @@
         </form>
       </div> 
 
+
 <div class="panel hidden results" id="yelpResultsPanel">
         <div class="panel-body fixed-panel">
           <div class="tab-content">
@@ -70,16 +72,16 @@
             </div>
         </div>
       </div>
-
+<div class="panel" id="my-map"></div>
 <div class="panel hidden title" id="infobox"></div>
 
-<div class="panel" id="my-map"></div>
+<form action="/delete-event/{{event.event_id}}" method="POST">
+  <button type="submit">Save Event</button>
+</form
 
-
-
-
-
-
+<form action="/delete-event/{{event.event_id}}" method="POST">
+  <button type="submit">Delete Event</button>
+</form>
 
 
 <script src="/static/js/new_yelp.js"></script>
@@ -87,6 +89,7 @@
 <script src="/static/js/image.js"></script>
 <script src="/static/js/calendar.js"></script>
 <script src="/static/js/request.js"></script>
+<script src="/static/js/date.js"></script>
 
 
 

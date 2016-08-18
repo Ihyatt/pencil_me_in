@@ -273,21 +273,37 @@ def add_restaurant():
 
     return "success"
 
-# @app.route("/add-start", methods=['POST'])
-# def add_start_date():
-# 	"""updates start date"""
-# 	print " i am here"
+@app.route("/save_start_date", methods=['POST'])
+def add_start_date():
+	"""updates start date"""
+	print " i am here"
 
-# 	event_id = request.form.get('event_id')
-# 	print event_id
-# 	event = Event.query.get(event_id)
-# 	print event
+	event_id = request.form.get('event_id')
+	print event_id
+	event = Event.query.get(event_id)
+	print event
 
-# 	event_start_date = str(request.form.get('date'))
-# 	event.event_start_date = event_start_date
+	event_start_date = str(request.form.get('date'))
+	event.event_start_date = event_start_date
 
-# 	db.session.commit()
-# 	return "success"
+	db.session.commit()
+	return "success"
+
+@app.route("/save_end_date", methods=['POST'])
+def add_end_date():
+	"""updates end date"""
+	print " i am here"
+
+	event_id = request.form.get('event_id')
+	print event_id
+	event = Event.query.get(event_id)
+	print event
+
+	event_end_date = str(request.form.get('date'))
+	event.event_end_date = event_end_date
+
+	db.session.commit()
+	return "success"
 
 
 @app.route("/send-request", methods=['POST'])
@@ -302,6 +318,18 @@ def send_request():
 	db.session.add(event_request)
 	db.session.commit()
 	return "friend added"
+
+# @app.route("/save-event/<int:event_id>", methods=["POST"])
+# def save_event():
+# 	"""saves event"""
+
+# 	event_id = session.get("event_id")
+
+
+# 	event_start_date = request.form.get("start-date")
+# 	event_end_date = request.form.get("end-date")
+
+
 
 	
 

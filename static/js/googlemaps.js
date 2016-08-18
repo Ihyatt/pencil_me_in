@@ -44,14 +44,14 @@ function initMap() {
 
   var places = $('.restaurant-listing > li');
   // using ternary operator to create default lat/long when there are no restaurants in a list initially/if no lat or long exists
-  var centerLatLng = { lat: ($(places[0]).data('lat') ? $(places[0]).data('lat') : 41.850033), lng: ($(places[0]).data('lng') ? $(places[0]).data('lng') : -87.6500523)};
+  var centerLatLng = { lat: ($(places[0]).data('lat') ? $(places[0]).data('lat') : 37.3382), lng: ($(places[0]).data('lng') ? $(places[0]).data('lng') : -121.8863)};
   // SET BOUNDS DEFAULT
 
   var styles = [{"featureType":"administrative",
                  "elementType":"geometry.stroke",
                  "stylers":[
                     {"visibility":"on"},
-                    {"color":"#006976"},
+                    // {"color":"black"},
                     {"weight":"0.30"},
                     {"saturation":"-75"},
                     {"lightness":"5"},
@@ -59,13 +59,13 @@ function initMap() {
                 {"featureType":"administrative",
                  "elementType":"labels.text.fill",
                  "stylers":[
-                    {"color":"#006976"},
+                    {"color":"black"},
                     {"saturation":"-75"},
                     {"lightness":"5"}]},
                 {"featureType":"administrative",
                  "elementType":"labels.text.stroke",
                  "stylers":[
-                    {"color":"#ffc04c"},
+                    // {"color":"black"},
                     {"visibility":"on"},
                     {"weight":"6"},
                     {"saturation":"-28"},
@@ -74,13 +74,13 @@ function initMap() {
                  "elementType":"labels.icon",
                  "stylers":[
                     {"visibility":"on"},
-                    {"color":"#e6007e"},
+                    {"color":"black"},
                     {"weight":"1"}]},
                 {"featureType":"landscape",
                  "elementType":"all",
                  "stylers":[
                     // {"color":"#ffe146"},
-                    {"color": "#ffc04c"},
+                    // {"color": "black"},
                     {"saturation":"-28"},
                     {"lightness":"0"}]},
                 {"featureType":"poi",
@@ -90,7 +90,7 @@ function initMap() {
                 {"featureType":"road",
                  "elementType":"all",
                  "stylers":[
-                    {"color":"#006976"},
+                    // {"color":"black"},
                     {"visibility":"simplified"},
                     {"saturation":"-75"},
                     {"lightness":"5"},
@@ -99,7 +99,7 @@ function initMap() {
                  "elementType":"labels.text",
                  "stylers":[
                     {"visibility":"on"},
-                    {"color":"#ffc04c"},
+                    // {"color":"black"},
                     {"weight":8},
                     {"saturation":"-28"},
                     {"lightness":"0"}]},
@@ -107,7 +107,7 @@ function initMap() {
                  "elementType":"labels.text.fill",
                  "stylers":[
                    {"visibility":"on"},
-                   {"color":"#006976"},
+                   // {"color":"black"},
                    {"weight":8},
                    {"lightness":"5"},
                    {"gamma":"1"},
@@ -120,14 +120,14 @@ function initMap() {
                  "elementType":"all",
                  "stylers":[
                    {"visibility":"simplified"},
-                   {"color":"#006976"},
+                   // {"color":"black"},
                    {"saturation":"-75"},
                    {"lightness":"5"},{"gamma":"1"}]},
                 {"featureType":"water",
                  "elementType":"geometry.fill",
                  "stylers":[
                    {"visibility":"on"},
-                   {"color":"#006976"},
+                   // {"color":"black"},
                    {"saturation":"-75"},
                    {"lightness":"5"},
                    {"gamma":"1"}]},
@@ -135,14 +135,14 @@ function initMap() {
                  "elementType":"labels.text",
                  "stylers":[
                    {"visibility":"simplified"},
-                   {"color":"#ffc04c"},
+                   // {"color":"black"},
                    {"saturation":"-28"},
                    {"lightness":"0"}]},
                 {"featureType":"water",
                  "elementType":"labels.icon",
                  "stylers":[{"visibility":"off"}]}];
   var styledMapOptions = {
-    name: 'Simple'
+    name: 'Studious'
   };
   var customMapType = new google.maps.StyledMapType(
         styles,
@@ -174,9 +174,7 @@ function initMap() {
     var name = $(places[i]).data('name');
     var yelp = $(places[i]).data('yelp');
     var myLatLng = {lat: latFromDom, lng: lngFromDom};
-    var contentString = '<div id="info">' +
-    '<p>'+ name + '</p><p>' + yelp + ' stars ' + '</p>' + '<button class="uber btn" type="button" data-toggle="modal" data-target="#myModal" data-lat=' + "'" + latFromDom + "'" + 'data-lng=' + "'" + lngFromDom + "'" + '>Uber</button>';
-
+    
     if (latFromDom, lngFromDom){
       addMarker(myLatLng, name);
       markers.push(marker);

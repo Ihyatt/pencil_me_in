@@ -41,20 +41,21 @@ function scheduleEventListerForRestaurantButtons(){
 
 // ################################################################################
 
-
+// succes function that displays results of yelp. 
 function displayResults(data) {
     var text = "";
     for (var i = 0; i < data.results.length; i++){
-      text = text + "<button class='restaurant-button btn' type='button'id=" + "'button" + i + "'" + 
+      text = text  + data.results[i].name + "<button class='restaurant-button btn' type='button'id=" + "'button" + i + "'" + 
                              "data-restaurant-name=" + '"' + data.results[i].name + '"' +
                              "data-address=" + "'" + data.results[i].address + "'" +
                              "data-neighborhoods=" + '"' + data.results[i].neighborhoods + '"' +
                              "data-latitude=" + "'" + data.results[i].latitude + "'" +
                              "data-longitude=" + "'" + data.results[i].longitude + "'" + 
                              ">" +
-                      "<span>" + data.results[i].name + "</span>" + 
-                    "</button>";
+                      "<span> Add location </span>" + 
+                    "</button>"
     }
+    
     $('#yelpResultsPanel').removeClass('hidden');
     $('#results').html(text);
 
@@ -82,6 +83,7 @@ function displayResults(data) {
       var latlng = {lat: parseFloat(latitude), lng: parseFloat(longitude)};
       // TRYING TO MAKE IT SUCH THAT THE MARKER GETS ADDED AND THEN DISAPPEARS WHEN ANOTHER YELP RESULT IS CLICKED
       var lastMarker = markers[markers.length - 1];
+
       if (lastMarker && lastMarker.icon === otherIcon) {
         lastMarker.setMap(null);
         markers.pop();
@@ -94,14 +96,14 @@ function displayResults(data) {
       }
       map.fitBounds(bounds);
       scheduleEventListerForRestaurantButtons();
-      $(this).addClass('btn-info');
-      $('#my-map').addClass('small');
+    
+     
     })
     // gives access to the add restaurant event listener once items are loaded
 }
 
 
-
+// submits search to yelp and will return results as a JSON object
 function submitSearch(evt) {
     evt.preventDefault();
     var formInputs = {
@@ -114,5 +116,5 @@ function submitSearch(evt) {
 }
 
 
-
+// Initianal event listener
 $("#search").on("submit", submitSearch);
