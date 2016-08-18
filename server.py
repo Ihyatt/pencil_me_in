@@ -235,37 +235,37 @@ def add_restaurant():
 
     return "success"
 
-@app.route("/save_start_date", methods=['POST'])
-def add_start_date():
-	"""updates start date"""
-	print " i am here"
+# @app.route("/save_start_date", methods=['POST'])
+# def add_start_date():
+# 	"""updates start date"""
+# 	print " i am here"
 
-	event_id = request.form.get('event_id')
-	print event_id
-	event = Event.query.get(event_id)
-	print event
+# 	event_id = request.form.get('event_id')
+# 	print event_id
+# 	event = Event.query.get(event_id)
+# 	print event
 
-	event_start_date = str(request.form.get('date'))
-	event.event_start_date = event_start_date
+# 	event_start_date = str(request.form.get('date'))
+# 	event.event_start_date = event_start_date
 
-	db.session.commit()
-	return "success"
+# 	db.session.commit()
+# 	return "success"
 
-@app.route("/save_end_date", methods=['POST'])
-def add_end_date():
-	"""updates end date"""
-	print " i am here"
+# @app.route("/save_end_date", methods=['POST'])
+# def add_end_date():
+# 	"""updates end date"""
+# 	print " i am here"
 
-	event_id = request.form.get('event_id')
-	print event_id
-	event = Event.query.get(event_id)
-	print event
+# 	event_id = request.form.get('event_id')
+# 	print event_id
+# 	event = Event.query.get(event_id)
+# 	print event
 
-	event_end_date = str(request.form.get('date'))
-	event.event_end_date = event_end_date
+# 	event_end_date = str(request.form.get('date'))
+# 	event.event_end_date = event_end_date
 
-	db.session.commit()
-	return "success"
+# 	db.session.commit()
+# 	return "success"
 
 
 @app.route("/send-request", methods=['POST'])
@@ -281,15 +281,31 @@ def send_request():
 	db.session.commit()
 	return "friend added"
 
-# @app.route("/save-event/<int:event_id>", methods=["POST"])
-# def save_event():
-# 	"""saves event"""
+@app.route("/save-event/<int:event_id>", methods=["POST"])
+def save_event_image(event_id):
+	"""saves event event"""
+	user = User.query.get(session["user_id"])
+	
+	file_ = request.files["image-upload"]
+	print event_id
+	event = Event.query.get(event_id)
+	print event
+	if file_:
+			filename = secure_filename(file_.filename)
+			file_.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-# 	event_id = session.get("event_id")
+
+			event_image = EventImage(event_id=event_id, image=filename)
+			db.session.add(event_image)
+			event_end_date = str(request.form.get('end-date'))
+			event.event_end_date = event_end_date
+			event_start_date = str(request.form.get('start-date'))
+			event.event_start_date = event_start_date
+
+			db.session.commit()
 
 
-# 	event_start_date = request.form.get("start-date")
-# 	event_end_date = request.form.get("end-date")
+	return redirect("/users/%s" % user.user_id)
 
 
 
