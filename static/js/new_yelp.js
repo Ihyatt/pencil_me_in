@@ -24,14 +24,11 @@ function addRestaurant(evt){
                                },
                                restaurantAdded);
     function getEventId() {
-    var componenets = window.location.href.split("/")
-    var idx = componenets.length - 1
-    var eventId = componenets[idx]
-    if ([-1] == "#"){
-      return eventId.slice(0,-1)
-    }
-    return eventId
-    }
+      var componenets = window.location.href.split("/")
+      var idx = componenets.length - 1
+      var eventId = componenets[idx]
+      return eventId
+      }
 
     $('.add-button').html("Added!");
     

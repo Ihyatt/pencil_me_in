@@ -57,10 +57,24 @@ Last Name: {{user.last_name}}<br>
 <a href="/create_event">Create Event</a>
 
 
+<h2>User Events:</h2>
+<ul id="user_events">
+   {% for event in user_events %}
+   <li>
+    {{event.event_title}}
+   </li>
+    {% endfor %}
+</ul>
 
 
 
 
-<script type="/static/js/image.js"></script>
+<h2> Upcoming Events:</h2>
+
+
+
+
+
+<script src="/static/js/image.js"></script>
 
 {% endblock %}

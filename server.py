@@ -152,9 +152,18 @@ def user_page(user_id):
    
 	user = User.query.get(user_id)
  	image = user.user_image
+
+ 	
+ 	upcoming_events = []
+
+ 	user_events = Event.query.filter(Event.user_id == user.user_id).all()
+
+ 	upcoming_events = EventRequest.query.filter(EventRequest.user_id == user.user_id).all()
+
+ 	upcoming_events = upcoming_events.extend(user_events)
  	
 	   
-	return render_template("profile.html", user=user, image=image)
+	return render_template("profile.html", user=user, image=image, user_events=user_events, upcoming_events=upcoming_events)
 
 
     
@@ -197,6 +206,41 @@ def event_page(event_id):
 	
 	return render_template("event.html", event=event, friends=friends)
 
+@app.route("/save_start_date", methods=['POST'])
+def add_start_date():
+	"""updates start date"""
+	print " i am here"
+
+	event_id = request.form.get('event_id')
+	print event_id
+	event = Event.query.get(event_id)
+	print event
+
+	event_start_date = str(request.form.get('date'))
+	print event_start_date
+	event.event_start_date = event_start_date
+
+	db.session.commit()
+	return "success"
+
+
+@app.route("/save_end_date", methods=['POST'])
+def add_end_date():
+	"""updates end date"""
+	print " i am here"
+
+	event_id = request.form.get('event_id')
+	print event_id
+	event = Event.query.get(event_id)
+	print event
+
+	event_end_date = str(request.form.get('date'))
+	event.event_end_date = event_end_date
+
+	db.session.commit()
+	return "success"
+
+
 
 
 @app.route('/search-location.json', methods=['POST'])
@@ -235,38 +279,6 @@ def add_restaurant():
 
     return "success"
 
-# @app.route("/save_start_date", methods=['POST'])
-# def add_start_date():
-# 	"""updates start date"""
-# 	print " i am here"
-
-# 	event_id = request.form.get('event_id')
-# 	print event_id
-# 	event = Event.query.get(event_id)
-# 	print event
-
-# 	event_start_date = str(request.form.get('date'))
-# 	event.event_start_date = event_start_date
-
-# 	db.session.commit()
-# 	return "success"
-
-# @app.route("/save_end_date", methods=['POST'])
-# def add_end_date():
-# 	"""updates end date"""
-# 	print " i am here"
-
-# 	event_id = request.form.get('event_id')
-# 	print event_id
-# 	event = Event.query.get(event_id)
-# 	print event
-
-# 	event_end_date = str(request.form.get('date'))
-# 	event.event_end_date = event_end_date
-
-# 	db.session.commit()
-# 	return "success"
-
 
 @app.route("/send-request", methods=['POST'])
 def send_request():
@@ -289,6 +301,7 @@ def save_event_image(event_id):
 	file_ = request.files["image-upload"]
 	print event_id
 	event = Event.query.get(event_id)
+	event_title = request.form.get("event_title")
 	print event
 	if file_:
 			filename = secure_filename(file_.filename)
@@ -297,10 +310,7 @@ def save_event_image(event_id):
 
 			event_image = EventImage(event_id=event_id, image=filename)
 			db.session.add(event_image)
-			event_end_date = str(request.form.get('end-date'))
-			event.event_end_date = event_end_date
-			event_start_date = str(request.form.get('start-date'))
-			event.event_start_date = event_start_date
+			event.event_title = event_title
 
 			db.session.commit()
 

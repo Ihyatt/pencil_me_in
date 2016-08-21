@@ -21,7 +21,7 @@ yelp_api = YelpAPI(
 
 
 def get_results(location, term):
-    resp = yelp_api.search_query(location=location, term=term, limit=20)
+    resp = yelp_api.search_query(location=location, term=term, limit=10)
 
     # create list of results to store result objects
     results = []
@@ -49,4 +49,4 @@ def get_results(location, term):
     # print results
     return results
 
-# get_results("chicago", "food")
+# get_results("San Jose", "library")

@@ -12,33 +12,39 @@
         <input type="file" name="image-upload" class="file-upload" id="upload" style="display: none;" accept="image/*" > <br>
 
 
-
+<div>
+  Event Name: <input type="text" name="event-title">
+</div>
+</form>
 
     <div class="container">
     <div class='col-md-5'>
         <div class="form-group">
             <div class='input-group date' id='datetimepicker6'>
-                <input type='text' name='start-date'class="form-control" />
+                <input type='text' id='start-date'class="form-control" />
                 <span class="input-group-addon"> 
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
-               <!--  <button class="start" data-event-id="{{event.event_id}}" type="button">save</button> -->
+                
             </div>
         </div>
+        <button class="start" data-event-id="{{event.event_id}}" type="button">save</button>
     </div>
+    
     <div class='col-md-5'>
         <div class="form-group">
             <div class='input-group date' id='datetimepicker7'>
-                <input type='text' name='end-date' class="form-control" />
+                <input type='text' id='end-date' class="form-control" />
                 <span class="input-group-addon"> 
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
-                <!-- <button class="end" data-event-id="{{event.event_id}}" type="button">save</button> -->
+               
             </div>
         </div>
     </div>
+     <button class="end" data-event-id="{{event.event_id}}" type="button">save</button>
 </div>
-</form>
+
 
 
 <h2> Add Friends </h2>
@@ -89,7 +95,7 @@
 <script src="/static/js/image.js"></script>
 <script src="/static/js/calendar.js"></script>
 <script src="/static/js/request.js"></script>
-<!-- <script src="/static/js/date.js"></script> -->
+<script src="/static/js/date.js"></script>
 
 
 
