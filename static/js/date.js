@@ -15,6 +15,7 @@ function saveStartDate(evt) {
 	}
 
 $.post("/save_start_date", dateInfo, startDateAdded);
+$(evt.target).html("Saved!");
 
 }
 
@@ -38,6 +39,7 @@ function saveEndDate(evt) {
 	}
 
 $.post("/save_end_date", dateInfo, endDateAdded);
+$(evt.target).html("Saved!");
 
 }
 

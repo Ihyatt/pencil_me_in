@@ -12,7 +12,7 @@ function sendRequest(evt) {
 
 $.post("/send-request", requestItem, requestSent);
 
- $('.request').html("Added!");
+ $(evt.target).html("Added!");
 
 }
 
