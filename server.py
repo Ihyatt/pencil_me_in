@@ -168,12 +168,12 @@ def user_page(user_id):
 
     
 
-@app.route('/upload-image', methods=['POST'])
+@app.route('/uploadajax', methods=['POST'])
 def image_update():
 
 	user = User.query.get(session["user_id"])
 	u_image = user.user_image
-	file_ = request.files["image-upload"]
+	file_ = request.files["file"]
 	print file_
 	if file_:
 		filename = secure_filename(file_.filename)
@@ -184,7 +184,7 @@ def image_update():
 		
 		db.session.commit()
 
-	return redirect("/users/%s" % user.user_id)
+	return "succes"
 
 
 @app.route('/create_event', methods=['GET'])
