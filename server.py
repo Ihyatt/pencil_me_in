@@ -160,7 +160,7 @@ def user_page(user_id):
 
  	upcoming_events = EventRequest.query.filter(EventRequest.user_id == user.user_id).all()
 
- 	upcoming_events = upcoming_events.extend(user_events)
+ 	
  	
 	   
 	return render_template("profile.html", user=user, image=image, user_events=user_events, upcoming_events=upcoming_events)
@@ -179,7 +179,6 @@ def image_update():
 		filename = secure_filename(file_.filename)
 		file_.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-		# db.session.add(u_image)
 		u_image.image = filename
 		
 		db.session.commit()

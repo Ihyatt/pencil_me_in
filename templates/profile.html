@@ -29,16 +29,16 @@
         </div>
         <div class="modal-body">
           <img src="/static/images/{{image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="300"> 
-          <input name="file" type="file">
-          <button id="upload-file-btn" type="button">Upload</button>
+       <!--    <input name="file" type="file"> -->
+          <button id="upload-file-btn" type="button">Save</button>
 
         
-			<!-- <div class="upload-button" style="cursor:pointer">Upload Image</div> -->
+			<div class="upload-button" style="cursor:pointer">Upload Image</div>
     <!--   <button id="upload-file-btn" type="button">Upload</button> -->
       <!--  <button type="submit" class="btn btn-default" value="Submit">Submit</button> -->
 			<!-- <div class="save-button" style="cursor:pointer">Save</div> -->
 		
-       		<!-- <input type="file" name="image-upload" class="file-upload" id="upload" style="display: none;" accept="image/*" > -->
+       		<input type="file" name="file" class="file-upload" id="upload" style="display: none;" accept="image/*" >
        
         </div>
         <div class="modal-footer">
@@ -72,6 +72,7 @@ Last Name: {{user.last_name}}<br>
 
 <h2> Upcoming Events:</h2>
 
+
 <script>
 
 $(function() {
@@ -93,6 +94,6 @@ $(function() {
     });
 });
 </script>
-<!-- <script src="/static/js/image.js"></script> -->
+<script src="/static/js/image.js"></script>
 
 {% endblock %}
