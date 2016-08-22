@@ -72,6 +72,13 @@ Last Name: {{user.last_name}}<br>
 
 
 <h2> Upcoming Events:</h2>
+<ul id="event_requests">
+   {% for event in event_request %}
+   <li>
+    {{event.event_title}}
+   </li>
+    {% endfor %}
+</ul>
 
 
 <script>

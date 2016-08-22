@@ -154,16 +154,23 @@ def user_page(user_id):
  	image = user.user_image
 
  	
- 	upcoming_events = []
+ 	event_request = []
 
  	user_events = Event.query.filter(Event.user_id == user.user_id).all()
+ 	print user_events
 
  	upcoming_events = EventRequest.query.filter(EventRequest.user_id == user.user_id).all()
 
- 	
- 	
+ 	for request in upcoming_events:
+ 		study_event = request.event
+ 		event_request.append(study_event)
+ 	event_request.extend(user_events)
+
+
+
+
 	   
-	return render_template("profile.html", user=user, image=image, user_events=user_events, upcoming_events=upcoming_events)
+	return render_template("profile.html", user=user, image=image, user_events=user_events, upcoming_events=upcoming_events, event_request=event_request)
 
 
     
