@@ -263,6 +263,8 @@ def add_restaurant():
 
     event_id = request.form.get('event_id')
     print event_id
+    if event_id[-1] == "#":
+    	event_id = event_id[0:-1]
  
     event = Event.query.get(event_id)
     print event
@@ -310,6 +312,7 @@ def save_event_image(event_id):
 
 			event_image = EventImage(event_id=event_id, image=filename)
 			db.session.add(event_image)
+			print event_title
 			event.event_title = event_title
 
 			db.session.commit()
