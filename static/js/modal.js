@@ -2,6 +2,21 @@
 ////////////////// ADD ATTRACTION to database///////////////////////////
 $(document).ready(function(){
 
+	function makeAttModalMap(evt){
+  var resultId = $(this).data('attractionId');
+  console.log(resultId);
+  initMaps[resultId]();
+}
+
+function populateAttModal(evt){
+  var attractionId = $(this).data('attractionId');
+  var modalToModalize = $('#attractionModal'+attractionId);
+  modalToModalize.on('shown.bs.modal', makeAttModalMap).modal('show');
+  //map things
+}
+
+$('.triggerAttModal').on('click', populateAttModal);
+
 
 ///////////////////Modal Details/Map Attraction /////////////////////////////
 

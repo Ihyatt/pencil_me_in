@@ -81,7 +81,7 @@ Last Name: {{user.last_name}}<br>
 
 
 <h2>User Created Events:</h2>
-<ul id="user_events">
+<!-- <ul id="user_events">
    {% for event in user_events %}
    <li>
     <div>
@@ -91,7 +91,93 @@ Last Name: {{user.last_name}}<br>
 
    </li>
     {% endfor %}
-</ul>
+</ul> -->
+
+{% for event in user_events %}
+  <div class="attraction-results">
+    <div class="yelp-results-btn" id="{{event.event_id}}">
+         <div value="{{event.event_id}}"> 
+                <h4 class="results-header">{{ event.event_title }} </h4>   
+                    <br>
+                        <button type="button"  class="btn btn-primary triggerAttModal" data-attraction-id="{{ event.event_id }}"
+                        data-toggle="modal" 
+                        data-target=""><span class="glyphicon glyphicon-search"></span></button> 
+                        <button type="button" class="delete" data-event-id="{{event.event_id}}">delete event</button> 
+                          <div class="modal fade" id="attractionModal{{ event.event_id }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-attraction-id="{{ event.event_id }}">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button id="results-ev-header" type="button" class="close" data-dismiss="modal" aria-hidden="true"> About {{ event.event_title }}</button><br>
+                                  <h4 class="modal-title" id="myModalLabel"></h4>
+                                </div>
+                                  <div class="modal-body">
+                                    
+                                     
+                                   
+                                  <div class="modalMap" id="map{{ event.event_id }}"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal"    ><span class="glyphicon glyphicon-remove"></span>Close</button>
+                  
+                                        <button type="button" class="btn btn-primary saveAttractionModalBtn" data-id="{{ event.event_id }}" data-name="{{ event.event_title }}" data-longitude="{{ event.longitude }}" data-latitude="{{ event.latitude }}" ><span class="glyphicon glyphicon-heart"></span> Save</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div> 
+        </div>   
+</div>
+<script>
+
+initMaps['{{ event.event_id }}'] = function(){
+  var myPlaceLatLng = { lat:{{ event.latitude }}, lng:{{ event.longitude }}};
+
+  var map = new google.maps.Map(document.getElementById('map' + '{{ event.event_id }}'), {
+    center: myPlaceLatLng,
+    zoom: 12,
+  });
+
+  var marker = new google.maps.Marker({
+      position: myPlaceLatLng,
+      animation: google.maps.Animation.DROP,
+      map: map
+      // // draggable: false,     
+   });
+/////////////////
+ // info window //
+ /////////////////
+
+ var contentString = '<div id="content">' +
+  '<h4 style="color:black;font:12px;">"{{ event.event_title }}"</h4>' + 
+
+  '</div>';
+
+var infoWindow = new google.maps.InfoWindow({
+  content: contentString,
+  maxWidth: 200
+});
+
+  marker.addListener('click', function() {
+    infoWindow.open(map, marker);
+  });
+};
+
+</script>
+
+
+{% endfor %} 
+
+<br>
+<br>
+<br>
+
+
+
+
+
+
+
+
 
 
 
@@ -236,7 +322,7 @@ var rejection = {
   event_id: $(evt.target).data("event-id")
 }
 
-$.post("/decline_event", rejection, eventDeclined);
+$.post("/decline_event", reject, eventDeclined);
 }
 
 $(".decline_request").click(declineEvent);
