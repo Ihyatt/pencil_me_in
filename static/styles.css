@@ -43,277 +43,27 @@ margin: 10px;
 }
 
 
-html, body, .map-canvas  {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-
-.map-canvas {
-  width:500px;
-  height:480px;
-}
 
 
 
 
 
-body {
-    padding-top:80px;
-}
-
-
-input {
- font-family: 'MANIFESTO';
- font-size: 14px;
- line-height: 25px;
- color:black;
-}
-
-a {
-    font-family: 'MANIFESTO';
-    font-weight: bold;
-    font-size: 15px;
-    text-shadow: 2px 2px 2px skyblue;
-}
-
-p {
-    font-family: 'MANIFESTO';
-}
+/*veronicas code*/
 
 /*MODALS*/
 
-.modal-info {
-    border: 1.5px solid skyblue;
-    border-radius: 5px;
-}
-
-.modal-input {
-    color: black;
-}
-
-/*Search and title*/
-.search {
-    height: 700px !important;
-    width: 1170px !important;
-}
-
-#submit-search {
-    font-family: 'MANIFESTO';
-    font-size: 20px;
-    text-transform: capitalize;
-    text-shadow: 2px 2px 4px skyblue;
-    color: white;
-}
-
-#title {
-    font-family: 'MANIFESTO';
-    font-size: 90px;
-    text-transform: capitalize;
-    font-weight: 900;
-    height: 40px;
-    text-shadow: 8px 8px 8px black;
-    
-}
-
-.tag {
-  text-shadow: 2px 2px 2px black;
-  font-weight: medium;
-}
-
-.vertical-align {
-    padding-bottom: 50px;
-}
-
-.main-title {
-    height:180px;
-}
-
-.info-parent {
-    width: 610px;
-    /*border: 1px solid green;*/
-    height: 200px;
-    margin: 0 auto;
-}
-
-.info-holder {
-    width: 300px;
-    float: left;
-    padding: 20px;
-    height: 100px;
-    margin-top: 35px;
-    font-family: 'MANIFESTO';
-    color: black;
-}
-.submit {
-    width: 250px;
-    margin: 10px auto;
-    font-family: 'MANIFESTO'
-}
-
-
-.parent-submit {
-    margin: auto;
-}
-
-.menu {
-    float: left;
-}
-
-.container {
-    width: 1300px;
-    background-image: static;
-}
-
-.logo-img {
-    float:right;
-    width: 4%;
-    margin-right: 2%;
-    margin-top: 2%;
-    height: 40px;
-
-margin-bottom: 1%;}
-
 /* SEARCH RESULTS PAGE DIVS*/
-
-.new {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: center;
-  justify-content: space-around;
-}
-
-.attraction-results {
-    background-color: #A0CBEE;
-    border: white 1px solid;
-    width: 400px;
-    height: 350px;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    padding: 5px;
-    margin-top: 10px;
-    text-align: center;
-    font-size: 14px;
-    border-radius: 25px;
-    font-family: 'Arvo'
-}
 
 .event-results {
     background-color: #00628B;
     border: #A0CBEE 1px solid;
-    width: 400px;
-    height: 325px;
     color: white;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    display: block;
     padding: 5px;
     margin-top: 10px;
     text-align: center;
-    font-size: small;
-    border-radius: 25px;
-    font-family: 'Arvo'
-}
-
-.yelp-result-img {
-    height: 14em;
-    width: 17em;
-    border: 1px solid #00628B;
-    border-radius: 10px;
-    margin: 4px;
-}
-
-/* EVENT RESULTS ATTRACTIONS*/
-.eventbriteSearchImg {
-    /*height:13em;*/
-    width: 20em;
-    height: 12em;
-    border: 1px solid #A0CBEE;
-    border-radius: 10px;
-    margin: 4px;
-}
-
-
-/* AGENDA RESULTS ATTRACTIONS*/
-.att-results-agenda {
-    background-color: white;
-    border: solid 10px #A0CBEE;
-    width: 220px;
-    height: 150px;
-    color: black;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    padding: 5px;
-    margin-top: 10px;
-    text-align: center;
-    font-size: 14px;
-    border-radius: 25px;
-    font-family: 'Arvo'
-}
-
-.ev-results-agenda {
-    background-color:white;
-    width: 270px;
-    height: 225px;
-    color: black;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    padding-top: 10px;
-    margin-top: 10px;
-    text-align: center;
-    font-size: 14px;
-    border: 10px solid #00628B;
-    border-radius: 25px;
-    font-family: 'Arvo';
-    text-transform: capitalize;
-}
-
-.ev-results-agenda h4 {
-    /*padding-top: 10px;*/
-    font-size: small;
-    padding-top: 22px;
-}
-
-#results-ev-header {
-  font-size: medium;
-}
-
-.delete-att {
-  float:right;
-}
-
-.a-agenda {
-  font-family: "Arvo";
-  font-weight: normal;
-  float:left;
-  padding-left:10px;
-}
-
-#attraction-header {
-  text-decoration: none;
-}
-
-#btn-results {
-  display: inline-block;
-  padding: 15px 45px;
-  font-size: 15px;
-  line-height: 1.8;
-  border-radius: 15px;
-  background-color: skyblue;
-  border: 1px solid white;
 }
 
 /* MAP in modals*/
@@ -324,118 +74,15 @@ margin-bottom: 1%;}
 }
 
 
-.header {
-    padding-top:50px;
-    text-align: center;
-     font-family: 'MANIFESTO'
-}
-
-.calendar {
-    padding: 100px;
-    padding-bottom: 200px;
-}
-
-/*Glyphs*/
-.fa-ticket {
-    color: black;
-    float: left;
-    padding: 1px;
-    height: 8px;
-}
-
-.fa-yelp {
-    color: red;
-    float:left;
-    padding: 5px;
-}
-
-/*results page*/
-.results-header{
- padding: 10px;
-}
-
-#results-ev-header{
- /*padding: 30px;*/
-}
-
-.btn.btn-primary {
-    color:white;
-    background-color: skyblue;
-    border-color: white;
-}
-.btn.btn-primary:hover {
-    color:white;
-    background-color: skyblue;
-    border-color: lightgrey;
-}
-.btn.btn-primary:focus {
-    background-color: #f00;
-}
-
-/*Twilio*/
-
-#input-twilio-box{
-    background-color: #A0CBEE;
-    border: white;
-    border-radius: 10px;
-    color: black;
-}
-
-/*jQuery date picker*/
-
-.datepicker {
-    width: 216px;
-    height: auto;
-    margin: 5px auto 0;
-    font: 9pt Arial, sans-serif;
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
-    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
-    background-color: skyblue;
-}
-
-.ui-datepicker-calendar {
-  background-color: #A0CBEE;
- /* opacity: 0.7;*/
-  border-radius: 5px;
-  font-family: sans-serif;
-}
 
 
-.ui-datepicker-header > td {
-  background-color: white;
-  font-family: "Arvo"
-}
 
-#att-name {
-    padding: 20px;
-    padding-top: 22px;
-}
 
-.ev-name {
-  padding-top: 13px;
-  padding:10px;
-}
 
-::-webkit-input-placeholder {
-   color: black;
-}
 
-:-moz-placeholder { /* Firefox 18- */
-   color: black;  
-}
-
-::-moz-placeholder {  /* Firefox 19+ */
-   color:black;
-   text-shadow: 2px 2px 4px grey;
    
-}
-
-:-ms-input-placeholder {  
-   color: black;  
-}
 
 
-.delete-ev {
-  float: right;
-}
+
+
+
