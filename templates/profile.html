@@ -1,7 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<script type>
+///////////// Google Maps in Modals ///////////////////////////////////////////
 
+// var map;
+google.maps.visualRefresh = true;
+
+initMaps = {};
+
+function explode(){
+
+  var results = $( ".attraction-results" );
+  $( ".attraction-results" ).wrapAll( "<div class='new' />");
+}
+setTimeout(explode, 1000);
+
+function implode(){
+
+  var results = $( ".event-results" );
+  $( ".event-results" ).wrapAll( "<div class='new' />");
+}
+setTimeout(implode, 1000);
+</script>
 
 
 
@@ -84,99 +105,81 @@ Last Name: {{user.last_name}}<br>
 
 <h2> Upcoming Events:</h2>
 <!-- google maps -->
-<ul id="event_requests">
-   {% for event in event_request %}
-<li>
-<a href="#myMapModal" class="add-button btn" id="button" data-restaurant-name="{{event.study_location}}" data-address="{{event.address}}" data-latitude="{{event.latitude}}" data-longitude="{{event.longitude}}" data-toggle="modal">{{event.event_title}}</a>
-</li>
 
-<div class="modal fade" id="myMapModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <!--  <h4 class="modal-title">Modal title</h4> -->
 
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <div class="row">
-                        <div id="my-map" class="map-canvas"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-               <!--  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button> -->
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
+<!-- Limit results in Jinja -->
+{% for event in event_request %}
+<div class="event-results" id="{{ event.event_id }}">
 
-<!-- end -->
-
-</ul>
-
+        <h4 class="results-header" style="font-size:14px">{{ event.event_title }} </h4>
+          <h4 style="font-size:13px; text-transform:capitalize;">{{ event.event_start_date}}</h4>
+                  <button type="button"  class="btn btn-primary triggerEvModal" data-event-id="{{ event.event_id }}" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-search"></span></button>
+                    <div class="modal fade" id="eventModal{{ event.event_id }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-event-id="{{ event.event_id }}">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">About {{ event.event_title }}</button>
+                                <h4 class="modal-title" id="myModalLabel"></h4>
+                                </div>
+                                  <div class="modal-body">
+                                    <div style="color: black"> {{ event.event_start_date}} </div>
+                                    <div class="modalMap" id="map{{ event.event_id }}"></div>
+                                      <div style="height:200px;width:60%px;border:1px solid #ccc;overflow:auto;, font-color:black;">
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Close</button>
+                                    <button type="button" class="btn btn-primary saveEventModalBtn" data-id="{{ event.event_id }}" data-name="{{ event.event_title }}" data-start="{{ event.event_start_date }}" <span id="save-heart" onclick="heartChange" class="glyphicon glyphicon-heart"></span> Save</button>
+                                  
+                          </div>
+                        </div>
+                      </div>
+                   </div> 
+</div>
+ 
 
 <script>
+initMaps['{{ event.event_id }}'] = function(){
+  var myPlaceLatLng = { lat:{{ event.latitude }}, lng:{{ event.longitude }}};
 
-var map; 
-var lat = {{event.latitude}}
-console.log(lat);
-var lng = {{event.longitude}}
-console.log(lng);
-     
-var myCenter=new google.maps.LatLng(lat, lng);
-var marker=new google.maps.Marker({
-    position:myCenter
+  var map = new google.maps.Map(document.getElementById('map' + '{{ event.event_id }}'), {
+    center: myPlaceLatLng,
+    zoom: 12,
+  });
+
+  var marker = new google.maps.Marker({
+      position: myPlaceLatLng,
+      animation: google.maps.Animation.DROP,
+      map: map,
+      // icon: "/static/images/map-marker-icon.png",
+      title: "{{ event.event_title }}"
+      // // draggable: false,     
+   });
+/////////////////
+ // info window //
+ /////////////////
+
+ var contentString = '<div id="content">' +
+  '<h4 style="color:black">"{{ event.event_title }}"</h4>' +
+
+  '</div>';
+
+  
+
+var infoWindow = new google.maps.InfoWindow({
+  content: contentString,
+  maxWidth: 200
 });
 
-function initialize() {
-  var mapProp = {
-      center:myCenter,
-      zoom: 14,
-      draggable: false,
-      scrollwheel: false,
-      mapTypeId:google.maps.MapTypeId.ROADMAP
-  };
-  
-  map=new google.maps.Map(document.getElementById("my-map"),mapProp);
-  marker.setMap(map);
-    
-  google.maps.event.addListener(marker, 'click', function() {
-      
-    infowindow.setContent(contentString);
-    infowindow.open(map, marker);
-    
-  }); 
+  marker.addListener('click', function() {
+    infoWindow.open(map, marker);
+  });
 };
-google.maps.event.addDomListener(window, 'load', initialize);
-
-google.maps.event.addDomListener(window, "resize", resizingMap());
-
-$('#myMapModal').on('show.bs.modal', function() {
-   //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
-   resizeMap();
-})
-
-function resizeMap() {
-   if(typeof map =="undefined") return;
-   setTimeout( function(){resizingMap();} , 400);
-}
-
-function resizingMap() {
-   if(typeof map =="undefined") return;
-   var center = map.getCenter();
-   google.maps.event.trigger(map, "resize");
-   map.setCenter(center); 
-}
-
 
 </script>
-{% endfor %}
+{% endfor %}  
+
+
 
 
 
@@ -206,6 +209,7 @@ $(function() {
 });
 </script>
 <script src="/static/js/image.js"></script>
+<script src="/static/js/modal.js"></script>
 
 
 
