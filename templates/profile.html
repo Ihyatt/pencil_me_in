@@ -82,17 +82,20 @@ Last Name: {{user.last_name}}<br>
 
 
 
-
+<h2> Upcoming Events:</h2>
 <!-- google maps -->
-<h1 class="">Lazy Load Google Map</h1> 
-<a href="#myMapModal" class="btn" data-toggle="modal">Launch Map Modal</a>
+<ul id="event_requests">
+   {% for event in event_request %}
+<li>
+<a href="#myMapModal" class="add-button btn" id="button" data-restaurant-name="{{event.study_location}}" data-address="{{event.address}}" data-latitude="{{event.latitude}}" data-longitude="{{event.longitude}}" data-toggle="modal">{{event.event_title}}</a>
+</li>
 
 <div class="modal fade" id="myMapModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                 <h4 class="modal-title">Modal title</h4>
+                <!--  <h4 class="modal-title">Modal title</h4> -->
 
             </div>
             <div class="modal-body">
@@ -103,8 +106,8 @@ Last Name: {{user.last_name}}<br>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+               <!--  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button> -->
             </div>
         </div>
         <!-- /.modal-content -->
@@ -115,10 +118,18 @@ Last Name: {{user.last_name}}<br>
 
 <!-- end -->
 
+</ul>
+
+
 <script>
 
-var map;        
-var myCenter=new google.maps.LatLng(53, -1.33);
+var map; 
+var lat = {{event.latitude}}
+console.log(lat);
+var lng = {{event.longitude}}
+console.log(lng);
+     
+var myCenter=new google.maps.LatLng(lat, lng);
 var marker=new google.maps.Marker({
     position:myCenter
 });
@@ -165,7 +176,7 @@ function resizingMap() {
 
 
 </script>
-
+{% endfor %}
 
 
 
@@ -195,7 +206,6 @@ $(function() {
 });
 </script>
 <script src="/static/js/image.js"></script>
-<script src="/static/js/googlemaps.js"></script>
 
 
 
