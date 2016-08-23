@@ -5,10 +5,10 @@ var markers = [];
 
 var otherIcon = {
         path: google.maps.SymbolPath.CIRCLE ,
-        strokeColor: "#a91245",
-        fillColor: "#BC154D",
+        strokeColor: "#5e2c45",
+        fillColor: "#69314D",
         fillOpacity: 1,
-        scale: 6
+        scale: 5
     };
 
 var defaultIcon = {
@@ -42,9 +42,8 @@ function bindInfoWindow(marker, map, infoWindow, contentString) {
 
 function initMap() {
 
-  var places = $('.restaurant-listing > li');
   // using ternary operator to create default lat/long when there are no restaurants in a list initially/if no lat or long exists
-  var centerLatLng = { lat: ($(places[0]).data('lat') ? $(places[0]).data('lat') : 37.3382), lng: ($(places[0]).data('lng') ? $(places[0]).data('lng') : -121.8863)};
+  var centerLatLng = { lat : 40, lng: -121.8863};
   // SET BOUNDS DEFAULT
 
   var styles = [{"featureType":"administrative",
@@ -167,21 +166,6 @@ function initMap() {
   map.setMapTypeId('map_style');
 
   var bounds = new google.maps.LatLngBounds();
-
-  for (var i = 0; i < places.length; i++) {
-    var latFromDom = $(places[i]).data('lat');
-    var lngFromDom = $(places[i]).data('lng');
-    var name = $(places[i]).data('name');
-    var yelp = $(places[i]).data('yelp');
-    var myLatLng = {lat: latFromDom, lng: lngFromDom};
-    
-    if (latFromDom, lngFromDom){
-      addMarker(myLatLng, name);
-      markers.push(marker);
-    }
-
-    bindInfoWindow(marker, map, infoWindow, contentString);
-  }
 
   // TRYING TO FIX BUG WHERE MAP STARTS IN THE OCEAN
   if (markers.length > 0) {
