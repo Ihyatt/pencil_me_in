@@ -54,16 +54,12 @@ margin: 10px;
 
 /* SEARCH RESULTS PAGE DIVS*/
 
-.event-results {
-    background-color: #00628B;
-    border: #A0CBEE 1px solid;
-    color: white;
-    text-align: center;
+.event-results {  
     text-decoration: none;
     display: block;
     padding: 5px;
     margin-top: 10px;
-    text-align: center;
+   
 }
 
 /* MAP in modals*/

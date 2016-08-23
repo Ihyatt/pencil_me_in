@@ -162,14 +162,11 @@ def user_page(user_id):
  	upcoming_events = EventRequest.query.filter(EventRequest.user_id == user.user_id).all()
 
  	for request in upcoming_events:
- 		study_event = request.event
+ 		if request.accepted == True:
+ 			study_event = request.event
  		event_request.append(study_event)
- 	event_request.extend(user_events)
+ 	
 
-
-
-
-	   
 	return render_template("profile.html", user=user, image=image, user_events=user_events, upcoming_events=upcoming_events, event_request=event_request)
 
 
@@ -325,6 +322,32 @@ def save_event_image(event_id):
 
 
 	return redirect("/users/%s" % user.user_id)
+
+@app.route("/delete_event", methods=["POST"])
+def delete_event():
+	"""delete event on profile page"""
+
+	event_id = request.form.get("event_id")
+	deleted_event = Event.query.filter(Event.event_id == event_id).first()
+	db.session.delete(deleted_event)
+	db.session.commit()
+
+	return "event deleted"
+
+@app.route("/decline_event", methods=["POST"])
+def decline_event():
+	"""decline event request"""
+	user = User.query.get(session["user_id"])
+	print user
+	print "ppop"
+	event_id = request.form.get("event_id")
+	request_event = EventRequest.query.filter(EventRequest.event_id == event_id, EventRequest.user_id == user.user_id).first()
+	
+	db.session.delete(request_event)
+	db.session.commit()
+
+	return "request deleted"
+
 
 
 

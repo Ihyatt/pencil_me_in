@@ -84,15 +84,14 @@ Last Name: {{user.last_name}}<br>
 <ul id="user_events">
    {% for event in user_events %}
    <li>
+    <div>
     {{event.event_title}}
+     <button type="button" class="delete" data-event-id="{{event.event_id}}">delete event</button>
+   </div>
+
    </li>
     {% endfor %}
 </ul>
-
-<h2> Event Requests</h2>
-
-
-
 
 
 
@@ -106,6 +105,9 @@ Last Name: {{user.last_name}}<br>
         <h4 class="results-header" style="font-size:14px">{{ event.event_title }} </h4>
           <h4 style="font-size:13px; text-transform:capitalize;">{{ event.event_start_date}}</h4>
                   <button type="button"  class="btn btn-primary triggerEvModal" data-event-id="{{ event.event_id }}" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-search"></span></button>
+                  <button type="button" class="decline_request" data-event-id="{{event.event_id}}">Decline Event</button>
+
+
                     <div class="modal fade" id="eventModal{{ event.event_id }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-event-id="{{ event.event_id }}">
                       <div class="modal-dialog">
                         <div class="modal-content">
@@ -120,8 +122,8 @@ Last Name: {{user.last_name}}<br>
                                       </div>
                                     </div>
                                     <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Close</button>
-                                    <button type="button" class="btn btn-primary saveEventModalBtn" data-id="{{ event.event_id }}" data-name="{{ event.event_title }}" data-start="{{ event.event_start_date }}" <span id="save-heart" onclick="heartChange" class="glyphicon glyphicon-heart"></span> Save</button>
+                                 <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
+                                   
                                   
                           </div>
                         </div>
@@ -200,6 +202,49 @@ $(function() {
     });
 });
 </script>
+
+<script>
+function eventDeleted() {
+  console.log("event deleted")
+  location.reload(true);
+}
+
+
+function deleteEvent(evt) {
+
+var deleteItem = {
+event_id: $(evt.target).data("event-id")
+}
+
+$.post("/delete_event", deleteItem, eventDeleted);
+
+}
+
+
+$(".delete").click(deleteEvent);
+</script>
+
+<script>
+
+function eventDeclined(){
+  console.log("event deleted")
+  location.reload(true);
+}
+
+function declineEvent(evt){
+var rejection = {
+  event_id: $(evt.target).data("event-id")
+}
+
+$.post("/decline_event", rejection, eventDeclined);
+}
+
+$(".decline_request").click(declineEvent);
+</script>
+
+
+
+
 <script src="/static/js/image.js"></script>
 <script src="/static/js/modal.js"></script>
 
