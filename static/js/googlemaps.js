@@ -26,7 +26,8 @@ function addMarker(latlng, name, icon=defaultIcon) {
         position: latlng,
         map: map,
         title: name,
-        icon : icon
+        // icon : icon,
+        animation: google.maps.Animation.DROP,
       });
   return marker;
 }
@@ -36,7 +37,6 @@ function bindInfoWindow(marker, map, infoWindow, contentString) {
         infoWindow.close();
         infoWindow.setContent(contentString);
         infoWindow.open(map, marker);
-        scheduleEventListenerForUber();
     });
 }
 
