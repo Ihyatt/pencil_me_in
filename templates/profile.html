@@ -50,16 +50,10 @@ setTimeout(implode, 1000);
         </div>
         <div class="modal-body">
           <img src="/static/images/{{image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="300"> 
-       <!--    <input name="file" type="file"> -->
-         
-
         
 			<div class="upload-button" style="cursor:pointer">Upload Image</div>
        <button id="upload-file-btn" type="button">Save</button>
-    <!--   <button id="upload-file-btn" type="button">Upload</button> -->
-      <!--  <button type="submit" class="btn btn-default" value="Submit">Submit</button> -->
-			<!-- <div class="save-button" style="cursor:pointer">Save</div> -->
-		
+ 
        		<input type="file" name="file" class="file-upload" id="upload" style="display: none;" accept="image/*" >
        
         </div>
@@ -81,23 +75,13 @@ Last Name: {{user.last_name}}<br>
 
 
 <h2>User Created Events:</h2>
-<!-- <ul id="user_events">
-   {% for event in user_events %}
-   <li>
-    <div>
-    {{event.event_title}}
-     <button type="button" class="delete" data-event-id="{{event.event_id}}">delete event</button>
-   </div>
-
-   </li>
-    {% endfor %}
-</ul> -->
 
 {% for event in user_events %}
   <div class="attraction-results">
     <div class="yelp-results-btn" id="{{event.event_id}}">
          <div value="{{event.event_id}}"> 
-                <h4 class="results-header">{{ event.event_title }} </h4>   
+                <h4 class="results-header">{{ event.event_title }} </h4> 
+                <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="300">   
                     <br>
                         <button type="button"  class="btn btn-primary triggerAttModal" data-attraction-id="{{ event.event_id }}"
                         data-toggle="modal" 
@@ -190,6 +174,7 @@ var infoWindow = new google.maps.InfoWindow({
 
         <h4 class="results-header" style="font-size:14px">{{ event.event_title }} </h4>
           <h4 style="font-size:13px; text-transform:capitalize;">{{ event.event_start_date}}</h4>
+          <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="300"> 
                   <button type="button"  class="btn btn-primary triggerEvModal" data-event-id="{{ event.event_id }}" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-search"></span></button>
                   <button type="button" class="decline_request" data-event-id="{{event.event_id}}">Decline Event</button>
 

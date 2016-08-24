@@ -152,6 +152,7 @@ def user_page(user_id):
    
 	user = User.query.get(user_id)
  	image = user.user_image
+ 	
 
  	
  	event_request = []
@@ -187,7 +188,7 @@ def image_update():
 		
 		db.session.commit()
 
-	return "succes"
+	return "success"
 
 
 @app.route('/create_event', methods=['GET'])
