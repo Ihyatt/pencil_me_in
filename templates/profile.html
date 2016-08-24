@@ -83,18 +83,7 @@ Last Name: {{user.last_name}}<br>
                 <h4 class="results-header">{{ event.event_title }} </h4> 
                 <h4 style="font-size:13px; text-transform:capitalize;">{{ event.event_start_date}} to {{ event.event_end_date}}</h4>
                 <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="300">   
-                <br><div class="modal fade" id="eventModal{{ event.event_id }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-event-id="{{ event.event_id }}">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-
-                             <h6> About: {{ event.event_title }}</h6>
-
-                                <h4 class="modal-title" id="myModalLabel"></h4>
-                                </div>
-                                  <div class="modal-body">
-                                    <div class="modalMap" id="map{{ event.event_id }}"></div>
-                                   
+                <br>
                         <button type="button"  class="btn btn-primary triggerAttModal" data-attraction-id="{{ event.event_id }}"
                         data-toggle="modal" 
                         data-target=""><span class="glyphicon glyphicon-search"></span></button> 
@@ -110,6 +99,7 @@ Last Name: {{user.last_name}}<br>
                                 </div>
                                   <div class="modal-body">
                                   <div class="modalMap" id="map{{ event.event_id }}"></div>
+                                  
                                      <div style="height:200px;width:60%px;border:1px solid #ccc;overflow:auto;, font-color:black;">
                                       <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="100"> 
                                       <br>
