@@ -41,9 +41,11 @@
                
             </div>
         </div>
+        <button class="end" data-event-id="{{event.event_id}}" type="button">save</button>
     </div>
-     <button class="end" data-event-id="{{event.event_id}}" type="button">save</button>
+     
 </div>
+
 
 
 
@@ -52,6 +54,7 @@
   {% for friend in friends %}
   <li>
     <div>
+      <img src="/static/images/{{friend.user_image.image}}" class="img-thumbnail img-responsive hover" alt="Cinque Terre" width="300"><br> 
       {{friend.first_name}}
       <button type="button" class="request" data-friend-id="{{friend.user_id}}" data-event-id="{{event.event_id}}">send request</button>
     </div>
