@@ -3,30 +3,15 @@ var marker;
 var infoWindow;
 var markers = [];
 
-var otherIcon = {
-        path: google.maps.SymbolPath.CIRCLE ,
-        strokeColor: "#5e2c45",
-        fillColor: "#69314D",
-        fillOpacity: 1,
-        scale: 5
-    };
 
-var defaultIcon = {
-        path: google.maps.SymbolPath.CIRCLE ,
-        strokeColor: "#5e2c45",
-        fillColor: "#69314D",
-        fillOpacity: 1,
-        scale: 5
-    };
 
 var bounds = new google.maps.LatLngBounds();
 
-function addMarker(latlng, name, icon=defaultIcon) {
+function addMarker(latlng, name) {
   marker = new google.maps.Marker({
         position: latlng,
         map: map,
         title: name,
-        // icon : icon,
         animation: google.maps.Animation.DROP,
       });
   return marker;
@@ -167,15 +152,6 @@ function initMap() {
 
   var bounds = new google.maps.LatLngBounds();
 
-  // TRYING TO FIX BUG WHERE MAP STARTS IN THE OCEAN
-  if (markers.length > 0) {
-    for (var j = 0; j < markers.length; j++) {
-      bounds.extend(markers[j].getPosition());
-    }
-    map.fitBounds(bounds);
-  }
-
-  
 }
 
 

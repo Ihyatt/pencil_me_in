@@ -85,12 +85,9 @@ function displayResults(data) {
       // TRYING TO MAKE IT SUCH THAT THE MARKER GETS ADDED AND THEN DISAPPEARS WHEN ANOTHER YELP RESULT IS CLICKED
       var lastMarker = markers[markers.length - 1];
 
-      if (lastMarker && lastMarker.icon === otherIcon) {
-        lastMarker.setMap(null);
-        markers.pop();
-      }
+     
       initMap();
-      addMarker(latlng, name, otherIcon);
+      addMarker(latlng, name);
       markers.push(marker);
       for (var j = 0; j < markers.length; j++) {
         bounds.extend(markers[j].getPosition());
