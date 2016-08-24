@@ -78,11 +78,23 @@ Last Name: {{user.last_name}}<br>
 
 {% for event in user_events %}
   <div class="attraction-results">
-    <div class="yelp-results-btn" id="{{event.event_id}}">
-         <div value="{{event.event_id}}"> 
+  <!--   <div class="yelp-results-btn" id="{{event.event_id}}"> -->
+         <!-- <div value="{{event.event_id}}"> --> 
                 <h4 class="results-header">{{ event.event_title }} </h4> 
+                <h4 style="font-size:13px; text-transform:capitalize;">{{ event.event_start_date}} to {{ event.event_end_date}}</h4>
                 <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="300">   
-                    <br>
+                <br><div class="modal fade" id="eventModal{{ event.event_id }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-event-id="{{ event.event_id }}">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+                             <h6> About: {{ event.event_title }}</h6>
+
+                                <h4 class="modal-title" id="myModalLabel"></h4>
+                                </div>
+                                  <div class="modal-body">
+                                    <div class="modalMap" id="map{{ event.event_id }}"></div>
+                                   
                         <button type="button"  class="btn btn-primary triggerAttModal" data-attraction-id="{{ event.event_id }}"
                         data-toggle="modal" 
                         data-target=""><span class="glyphicon glyphicon-search"></span></button> 
@@ -91,14 +103,23 @@ Last Name: {{user.last_name}}<br>
                             <div class="modal-dialog">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <button id="results-ev-header" type="button" class="close" data-dismiss="modal" aria-hidden="true"> About {{ event.event_title }}</button><br>
+
+                                  <h6> About: {{ event.event_title }}</h6>
+
                                   <h4 class="modal-title" id="myModalLabel"></h4>
                                 </div>
                                   <div class="modal-body">
-                                    
-                                     
-                                   
                                   <div class="modalMap" id="map{{ event.event_id }}"></div>
+                                     <div style="height:200px;width:60%px;border:1px solid #ccc;overflow:auto;, font-color:black;">
+                                      <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="100"> 
+                                      <br>
+                                      {{event.event_title}}<br>
+                                      {{event.event_start_date}} to {{event.event_end_date}}<br>
+                                      {{event.study_location}}<br>
+                                      {{event.address}}<br>
+                                      {{event.neighborhood}}
+
+                                      </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal"    ><span class="glyphicon glyphicon-remove"></span></button>
@@ -108,8 +129,8 @@ Last Name: {{user.last_name}}<br>
                     </div>
                   </div>
                 </div>
-            </div> 
-        </div>   
+          <!--   </div>  -->
+       <!--  </div> -->   
 </div>
 <script>
 
@@ -172,10 +193,12 @@ var infoWindow = new google.maps.InfoWindow({
 {% for event in event_request %}
 <div class="event-results" id="{{ event.event_id }}">
 
-        <h4 class="results-header" style="font-size:14px">{{ event.event_title }} </h4>
-          <h4 style="font-size:13px; text-transform:capitalize;">{{ event.event_start_date}}</h4>
+        <h4 class="results-header">{{ event.event_title }} </h4>
+          <h4 style="font-size:13px; text-transform:capitalize;">{{ event.event_start_date}} to {{ event.event_end_date}}</h4>
           <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="300"> 
+          <br>
                   <button type="button"  class="btn btn-primary triggerEvModal" data-event-id="{{ event.event_id }}" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-search"></span></button>
+
                   <button type="button" class="decline_request" data-event-id="{{event.event_id}}">Decline Event</button>
 
 
@@ -183,13 +206,22 @@ var infoWindow = new google.maps.InfoWindow({
                       <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">About {{ event.event_title }}</button>
+
+                             <h6> About: {{ event.event_title }}</h6>
+
                                 <h4 class="modal-title" id="myModalLabel"></h4>
                                 </div>
                                   <div class="modal-body">
-                                    <div style="color: black"> {{ event.event_start_date}} </div>
                                     <div class="modalMap" id="map{{ event.event_id }}"></div>
                                       <div style="height:200px;width:60%px;border:1px solid #ccc;overflow:auto;, font-color:black;">
+                                      <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="100"> 
+                                      <br>
+                                      {{event.event_title}}<br>
+                                      {{event.event_start_date}} to {{event.event_end_date}}<br>
+                                      {{event.study_location}}<br>
+                                      {{event.address}}<br>
+                                      {{event.neighborhood}}
+
                                       </div>
                                     </div>
                                     <div class="modal-footer">
