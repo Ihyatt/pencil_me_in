@@ -3,19 +3,19 @@
 $(document).ready(function(){
 
 	function makeAttModalMap(evt){
-  var resultId = $(this).data('attractionId');
+  var resultId = $(this).data('usereventId');
   console.log(resultId);
   initMaps[resultId]();
 }
 
-function populateAttModal(evt){
-  var attractionId = $(this).data('attractionId');
-  var modalToModalize = $('#attractionModal'+attractionId);
+function populateUserEvModal(evt){
+  var attractionId = $(this).data('usereventId');
+  var modalToModalize = $('#usereventModal'+attractionId);
   modalToModalize.on('shown.bs.modal', makeAttModalMap).modal('show');
   //map things
 }
 
-$('.triggerAttModal').on('click', populateAttModal);
+$('.triggerAttModal').on('click', populateUserEvModal);
 
 
 ///////////////////Modal Details/Map Attraction /////////////////////////////
