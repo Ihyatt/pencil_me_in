@@ -32,9 +32,10 @@ initMaps = {};
   <!-- Trigger the modal with a button -->
 
   <a data-toggle="modal" data-target="#myModal"> 
-  	<div id="wrapper" width="300">
-  		<img src="/static/images/{{image.image}}" class="img-thumbnail img-responsive hover" alt="Cinque Terre" width="300"> 
-  		<p class="text" width="300">Upload</p>
+  	<div class="wrapper">
+  		<img src="/static/images/{{image.image}}" class="img-thumbnail img-responsive hover" alt="Cinque Terre"> 
+  		<!-- <p class="text" width="300">Upload</p> -->
+      <span class="glyphicon glyphicon-camera"></span>
   	</div>​
   </a>
   	
@@ -46,7 +47,6 @@ initMaps = {};
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
         </div>
         <div class="modal-body">
           <img src="/static/images/{{image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="300"> 
@@ -74,6 +74,8 @@ Last Name: {{user.last_name}}<br>
 <a href="/create_event">Create Event</a>
 
 
+
+
 <h2>User Created Events:</h2>
 
 {% for event in user_events %}
@@ -81,8 +83,8 @@ Last Name: {{user.last_name}}<br>
   <!--   <div class="yelp-results-btn" id="{{event.event_id}}"> -->
          <!-- <div value="{{event.event_id}}"> --> 
                 <h4 class="results-header">{{ event.event_title }} </h4> 
-                <h4 style="font-size:13px; text-transform:capitalize;">{{ event.event_start_date}} to {{ event.event_end_date}}</h4>
-                <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="300">   
+                <h4 style="font-size:13px; text-transform:capitalize;">{{ event.event_start_date}}</h4>
+                <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail" alt="Cinque Terre" width="300">   
                 <br>
                         <button type="button"  class="btn btn-primary triggerAttModal" data-userevent-id="{{ event.event_id }}"
                         data-toggle="modal" 
@@ -92,6 +94,7 @@ Last Name: {{user.last_name}}<br>
                             <div class="modal-dialog">
                               <div class="modal-content">
                                 <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
 
                                   <h6> About: {{ event.event_title }}</h6>
 
@@ -104,7 +107,7 @@ Last Name: {{user.last_name}}<br>
                                       <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="100"> 
                                       <br>
                                       {{event.event_title}}<br>
-                                      {{event.event_start_date}} to {{event.event_end_date}}<br>
+                                      {{event.event_start_date}}<br>
                                       {{event.study_location}}<br>
                                       {{event.address}}<br>
                                       {{event.neighborhood}}
@@ -112,7 +115,7 @@ Last Name: {{user.last_name}}<br>
                                       </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal"    ><span class="glyphicon glyphicon-remove"></span></button>
+                              <!--   <button type="button" class="btn btn-default" data-dismiss="modal"    ><span class="glyphicon glyphicon-remove"></span></button> -->
                   
               
                         </div>
@@ -175,7 +178,7 @@ var infoWindow = new google.maps.InfoWindow({
 
 
 
-<h2> Upcoming Events:</h2>
+<h2> Event Request:</h2>
 <!-- google maps -->
 
 <!-- Limit results in Jinja -->
@@ -183,8 +186,8 @@ var infoWindow = new google.maps.InfoWindow({
 <div class="event-results" id="{{ event.event_id }}">
 
         <h4 class="results-header">{{ event.event_title }} </h4>
-          <h4 style="font-size:13px; text-transform:capitalize;">{{ event.event_start_date}} to {{ event.event_end_date}}</h4>
-          <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="300"> 
+          <h4 style="font-size:13px; text-transform:capitalize;">{{ event.event_start_date}}</h4>
+          <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail" alt="Cinque Terre" width="300"> 
           <br>
                   <button type="button"  class="btn btn-primary triggerEvModal" data-event-id="{{ event.event_id }}" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-search"></span></button>
 
@@ -195,6 +198,7 @@ var infoWindow = new google.maps.InfoWindow({
                       <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
 
                              <h6> About: {{ event.event_title }}</h6>
 
@@ -206,7 +210,7 @@ var infoWindow = new google.maps.InfoWindow({
                                       <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="100"> 
                                       <br>
                                       {{event.event_title}}<br>
-                                      {{event.event_start_date}} to {{event.event_end_date}}<br>
+                                      {{event.event_start_date}}<br>
                                       {{event.study_location}}<br>
                                       {{event.address}}<br>
                                       {{event.neighborhood}}
@@ -214,7 +218,7 @@ var infoWindow = new google.maps.InfoWindow({
                                       </div>
                                     </div>
                                     <div class="modal-footer">
-                                 <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
+                                <!--  <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button> -->
                                    
                                   
                           </div>
@@ -266,10 +270,16 @@ var infoWindow = new google.maps.InfoWindow({
 {% endfor %}  
 
 
+<br>
+<br>
+<br>
 
 
+<h2>Upcoming events</h2>
 
-
+{% for event in events %}
+<div> {{event.event_title}} </div>
+{% endfor %} 
 
 
 

@@ -152,23 +152,30 @@ def user_page(user_id):
    
 	user = User.query.get(user_id)
  	image = user.user_image
- 	
 
- 	
+
+ 	events = []
  	event_request = []
 
  	user_events = Event.query.filter(Event.user_id == user.user_id).all()
- 	print user_events
+ 	# print user_events
 
  	upcoming_events = EventRequest.query.filter(EventRequest.user_id == user.user_id).all()
-
+ 
  	for request in upcoming_events:
- 		if request.accepted == True:
- 			study_event = request.event
+ 		study_event = request.event
+ 		
+ 		location = study_event.study_location
+ 		
  		event_request.append(study_event)
+ 		events.append(study_event)
+
+ 	events.extend(user_events)
+
+
  	
 
-	return render_template("profile.html", user=user, image=image, user_events=user_events, upcoming_events=upcoming_events, event_request=event_request)
+	return render_template("profile.html", user=user, image=image, user_events=user_events, upcoming_events=upcoming_events, event_request=event_request, events=events)
 
 
     
@@ -194,7 +201,7 @@ def image_update():
 @app.route('/create_event', methods=['GET'])
 def create_event():
     """Show event creation page"""
-    event = Event(user_id=session["user_id"], event_title="", event_start_date="", event_end_date="", study_location="", latitude=0.1, longitude=0.1, address="", neighborhood="")
+    event = Event(user_id=session["user_id"], event_title="", event_start_date="", study_location="", latitude=0.1, longitude=0.1, address="", neighborhood="")
     db.session.add(event)
     db.session.commit()
 
@@ -228,21 +235,21 @@ def add_start_date():
 	return "success"
 
 
-@app.route("/save_end_date", methods=['POST'])
-def add_end_date():
-	"""updates end date"""
-	print " i am here"
+# @app.route("/save_end_date", methods=['POST'])
+# def add_end_date():
+# 	"""updates end date"""
+# 	print " i am here"
 
-	event_id = request.form.get('event_id')
-	print event_id
-	event = Event.query.get(event_id)
-	print event
+# 	event_id = request.form.get('event_id')
+# 	print event_id
+# 	event = Event.query.get(event_id)
+# 	print event
 
-	event_end_date = str(request.form.get('date'))
-	event.event_end_date = event_end_date
+# 	event_end_date = str(request.form.get('date'))
+# 	event.event_end_date = event_end_date
 
-	db.session.commit()
-	return "success"
+# 	db.session.commit()
+# 	return "success"
 
 
 

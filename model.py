@@ -65,7 +65,6 @@ class Event(db.Model):
 	user_id = user_id =  db.Column(db.Integer, db.ForeignKey('users.user_id'))
 	event_title = db.Column(db.String(100), nullable=True)
 	event_start_date = db.Column(db.String(100), nullable=True)
-	event_end_date = db.Column(db.String(100), nullable=True)
 	study_location = db.Column(db.String(100), nullable=True)
 	latitude = db.Column(db.Float, nullable=True)
 	longitude = db.Column(db.Float, nullable=True)
@@ -74,6 +73,12 @@ class Event(db.Model):
 
 	event_image = db.relationship('EventImage', uselist = False, backref=db.backref("events"))
 	user = db.relationship('User', backref=db.backref("events"))
+
+	def request_count(self):
+		count = 0 
+		for request in self.event_requests:
+			count += 1
+		return count
 
 
 ##############################################################################
