@@ -10,6 +10,8 @@ import urlparse
 import yelp
 import logging
 import sys
+from sqlalchemy import desc
+from operator import attrgetter
 
 
 
@@ -156,26 +158,42 @@ def user_page(user_id):
 
  	events = []
  	event_request = []
+ 	past = []
+ 	today = datetime.today()
 
- 	user_events = Event.query.filter(Event.user_id == user.user_id).all()
+ 	user_events = Event.query.filter(Event.user_id == user.user_id).order_by(Event.date).all()
  	# print user_events
 
  	upcoming_events = EventRequest.query.filter(EventRequest.user_id == user.user_id).all()
  
  	for request in upcoming_events:
  		study_event = request.event
- 		
- 		location = study_event.study_location
- 		
- 		event_request.append(study_event)
- 		events.append(study_event)
+ 		if study_event.date < today:
+ 			past.append(study_event)
+ 		else: 
+ 			event_request.append(study_event)
+ 			events.append(study_event)
 
- 	events.extend(user_events)
+ 	for event in user_events:
+ 		if event.date < today:
+ 			past.append(event)
+ 		else:
+ 			events.append(event)
+
+ 	# events.extend(user_events)
+
+ 	# upcoming_events = sorted(upcoming_events, cmp=lambda x, y: x.datetime.cmp(y.datetime))
+ 	event_request = sorted(event_request, key=attrgetter('date'))
+ 	events = sorted(events, key=attrgetter('date'))
+ 	past = sorted(past, key=attrgetter('date'))
+ 	# print sorted_list
+
+
 
 
  	
 
-	return render_template("profile.html", user=user, image=image, user_events=user_events, upcoming_events=upcoming_events, event_request=event_request, events=events)
+	return render_template("profile.html", user=user, image=image, user_events=user_events, upcoming_events=upcoming_events, event_request=event_request, events=events, past=past)
 
 
     
@@ -201,7 +219,7 @@ def image_update():
 @app.route('/create_event', methods=['GET'])
 def create_event():
     """Show event creation page"""
-    event = Event(user_id=session["user_id"], event_title="", event_start_date="", study_location="", latitude=0.1, longitude=0.1, address="", neighborhood="")
+    event = Event(user_id=session["user_id"], event_title="", date= datetime.today(), study_location="", latitude=0.1, longitude=0.1, address="", neighborhood="")
     db.session.add(event)
     db.session.commit()
 
@@ -227,31 +245,13 @@ def add_start_date():
 	event = Event.query.get(event_id)
 	print event
 
-	event_start_date = str(request.form.get('date'))
-	print event_start_date
-	event.event_start_date = event_start_date
-
+	start_date = str(request.form.get('date'))
+	dt_obj = datetime.strptime(start_date, '%m/%d/%Y %I:%M %p')
+	print dt_obj
+	
+	event.date = dt_obj
 	db.session.commit()
 	return "success"
-
-
-# @app.route("/save_end_date", methods=['POST'])
-# def add_end_date():
-# 	"""updates end date"""
-# 	print " i am here"
-
-# 	event_id = request.form.get('event_id')
-# 	print event_id
-# 	event = Event.query.get(event_id)
-# 	print event
-
-# 	event_end_date = str(request.form.get('date'))
-# 	event.event_end_date = event_end_date
-
-# 	db.session.commit()
-# 	return "success"
-
-
 
 
 @app.route('/search-location.json', methods=['POST'])

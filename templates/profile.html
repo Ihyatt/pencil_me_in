@@ -83,7 +83,8 @@ Last Name: {{user.last_name}}<br>
   <!--   <div class="yelp-results-btn" id="{{event.event_id}}"> -->
          <!-- <div value="{{event.event_id}}"> --> 
                 <h4 class="results-header">{{ event.event_title }} </h4> 
-                <h4 style="font-size:13px; text-transform:capitalize;">{{ event.event_start_date}}</h4>
+                <h4 style="font-size:13px; text-transform:capitalize;">{{ event.date}}</h4>
+                <h6>attending: {{event.request_count() + 1}}</h6>
                 <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail" alt="Cinque Terre" width="300">   
                 <br>
                         <button type="button"  class="btn btn-primary triggerAttModal" data-userevent-id="{{ event.event_id }}"
@@ -107,7 +108,7 @@ Last Name: {{user.last_name}}<br>
                                       <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="100"> 
                                       <br>
                                       {{event.event_title}}<br>
-                                      {{event.event_start_date}}<br>
+                                      {{event.date}}<br>
                                       {{event.study_location}}<br>
                                       {{event.address}}<br>
                                       {{event.neighborhood}}
@@ -186,7 +187,9 @@ var infoWindow = new google.maps.InfoWindow({
 <div class="event-results" id="{{ event.event_id }}">
 
         <h4 class="results-header">{{ event.event_title }} </h4>
-          <h4 style="font-size:13px; text-transform:capitalize;">{{ event.event_start_date}}</h4>
+          <h4 style="font-size:13px; text-transform:capitalize;">{{ event.date}}</h4>
+          <h6>attending: {{event.request_count() + 1}}</h6>
+         
           <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail" alt="Cinque Terre" width="300"> 
           <br>
                   <button type="button"  class="btn btn-primary triggerEvModal" data-event-id="{{ event.event_id }}" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-search"></span></button>
@@ -210,7 +213,7 @@ var infoWindow = new google.maps.InfoWindow({
                                       <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="100"> 
                                       <br>
                                       {{event.event_title}}<br>
-                                      {{event.event_start_date}}<br>
+                                      {{event.date}}<br>
                                       {{event.study_location}}<br>
                                       {{event.address}}<br>
                                       {{event.neighborhood}}
@@ -279,6 +282,13 @@ var infoWindow = new google.maps.InfoWindow({
 
 {% for event in events %}
 <div> {{event.event_title}} </div>
+{% endfor %}
+
+
+<h2>Past events</h2>
+
+{% for event in past %}
+<div> {{event.event_title}} </div>
 {% endfor %} 
 
 
@@ -338,7 +348,7 @@ var rejection = {
   event_id: $(evt.target).data("event-id")
 }
 
-$.post("/decline_event", reject, eventDeclined);
+$.post("/decline_event", rejection, eventDeclined);
 }
 
 $(".decline_request").click(declineEvent);
