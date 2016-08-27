@@ -191,6 +191,7 @@ def user_page(user_id):
 
 
 
+
  	
 
 	return render_template("profile.html", user=user, image=image, user_events=user_events, upcoming_events=upcoming_events, event_request=event_request, events=events, past=past)
@@ -356,6 +357,21 @@ def decline_event():
 
 	return "request deleted"
 
+
+@app.route("/view_attendees")
+def view_friends():
+	attendees = {}
+	event_id = request.args.get("event_id")
+
+	requests = EventRequest.query.filter(EventRequest.event_id == event_id).all()
+	print requests
+
+	for r in requests: 
+		attendee = User.query.filter(User.user_id == r.user_id).first()
+		attendees[r.user_id] = [event_id, attendee.first_name]
+	print attendees
+
+	return jsonify(attendees)
 
 
 

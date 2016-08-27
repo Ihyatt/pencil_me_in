@@ -78,112 +78,36 @@ Last Name: {{user.last_name}}<br>
 
 <h2>User Created Events:</h2>
 
-{% for event in user_events %}
-  <div class="user-events">
-  <!--   <div class="yelp-results-btn" id="{{event.event_id}}"> -->
-         <!-- <div value="{{event.event_id}}"> --> 
-                <h4 class="results-header">{{ event.event_title }} </h4> 
-                <h4 style="font-size:13px; text-transform:capitalize;">{{ event.date}}</h4>
-                <h6>attending: {{event.request_count() + 1}}</h6>
-                <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail" alt="Cinque Terre" width="300">   
-                <br>
-                        <button type="button"  class="btn btn-primary triggerAttModal" data-userevent-id="{{ event.event_id }}"
-                        data-toggle="modal" 
-                        data-target=""><span class="glyphicon glyphicon-search"></span></button> 
-                        <button type="button" class="delete" data-event-id="{{event.event_id}}">delete event</button> 
-                          <div class="modal fade" id="usereventModal{{ event.event_id }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-userevent-id="{{ event.event_id }}">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+{% for event in user_events %}  
+<div>{{ event.event_title }} </div>
+  <button type="button" class="view" data-event-id="{{event.event_id}}">view</button>
+attendees:
+<ul id="attendees{{event.event_id}}">
+</ul>
 
-                                  <h6> About: {{ event.event_title }}</h6>
+ 
 
-                                  <h4 class="modal-title" id="myModalLabel"></h4>
-                                </div>
-                                  <div class="modal-body">
-                                  <div class="modalMap" id="map{{ event.event_id }}"></div>
 
-                                     <div style="height:200px;width:60%px;border:1px solid #ccc;overflow:auto;, font-color:black;">
-                                      <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="100"> 
-                                      <br>
-                                      {{event.event_title}}<br>
-                                      {{event.date}}<br>
-                                      {{event.study_location}}<br>
-                                      {{event.address}}<br>
-                                      {{event.neighborhood}}
 
-                                      </div>
-                            </div>
-                            <div class="modal-footer">
-                              <!--   <button type="button" class="btn btn-default" data-dismiss="modal"    ><span class="glyphicon glyphicon-remove"></span></button> -->
-                  
-              
-                        </div>
-                    </div>
-                  </div>
-                </div>
-          <!--   </div>  -->
-       <!--  </div> -->   
-</div>
-<script>
 
-initMaps['{{ event.event_id }}'] = function(){
-  var myPlaceLatLng = { lat:{{ event.latitude }}, lng:{{ event.longitude }}};
 
-  var map = new google.maps.Map(document.getElementById('map' + '{{ event.event_id }}'), {
-    center: myPlaceLatLng,
-    zoom: 12,
-  });
 
-  var marker = new google.maps.Marker({
-      position: myPlaceLatLng,
-      animation: google.maps.Animation.DROP,
-      map: map
-      // // draggable: false,     
-   });
-/////////////////
- // info window //
- /////////////////
-
- var contentString = '<div id="content">' +
-  '<h4 style="color:black;font:12px;">"{{ event.event_title }}"</h4>' + 
-  '</div>';
-
-var infoWindow = new google.maps.InfoWindow({
-  content: contentString,
-  maxWidth: 200
-});
-
-  marker.addListener('click', function() {
-    infoWindow.open(map, marker);
-  });
-};
-
-</script>
 
 
 {% endfor %} 
 
-<br>
-<br>
-<br>
-
-
-
-
-
-
-
-
-
-
 
 <h2> Event Request:</h2>
-<!-- google maps -->
 
-<!-- Limit results in Jinja -->
 {% for event in event_request %}
+<div>{{ event.event_title }} </div>
+{% endfor %}  
+
+
+
+<h2>Upcoming events</h2>
+
+{% for event in events %}
 <div class="event-results" id="{{ event.event_id }}">
 
         <h4 class="results-header">{{ event.event_title }} </h4>
@@ -234,12 +158,10 @@ var infoWindow = new google.maps.InfoWindow({
 <script>
 initMaps['{{ event.event_id }}'] = function(){
   var myPlaceLatLng = { lat:{{ event.latitude }}, lng:{{ event.longitude }}};
-
   var map = new google.maps.Map(document.getElementById('map' + '{{ event.event_id }}'), {
     center: myPlaceLatLng,
     zoom: 12,
   });
-
   var marker = new google.maps.Marker({
       position: myPlaceLatLng,
       animation: google.maps.Animation.DROP,
@@ -251,44 +173,27 @@ initMaps['{{ event.event_id }}'] = function(){
 /////////////////
  // info window //
  /////////////////
-
  var contentString = '<div id="content">' +
   '<h4 style="color:black">"{{ event.event_title }}"</h4>' +
-
   '</div>';
-
   
-
 var infoWindow = new google.maps.InfoWindow({
   content: contentString,
   maxWidth: 200
 });
-
   marker.addListener('click', function() {
     infoWindow.open(map, marker);
   });
 };
-
 </script>
-{% endfor %}  
+{% endfor %} 
 
-
-<br>
-<br>
-<br>
-
-
-<h2>Upcoming events</h2>
-
-{% for event in events %}
-<div> {{event.event_title}} </div>
-{% endfor %}
 
 
 <h2>Past events</h2>
 
 {% for event in past %}
-<div> {{event.event_title}} </div>
+<div>{{event.event_title}}</div>
 {% endfor %} 
 
 
@@ -354,6 +259,35 @@ $.post("/decline_event", rejection, eventDeclined);
 $(".decline_request").click(declineEvent);
 </script>
 
+ <script>
+
+function showAttendees(results){
+
+  var attendees = results;
+  console.log("here");
+  console.log(attendees[0])
+
+  for (var key in attendees) {
+    $("#attendees" + attendees[key][0]).append("<li>" + attendees[key][1] + "<li>");
+    console.log("here");
+  }
+}
+
+
+function viewAttendees(evt) {
+  info = {
+    "event_id": $(evt.target).data("event-id")
+
+  }
+   console.log(info);
+
+  $.get("/view_attendees", info, showAttendees);
+}
+
+
+$(".view").click(viewAttendees);
+
+</script>
 
 
 

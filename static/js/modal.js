@@ -1,24 +1,10 @@
+
 "use strict";
 ////////////////// ADD ATTRACTION to database///////////////////////////
 $(document).ready(function(){
 
-	function makeAttModalMap(evt){
-  var resultId = $(this).data('usereventId');
-  console.log(resultId);
-  initMaps[resultId]();
-}
 
-function populateUserEvModal(evt){
-  var attractionId = $(this).data('usereventId');
-  var modalToModalize = $('#usereventModal'+attractionId);
-  modalToModalize.on('shown.bs.modal', makeAttModalMap).modal('show');
-  //map things
-}
-
-$('.triggerAttModal').on('click', populateUserEvModal);
-
-
-///////////////////Modal Details/Map Attraction /////////////////////////////
+console.log("JS Connected");
 
 function makeEvModalMap(evt){
   var eventId = $(this).data('eventId');
@@ -35,5 +21,5 @@ function populateEvModal(evt){
 
 $('.triggerEvModal').on('click', populateEvModal);
 
-/////////////////// Change Heart Color for SAVE /////////////////////////////
+
 });

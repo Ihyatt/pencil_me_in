@@ -9,6 +9,7 @@ function sendRequest(evt) {
     "request": $(evt.target).data("friend-id"),
     "event_id": $(evt.target).data("event-id")
   }
+  console.log(requestItem);
 
 $.post("/send-request", requestItem, requestSent);
 
