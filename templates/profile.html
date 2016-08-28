@@ -35,7 +35,7 @@ initMaps = {};
   	<div class="wrapper">
   		<img src="/static/images/{{image.image}}" class="img-thumbnail img-responsive hover" alt="Cinque Terre"> 
   		<!-- <p class="text" width="300">Upload</p> -->
-      <span class="glyphicon glyphicon-camera"></span>
+     
   	</div>​
   </a>
   	
@@ -75,8 +75,9 @@ Last Name: {{user.last_name}}<br>
 
 
 
-
-<h2>User Created Events:</h2>
+<br>
+<button id="user-events-div"><h2>User Created Events:</h2></button>
+  <div id="user-toggle">
 
 {% for event in user_events %}  
 <!-- <div class="event-results" id="{{ event.event_id }}"> -->
@@ -132,10 +133,13 @@ attendees:
 
 
 
-{% endfor %} 
+{% endfor %}
+</div> 
 
+<br>
 
-<h2> Event Request:</h2>
+<button id="requests-div"><h2> Event Request:</h2></button>
+<div id="requests-toggle">
 
 {% for event in event_request %}
  <h4 class="results-header">{{ event.event_title }} </h4>
@@ -186,10 +190,13 @@ attendees:
                       </div>
                    </div> 
 {% endfor %}  
-
+</div>
+<br>
 
 
 <h2>Upcoming events</h2>
+
+
 
 {% for event in events %}
 <div class="event-results" id="{{ event.event_id }}">
@@ -241,6 +248,7 @@ attendees:
                       </div>
                    </div> 
 </div>
+
  
 
 <script>
@@ -276,9 +284,12 @@ var infoWindow = new google.maps.InfoWindow({
 </script>
 {% endfor %} 
 
+<br>
 
 
-<h2>Past events</h2>
+<button id="past-div"><h2>Past events</h2></button>
+<div id="past-toggle">
+
 
 {% for event in past %}
  <h4 class="results-header">{{ event.event_title }} </h4>
@@ -329,7 +340,7 @@ attendees:
                    </div> 
 {% endfor %} 
 
-
+</div>
 
 <script>
 
@@ -391,7 +402,24 @@ $.post("/decline_event", rejection, eventDeclined);
 
 $(".decline_request").click(declineEvent);
 </script>
+<script>
 
+$("#user-events-div").click(function() {
+  $( "#user-toggle" ).toggle( "slow" );
+});
+
+$("#requests-div").click(function() {
+  $( "#requests-toggle" ).toggle( "slow" );
+});
+
+
+
+$("#past-div").click(function() {
+  $( "#past-toggle" ).toggle( "slow" );
+});
+
+
+</script>
 
 
 
