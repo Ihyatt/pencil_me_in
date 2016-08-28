@@ -14,7 +14,9 @@ function makePastModal(results){
   var attendees = results;
   console.log(attendees);
   for (var key in attendees) {
-    $("#attend" + attendees[key][0]).append("<li>" + attendees[key][1] + "<li>")
+    $("#attend" + attendees[key][0]).append('<li>' + attendees[key][1] + ' ' + attendees[key][2] + '<br>' + 
+      '<img src="/static/images/' + attendees[key][3] + '" class="img-thumbnail img-responsive" width="100">' + 
+      '<li>')
 
   };
 }
@@ -43,7 +45,9 @@ function makeRequestModal(results){
    var attendees = results;
   console.log("here");
   for (var key in attendees) {
-    $("#att" + attendees[key][0]).append("<li>" + attendees[key][1] + "<li>")
+    $("#att" + attendees[key][0]).append('<li>' + attendees[key][1] + ' ' + attendees[key][2] + '<br>' + 
+      '<img src="/static/images/' + attendees[key][3] + '" class="img-thumbnail img-responsive" width="100">' + 
+      '<li>')
   };
 }
 
@@ -70,7 +74,9 @@ function makeUserModal(results){
   var attendees = results;
   console.log("here");
   for (var key in attendees) {
-    $("#attendees" + attendees[key][0]).append("<li>" + attendees[key][1] + "<li>")
+    $("#attendees" + attendees[key][0]).append('<li>' + attendees[key][1] + ' ' + attendees[key][2] + '<br>' + 
+      '<img src="/static/images/' + attendees[key][3] + '" class="img-thumbnail img-responsive" width="100">' + 
+      '<li>')
   };
 }
 
@@ -96,7 +102,9 @@ function showFriends(results) {
   var attendees = results;
   console.log("attendees");
   for (var key in attendees) {
-    $("#a" + attendees[key][0]).append("<li>" + attendees[key][1] + "<li>")
+    $("#a" + attendees[key][0]).append('<li>' + attendees[key][1] + ' ' + attendees[key][2] + '<br>' + 
+      '<img src="/static/images/' + attendees[key][3] + '" class="img-thumbnail img-responsive" width="100">' + 
+      '<li>')
   };
 
 }

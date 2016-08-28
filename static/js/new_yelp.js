@@ -108,6 +108,7 @@ function submitSearch(evt) {
         "location": $("#location").val(),
         "term": $("#term").val()
     };
+    console.log(formInputs);
     $('#yelpResultsPanel').removeClass('hidden');
     $('#results').html("searching...");;
     $.post("/search-location.json", formInputs, displayResults);

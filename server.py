@@ -259,6 +259,7 @@ def search_restaurant():
   
    
     results = yelp.get_results(location=location, term=term)
+    print results
    
 
     return jsonify(results=results)
@@ -368,8 +369,9 @@ def view_friends():
 
 	for r in requests: 
 		attendee = User.query.filter(User.user_id == r.user_id).first()
-		attendees[r.user_id] = [event_id, attendee.first_name]
-	attendees[creator.user_id] = [event_id, creator.first_name]
+
+		attendees[r.user_id] = [event_id, attendee.first_name, attendee.last_name, attendee.user_image.image ]
+	attendees[creator.user_id] = [event_id, creator.first_name, creator.last_name, creator.user_image.image]
 	print attendees
 
 	return jsonify(attendees)
@@ -389,8 +391,8 @@ def view_past_friends():
 
 	for r in requests: 
 		attendee = User.query.filter(User.user_id == r.user_id).first()
-		attendees[r.user_id] = [event_id, attendee.first_name]
-	attendees[creator.user_id] = [event_id, creator.first_name]
+		attendees[r.user_id] = [event_id, attendee.first_name, attendee.last_name, attendee.user_image.image ]
+	attendees[creator.user_id] = [event_id, creator.first_name, creator.last_name, creator.user_image.image]
 	print attendees
 
 	return jsonify(attendees)
@@ -410,8 +412,8 @@ def view_request_friends():
 
 	for r in requests: 
 		attendee = User.query.filter(User.user_id == r.user_id).first()
-		attendees[r.user_id] = [event_id, attendee.first_name]
-	attendees[creator.user_id] = [event_id, creator.first_name]
+		attendees[r.user_id] = [event_id, attendee.first_name, attendee.last_name, attendee.user_image.image ]
+	attendees[creator.user_id] = [event_id, creator.first_name, creator.last_name, creator.user_image.image]
 	print attendees
 
 	return jsonify(attendees)
@@ -431,8 +433,8 @@ def view_event_friends():
 
 	for r in requests: 
 		attendee = User.query.filter(User.user_id == r.user_id).first()
-		attendees[r.user_id] = [event_id, attendee.first_name]
-	attendees[creator.user_id] = [event_id, creator.first_name]
+		attendees[r.user_id] = [event_id, attendee.first_name, attendee.last_name, attendee.user_image.image]
+	attendees[creator.user_id] = [event_id, creator.first_name, creator.last_name, creator.user_image.image]
 	print attendees
 
 	return jsonify(attendees)
