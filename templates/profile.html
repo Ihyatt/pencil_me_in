@@ -79,18 +79,56 @@ Last Name: {{user.last_name}}<br>
 <h2>User Created Events:</h2>
 
 {% for event in user_events %}  
-<div>{{ event.event_title }} </div>
-  <button type="button" class="view" data-event-id="{{event.event_id}}">view</button>
+<!-- <div class="event-results" id="{{ event.event_id }}"> -->
+
+        <h4 class="results-header">{{ event.event_title }} </h4>
+          <h4 style="font-size:13px; text-transform:capitalize;">{{ event.date}}</h4>
+          <h6>attending: {{event.request_count() + 1}}</h6>
+         
+          <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail" alt="Cinque Terre" width="300"> 
+          <br>
+                  <button type="button"  class="btn btn-primary triggerUserModal view" data-event-id="{{ event.event_id }}" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-search"></span></button>
+                     <button type="button" class="delete" data-event-id="{{event.event_id}}">delete event</button> 
+
+             <!--      <button type="button" class="decline_request" data-event-id="{{event.event_id}}">Decline Event</button> -->
+
+
+                    <div class="modal fade" id="userModal{{ event.event_id }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-event-id="{{ event.event_id }}">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                             <h6> About: {{ event.event_title }}</h6>
+
+                                <h4 class="modal-title" id="myModalLabel"></h4>
+                                </div>
+                                  <div class="modal-body">
+                                    
+                                      <div style="height:200px;width:60%px;border:1px solid #ccc;overflow:auto;, font-color:black;">
+                                      <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="100"> 
+                                      <br>
+                                      {{event.event_title}}<br>
+                                      {{event.date}}<br>
+                                      {{event.study_location}}<br>
+                                      {{event.address}}<br>
+                                      {{event.neighborhood}}
+                                    
 attendees:
 <ul id="attendees{{event.event_id}}">
 </ul>
 
- 
-
-
-
-
-
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                <!--  <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button> -->
+                                   
+                                  
+                          </div>
+                        </div>
+                      </div>
+                   </div> 
+<!-- </div> -->
 
 
 
@@ -100,7 +138,53 @@ attendees:
 <h2> Event Request:</h2>
 
 {% for event in event_request %}
-<div>{{ event.event_title }} </div>
+ <h4 class="results-header">{{ event.event_title }} </h4>
+          <h4 style="font-size:13px; text-transform:capitalize;">{{ event.date}}</h4>
+          <h6>attending: {{event.request_count() + 1}}</h6>
+         
+          <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail" alt="Cinque Terre" width="300"> 
+          <br>
+                  <button type="button"  class="btn btn-primary triggerRequestModal view" data-event-id="{{ event.event_id }}" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-search"></span></button>
+                     <button type="button" class="decline_request" data-event-id="{{event.event_id}}">decline</button> 
+
+             <!--      <button type="button" class="decline_request" data-event-id="{{event.event_id}}">Decline Event</button> -->
+
+
+                    <div class="modal fade" id="requestModal{{ event.event_id }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-event-id="{{ event.event_id }}">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                             <h6> About: {{ event.event_title }}</h6>
+
+                                <h4 class="modal-title" id="myModalLabel"></h4>
+                                </div>
+                                  <div class="modal-body">
+                                    
+                                      <div style="height:200px;width:60%px;border:1px solid #ccc;overflow:auto;, font-color:black;">
+                                      <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="100"> 
+                                      <br>
+                                      {{event.event_title}}<br>
+                                      {{event.date}}<br>
+                                      {{event.study_location}}<br>
+                                      {{event.address}}<br>
+                                      {{event.neighborhood}}
+                                    
+attendees:
+<ul id="att{{event.event_id}}">
+</ul>
+
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                <!--  <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button> -->
+                                   
+                                  
+                          </div>
+                        </div>
+                      </div>
+                   </div> 
 {% endfor %}  
 
 
@@ -116,9 +200,9 @@ attendees:
          
           <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail" alt="Cinque Terre" width="300"> 
           <br>
-                  <button type="button"  class="btn btn-primary triggerEvModal" data-event-id="{{ event.event_id }}" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-search"></span></button>
+                  <button type="button"  class="btn btn-primary triggerEvModal view" data-event-id="{{ event.event_id }}" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-search"></span></button>
 
-                  <button type="button" class="decline_request" data-event-id="{{event.event_id}}">Decline Event</button>
+             <!--      <button type="button" class="decline_request" data-event-id="{{event.event_id}}">Decline Event</button> -->
 
 
                     <div class="modal fade" id="eventModal{{ event.event_id }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-event-id="{{ event.event_id }}">
@@ -141,6 +225,10 @@ attendees:
                                       {{event.study_location}}<br>
                                       {{event.address}}<br>
                                       {{event.neighborhood}}
+                                    
+attendees:
+<ul id="a{{event.event_id}}">
+</ul>
 
                                       </div>
                                     </div>
@@ -193,7 +281,52 @@ var infoWindow = new google.maps.InfoWindow({
 <h2>Past events</h2>
 
 {% for event in past %}
-<div>{{event.event_title}}</div>
+ <h4 class="results-header">{{ event.event_title }} </h4>
+          <h4 style="font-size:13px; text-transform:capitalize;">{{ event.date}}</h4>
+          <h6>attending: {{event.request_count() + 1}}</h6>
+         
+          <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail" alt="Cinque Terre" width="300"> 
+          <br>
+                  <button type="button"  class="btn btn-primary triggerPastModal view" data-event-id="{{ event.event_id }}" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-search"></span></button>
+
+             <!--      <button type="button" class="decline_request" data-event-id="{{event.event_id}}">Decline Event</button> -->
+
+
+                    <div class="modal fade" id="pastModal{{ event.event_id }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-event-id="{{ event.event_id }}">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                             <h6> About: {{ event.event_title }}</h6>
+
+                                <h4 class="modal-title" id="myModalLabel"></h4>
+                                </div>
+                                  <div class="modal-body">
+                                    
+                                      <div style="height:200px;width:60%px;border:1px solid #ccc;overflow:auto;, font-color:black;">
+                                      <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="100"> 
+                                      <br>
+                                      {{event.event_title}}<br>
+                                      {{event.date}}<br>
+                                      {{event.study_location}}<br>
+                                      {{event.address}}<br>
+                                      {{event.neighborhood}}
+                                    
+attendees:
+<ul id="attend{{event.event_id}}">
+</ul>
+
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                <!--  <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button> -->
+                                   
+                                  
+                          </div>
+                        </div>
+                      </div>
+                   </div> 
 {% endfor %} 
 
 
@@ -259,35 +392,6 @@ $.post("/decline_event", rejection, eventDeclined);
 $(".decline_request").click(declineEvent);
 </script>
 
- <script>
-
-function showAttendees(results){
-
-  var attendees = results;
-  console.log("here");
-  console.log(attendees[0])
-
-  for (var key in attendees) {
-    $("#attendees" + attendees[key][0]).append("<li>" + attendees[key][1] + "<li>");
-    console.log("here");
-  }
-}
-
-
-function viewAttendees(evt) {
-  info = {
-    "event_id": $(evt.target).data("event-id")
-
-  }
-   console.log(info);
-
-  $.get("/view_attendees", info, showAttendees);
-}
-
-
-$(".view").click(viewAttendees);
-
-</script>
 
 
 

@@ -162,17 +162,20 @@ def user_page(user_id):
  	today = datetime.today()
 
  	user_events = Event.query.filter(Event.user_id == user.user_id).order_by(Event.date).all()
- 	# print user_events
+ 	print user_events
 
  	upcoming_events = EventRequest.query.filter(EventRequest.user_id == user.user_id).all()
- 
+ 	print "here"
+ 	print upcoming_events
+ 	
  	for request in upcoming_events:
  		study_event = request.event
- 		if study_event.date < today:
- 			past.append(study_event)
- 		else: 
- 			event_request.append(study_event)
- 			events.append(study_event)
+ 		if study_event:
+	 		if study_event.date < today:
+	 			past.append(study_event)
+	 		else: 
+	 			event_request.append(study_event)
+	 			events.append(study_event)
 
  	for event in user_events:
  		if event.date < today:
@@ -180,19 +183,11 @@ def user_page(user_id):
  		else:
  			events.append(event)
 
- 	# events.extend(user_events)
-
- 	# upcoming_events = sorted(upcoming_events, cmp=lambda x, y: x.datetime.cmp(y.datetime))
+ 
  	event_request = sorted(event_request, key=attrgetter('date'))
  	events = sorted(events, key=attrgetter('date'))
  	past = sorted(past, key=attrgetter('date'))
  	# print sorted_list
-
-
-
-
-
- 	
 
 	return render_template("profile.html", user=user, image=image, user_events=user_events, upcoming_events=upcoming_events, event_request=event_request, events=events, past=past)
 
@@ -360,19 +355,87 @@ def decline_event():
 
 @app.route("/view_attendees")
 def view_friends():
+	
 	attendees = {}
 	event_id = request.args.get("event_id")
-
+	print event_id
 	requests = EventRequest.query.filter(EventRequest.event_id == event_id).all()
 	print requests
+	event = Event.query.filter(Event.event_id == event_id).first()
+	print event.user_id
+	creator = User.query.filter(User.user_id == event.user_id).first()
+	print creator
 
 	for r in requests: 
 		attendee = User.query.filter(User.user_id == r.user_id).first()
 		attendees[r.user_id] = [event_id, attendee.first_name]
+	attendees[creator.user_id] = [event_id, creator.first_name]
+	print attendees
+
+	return jsonify(attendees)
+	
+@app.route("/view_past_attendees")
+def view_past_friends():
+	
+	attendees = {}
+	event_id = request.args.get("event_id")
+	print event_id
+	requests = EventRequest.query.filter(EventRequest.event_id == event_id).all()
+	print requests
+	event = Event.query.filter(Event.event_id == event_id).first()
+	print event.user_id
+	creator = User.query.filter(User.user_id == event.user_id).first()
+	print creator
+
+	for r in requests: 
+		attendee = User.query.filter(User.user_id == r.user_id).first()
+		attendees[r.user_id] = [event_id, attendee.first_name]
+	attendees[creator.user_id] = [event_id, creator.first_name]
+	print attendees
+
+	return jsonify(attendees)
+	
+@app.route("/view_request_attendees")
+def view_request_friends():
+	
+	attendees = {}
+	event_id = request.args.get("event_id")
+	print event_id
+	requests = EventRequest.query.filter(EventRequest.event_id == event_id).all()
+	print requests
+	event = Event.query.filter(Event.event_id == event_id).first()
+	print event.user_id
+	creator = User.query.filter(User.user_id == event.user_id).first()
+	print creator
+
+	for r in requests: 
+		attendee = User.query.filter(User.user_id == r.user_id).first()
+		attendees[r.user_id] = [event_id, attendee.first_name]
+	attendees[creator.user_id] = [event_id, creator.first_name]
 	print attendees
 
 	return jsonify(attendees)
 
+@app.route("/view_event_attendees")
+def view_event_friends():
+	
+	attendees = {}
+	event_id = request.args.get("event_id")
+	print event_id
+	requests = EventRequest.query.filter(EventRequest.event_id == event_id).all()
+	print requests
+	event = Event.query.filter(Event.event_id == event_id).first()
+	print event.user_id
+	creator = User.query.filter(User.user_id == event.user_id).first()
+	print creator
+
+	for r in requests: 
+		attendee = User.query.filter(User.user_id == r.user_id).first()
+		attendees[r.user_id] = [event_id, attendee.first_name]
+	attendees[creator.user_id] = [event_id, creator.first_name]
+	print attendees
+
+	return jsonify(attendees)
 
 
 	
