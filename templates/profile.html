@@ -9,19 +9,6 @@ google.maps.visualRefresh = true;
 
 initMaps = {};
 
-// function explode(){
-
-//   var results = $( ".user-events" );
-//   $( ".user-events" ).wrapAll( "<div class='new' />");
-// }
-// setTimeout(explode, 1000);
-
-// function implode(){
-
-//   var results = $( ".event-results" );
-//   $( ".event-results" ).wrapAll( "<div class='new' />");
-// }
-// setTimeout(implode, 1000);
 </script>
 
 
@@ -294,7 +281,7 @@ var infoWindow = new google.maps.InfoWindow({
 {% for event in past %}
  <h4 class="results-header">{{ event.event_title }} </h4>
           <h4 style="font-size:13px; text-transform:capitalize;">{{ event.date}}</h4>
-          <h6>attending: {{event.request_count() + 1}}</h6>
+          <h6>attended: {{event.request_count() + 1}}</h6>
          
           <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail" alt="Cinque Terre" width="300"> 
           <br>
@@ -331,7 +318,6 @@ attendees:
                                       </div>
                                     </div>
                                     <div class="modal-footer">
-                                <!--  <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button> -->
                                    
                                   
                           </div>
@@ -342,87 +328,10 @@ attendees:
 
 </div>
 
-<script>
-
-$(function() {
-    $('#upload-file-btn').click(function() {
-        var form_data = new FormData($('#upload-file')[0]);
-        $.ajax({
-            type: 'POST',
-            url: '/uploadajax',
-            data: form_data,
-            contentType: false,
-            cache: false,
-            processData: false,
-            async: false,
-            success: function(data) {
-                console.log('Success!');
-                location.reload(true);
-            },
-        });
-    });
-});
-</script>
-
-<script>
-function eventDeleted() {
-  console.log("event deleted")
-  location.reload(true);
-}
-
-
-function deleteEvent(evt) {
-
-var deleteItem = {
-event_id: $(evt.target).data("event-id")
-}
-
-$.post("/delete_event", deleteItem, eventDeleted);
-
-}
-
-
-$(".delete").click(deleteEvent);
-</script>
-
-<script>
-
-function eventDeclined(){
-  console.log("event deleted")
-  location.reload(true);
-}
-
-function declineEvent(evt){
-var rejection = {
-  event_id: $(evt.target).data("event-id")
-}
-
-$.post("/decline_event", rejection, eventDeclined);
-}
-
-$(".decline_request").click(declineEvent);
-</script>
-<script>
-
-$("#user-events-div").click(function() {
-  $( "#user-toggle" ).toggle( "slow" );
-});
-
-$("#requests-div").click(function() {
-  $( "#requests-toggle" ).toggle( "slow" );
-});
 
 
 
-$("#past-div").click(function() {
-  $( "#past-toggle" ).toggle( "slow" );
-});
-
-
-</script>
-
-
-
+<script src="/static/js/event.js"></script>
 <script src="/static/js/image.js"></script>
 <script src="/static/js/modal.js"></script>
 

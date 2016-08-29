@@ -171,14 +171,14 @@ def user_page(user_id):
  	for request in upcoming_events:
  		study_event = request.event
  		if study_event:
-	 		if study_event.date < today:
+	 		if study_event.end_date < today:
 	 			past.append(study_event)
 	 		else: 
 	 			event_request.append(study_event)
 	 			events.append(study_event)
 
  	for event in user_events:
- 		if event.date < today:
+ 		if event.end_date < today:
  			past.append(event)
  		else:
  			events.append(event)
@@ -215,7 +215,7 @@ def image_update():
 @app.route('/create_event', methods=['GET'])
 def create_event():
     """Show event creation page"""
-    event = Event(user_id=session["user_id"], event_title="", date= datetime.today(), study_location="", latitude=0.1, longitude=0.1, address="", neighborhood="")
+    event = Event(user_id=session["user_id"], event_title="", date= datetime.today(), end_date= datetime.today(), study_location="", latitude=0.1, longitude=0.1, address="", neighborhood="")
     db.session.add(event)
     db.session.commit()
 
@@ -248,6 +248,27 @@ def add_start_date():
 	event.date = dt_obj
 	db.session.commit()
 	return "success"
+
+
+@app.route("/save_end_date", methods=['POST'])
+def add_end_date():
+	"""updates start date"""
+	print " i am here"
+
+	event_id = request.form.get('event_id')
+	print event_id
+	event = Event.query.get(event_id)
+	print event
+
+	end_date = str(request.form.get('date'))
+	dt_obj = datetime.strptime(end_date, '%m/%d/%Y %I:%M %p')
+	print dt_obj
+	
+	event.end_date = dt_obj
+	db.session.commit()
+	return "success"
+
+
 
 
 @app.route('/search-location.json', methods=['POST'])

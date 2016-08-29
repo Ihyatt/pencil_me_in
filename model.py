@@ -65,6 +65,7 @@ class Event(db.Model):
 	user_id = user_id =  db.Column(db.Integer, db.ForeignKey('users.user_id'))
 	event_title = db.Column(db.String(100), nullable=True)
 	date = db.Column(db.DateTime)
+	end_date = db.Column(db.DateTime)
 	study_location = db.Column(db.String(100), nullable=True)
 	latitude = db.Column(db.Float, nullable=True)
 	longitude = db.Column(db.Float, nullable=True)
