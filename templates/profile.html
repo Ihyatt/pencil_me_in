@@ -15,19 +15,19 @@ initMaps = {};
 
 <div class="row">
 
+<div class="col-sm-7 col-md-5">
+<!-- pf image div start -->
+
 <div class="container">
   <!-- Trigger the modal with a button -->
-
- <!--  <a data-toggle="modal" data-target="#myModal">  -->
   	<div class="wrapper">
-      <a data-toggle="modal" data-target="#myModal"> 
-  		<img src="/static/images/{{image.image}}" class="img-thumbnail img-responsive hover" alt="Cinque Terre"> 
-  		<!-- <p class="text" width="300">Upload</p> -->
-     </a>
+  		<img src="/static/images/{{image.image}}" class="img-thumbnail img-responsive" alt="Cinque Terre" width="175"> 
   	</div>​
- 
-  	
+    <div class="upload-wrapper"> <a data-toggle="modal" data-target="#myModal"> Upload Image <span class="glyphicon glyphicon-camera"></span> </a></div>
+<!-- pf image div enf -->
+</div>
 
+ 
   <!-- Modal -->
   <form id="upload-file" method="POST" enctype="multipart/form-data">
   <div class="modal fade" id="myModal" role="dialog">
@@ -51,33 +51,31 @@ initMaps = {};
     </div>
   </div>
   </form>
-</div>
 
 
-
-
-{{user.first_name}} {{user.last_name}}<br>
-
-
-<a href="/create_event">Create Event</a>
-
-
-
-<br>
-<button id="user-events-div"><h2>User Created Events:</h2></button>
+<!-- event div start -->
+<!-- <div class="panel panel-default">
+  <div class="panel-body"> -->
+<ul class="list-group">
+  <li class="list-group-item" style="text-align:center;">
+<h5><a href="/create_event"><span class="glyphicon glyphicon-pencil"></span> Create Event </a></h5> 
+ </li>
+ <li class="list-group-item">
+<div id="user-events-div"><h5>View Your Events</h5> <h6 style="color:grey;">You have {{user_events|length}} events<h6></div>
   <div id="user-toggle">
 
 {% for event in user_events %}  
 <!-- <div class="event-results" id="{{ event.event_id }}"> -->
-
+        <div>
+           <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail" alt="Cinque Terre" width="100"> 
         <h4 class="results-header">{{ event.event_title }} </h4>
           <h4 style="font-size:13px; text-transform:capitalize;">{{ event.date}}</h4>
           <h6>attending: {{event.request_count() + 1}}</h6>
-         
-          <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail" alt="Cinque Terre" width="300"> 
-          <br>
+      
+        
                   <button type="button"  class="btn btn-primary triggerUserModal view" data-event-id="{{ event.event_id }}" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-search"></span></button>
                      <button type="button" class="delete" data-event-id="{{event.event_id}}">delete event</button> 
+        </div>
 
              <!--      <button type="button" class="decline_request" data-event-id="{{event.event_id}}">Decline Event</button> -->
 
@@ -123,10 +121,11 @@ attendees:
 
 {% endfor %}
 </div> 
+ </li>
 
-<br>
 
-<button id="requests-div"><h2> Event Request:</h2></button>
+<li class="list-group-item">
+<div id="requests-div"><h5> View Event Requests</h5><h6 style="color:grey;">You have {{event_request|length}} events<h6></div>
 <div id="requests-toggle">
 
 {% for event in event_request %}
@@ -179,10 +178,75 @@ attendees:
                    </div> 
 {% endfor %}  
 </div>
-<br>
+ </li>
+
+<li class="list-group-item">
+<div id="past-div"><h5>View Past Events</h5> <h6 style="color:grey;">You have {{past|length}} events<h6></div>
+<div id="past-toggle">
 
 
-<h2>Upcoming events</h2>
+{% for event in past %}
+ <h4 class="results-header">{{ event.event_title }} </h4>
+          <h4 style="font-size:13px; text-transform:capitalize;">{{ event.date}}</h4>
+          <h6>attended: {{event.request_count() + 1}}</h6>
+         
+          <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail" alt="Cinque Terre" width="300"> 
+          <br>
+                  <button type="button"  class="btn btn-primary triggerPastModal view" data-event-id="{{ event.event_id }}" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-search"></span></button>
+
+             <!--      <button type="button" class="decline_request" data-event-id="{{event.event_id}}">Decline Event</button> -->
+
+
+                    <div class="modal fade" id="pastModal{{ event.event_id }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-event-id="{{ event.event_id }}">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                             <h6> About: {{ event.event_title }}</h6>
+
+                                <h4 class="modal-title" id="myModalLabel"></h4>
+                                </div>
+                                  <div class="modal-body">
+                                    
+                                      <div style="height:200px;width:60%px;border:1px solid #ccc;overflow:auto;, font-color:black;">
+                                      <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="100"> 
+                                      <br>
+                                      {{event.event_title}}<br>
+                                      {{event.date}}<br>
+                                      {{event.study_location}}<br>
+                                      {{event.address}}<br>
+                                      {{event.neighborhood}}
+                                    
+attendees:
+<ul id="attend{{event.event_id}}">
+</ul>
+
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                   
+                                  
+                          </div>
+                        </div>
+                      </div>
+                   </div> 
+{% endfor %} 
+
+</div>
+ </li>
+</ul>
+
+<!-- end of events wrapper -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- end of col-4 -->
+</div>
+<div class="col-sm-6 col-md-6 ">
+  <!-- current events div -->
+<div class="panel panel-default">
+  <div class="panel-body">
+<h5>Upcoming Events</h5>
 
 
 
@@ -271,62 +335,10 @@ var infoWindow = new google.maps.InfoWindow({
 };
 </script>
 {% endfor %} 
-
-<br>
-
-
-<button id="past-div"><h2>Past events</h2></button>
-<div id="past-toggle">
-
-
-{% for event in past %}
- <h4 class="results-header">{{ event.event_title }} </h4>
-          <h4 style="font-size:13px; text-transform:capitalize;">{{ event.date}}</h4>
-          <h6>attended: {{event.request_count() + 1}}</h6>
-         
-          <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail" alt="Cinque Terre" width="300"> 
-          <br>
-                  <button type="button"  class="btn btn-primary triggerPastModal view" data-event-id="{{ event.event_id }}" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-search"></span></button>
-
-             <!--      <button type="button" class="decline_request" data-event-id="{{event.event_id}}">Decline Event</button> -->
-
-
-                    <div class="modal fade" id="pastModal{{ event.event_id }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-event-id="{{ event.event_id }}">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                              <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-                             <h6> About: {{ event.event_title }}</h6>
-
-                                <h4 class="modal-title" id="myModalLabel"></h4>
-                                </div>
-                                  <div class="modal-body">
-                                    
-                                      <div style="height:200px;width:60%px;border:1px solid #ccc;overflow:auto;, font-color:black;">
-                                      <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="100"> 
-                                      <br>
-                                      {{event.event_title}}<br>
-                                      {{event.date}}<br>
-                                      {{event.study_location}}<br>
-                                      {{event.address}}<br>
-                                      {{event.neighborhood}}
-                                    
-attendees:
-<ul id="attend{{event.event_id}}">
-</ul>
-
-                                      </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                   
-                                  
-                          </div>
-                        </div>
-                      </div>
-                   </div> 
-{% endfor %} 
-
+</div>
+</div>
+</div>
+<!-- end of row -->
 </div>
 
 

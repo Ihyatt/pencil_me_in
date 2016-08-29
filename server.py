@@ -315,12 +315,22 @@ def send_request():
 
 	event_id = request.form.get('event_id')
 	friend_id = request.form.get('request')
+	event = EventRequest.query.filter(EventRequest.user_id == friend_id).first()
+	print event
+	if event:
+		# request_event = EventRequest.query.filter(EventRequest.event_id == event_id, EventRequest.user_id == user.user_id).first()
+	
+		db.session.delete(event)
+		db.session.commit()
+		return "friend removed" 
+		
+	else:
+		event_request = EventRequest(user_id=friend_id, event_id=event_id, accepted=True)
 
-	event_request = EventRequest(user_id=friend_id, event_id=event_id, accepted=True)
+		db.session.add(event_request)
+		db.session.commit()
+		return "friend added"
 
-	db.session.add(event_request)
-	db.session.commit()
-	return "friend added"
 
 @app.route("/save-event/<int:event_id>", methods=["POST"])
 def save_event_image(event_id):

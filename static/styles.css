@@ -1,25 +1,14 @@
+
+
 /*profile page*/
 
 
-.wrapper {
-   display: relative;
-   width: 230px;
+.panel{
+  margin-top: 20px;
 }
-
-img {
-    width: 230px;
+.list-group{
+  margin-top: 20px;
 }
-
-.wrapper .glyphicon {
-  position: absolute;
-  top: 280px;
-  left: 90px;
-  font-size: 40px;
-   color: white;
-   opacity: 0.5;
-
-}
-
 
 
 /*upload button for profile image*/
@@ -58,7 +47,7 @@ margin: 10px;
 
 
 
-/*veronicas code*/
+
 
 /*MODALS*/
 

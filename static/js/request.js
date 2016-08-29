@@ -2,6 +2,16 @@ function requestSent() {
   console.log("request sent");
 }
 
+
+function messageChange(evt) {
+    if ($(".request").innerText !== "send request") {
+        $(".request").innerText = "goodbye";
+  } else {
+        $(".request").innerText = "send request";
+    }
+  }
+
+
 function sendRequest(evt) {
 
 
@@ -13,8 +23,10 @@ function sendRequest(evt) {
 
 $.post("/send-request", requestItem, requestSent);
 
- $(evt.target).html("Added!");
+ $(evt.target).html("remove request");
 
+ 
+ 
 }
 
 $(".request").click(sendRequest);
