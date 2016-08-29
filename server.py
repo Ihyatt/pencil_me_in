@@ -86,8 +86,6 @@ def register_process():
 		return render_template("register.html")
 
 	else:
-		
-		flash('You were successfully logged in')
 
 
 		if file_:
