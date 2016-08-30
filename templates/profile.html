@@ -23,7 +23,7 @@ initMaps = {};
   	<div class="wrapper">
   		<img src="/static/images/{{image.image}}" class="img-thumbnail img-responsive" alt="Cinque Terre" width="175"> 
   	</div>​
-    <div class="upload-wrapper"> <a data-toggle="modal" data-target="#myModal"> Upload Image <span class="glyphicon glyphicon-camera"></span> </a></div>
+    <div class="upload-wrapper"> <a data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-camera"></span> Upload Image  </a></div>
 <!-- pf image div enf -->
 </div>
 
@@ -66,17 +66,22 @@ initMaps = {};
 
 {% for event in user_events %}  
 <!-- <div class="event-results" id="{{ event.event_id }}"> -->
-        <div>
-           <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail" alt="Cinque Terre" width="100"> 
-        <h4 class="results-header">{{ event.event_title }} </h4>
-          <h4 style="font-size:13px; text-transform:capitalize;">{{ event.date}}</h4>
-          <h6>attending: {{event.request_count() + 1}}</h6>
+        <div class="events-wrapper">
+           <img src="/static/images/{{event.event_image.image}}"alt="Cinque Terre" width="100"> 
+        <div style="display:inline-block;">
+          <div style="text-align:right;"><span class="glyphicon glyphicon-remove delete" data-event-id="{{event.event_id}}"></span></div>
+        <a href="" class="results-header triggerUserModal view" data-event-id="{{ event.event_id }}" data-toggle="modal" data-target=""><h7>{{ event.event_title }} </h7></a> <br>
+          <h7 style="font-size:13px; text-transform:capitalize;">{{ event.date.strftime("%B %d, %Y %I:%M %p")}}</h7><br>
+          <br>
+
+          <h8 style="color:grey; font-size:10px;">{{event.request_count() + 1}} Attending</h8><br>
       
         
-                  <button type="button"  class="btn btn-primary triggerUserModal view" data-event-id="{{ event.event_id }}" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-search"></span></button>
-                     <button type="button" class="delete" data-event-id="{{event.event_id}}">delete event</button> 
+                 <!--  <span  class="triggerUserModal view" data-event-id="{{ event.event_id }}" data-toggle="modal" data-target=""> View Event</span> -->
+                     <!-- <span class="glyphicon glyphicon-remove delete" data-event-id="{{event.event_id}}"></span> -->
+          </div>
         </div>
-
+        
              <!--      <button type="button" class="decline_request" data-event-id="{{event.event_id}}">Decline Event</button> -->
 
 
@@ -86,25 +91,37 @@ initMaps = {};
                             <div class="modal-header">
                               <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-                             <h6> About: {{ event.event_title }}</h6>
+                             <h5>{{ event.event_title }}</h5>
 
-                                <h4 class="modal-title" id="myModalLabel"></h4>
+                               <!--  <h4 class="modal-title" id="myModalLabel"></h4> -->
                                 </div>
                                   <div class="modal-body">
                                     
-                                      <div style="height:200px;width:60%px;border:1px solid #ccc;overflow:auto;, font-color:black;">
-                                      <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="100"> 
-                                      <br>
-                                      {{event.event_title}}<br>
-                                      {{event.date}}<br>
-                                      {{event.study_location}}<br>
-                                      {{event.address}}<br>
-                                      {{event.neighborhood}}
-                                    
-attendees:
-<ul id="attendees{{event.event_id}}">
-</ul>
+                                      <div style="height:400px;width:60%px;border:1px solid #ccc;overflow:auto;, font-color:black; background-color:#f7f7f7; background-image: url(/static/images/{{event.event_image.image}});background-repeat: repeat;" >
 
+                                      <div style="padding:10px;">
+
+                                  
+                                 
+                                      
+                                      <div class="panel panel-default">
+                                      <div class="panel-body">
+                                      <h4>{{event.event_title}}!</h4>
+                                      <span class="glyphicon glyphicon-time"></span> {{ event.date.strftime("%B %d, %Y %I:%M %p")}} to {{ event.end_date.strftime("%B %d, %Y %I:%M %p")}}<br>
+                                      <span class="glyphicon glyphicon-map-marker"></span> {{event.study_location}}, {{event.address}} 
+                                       </div>
+                                      </div>
+                                    
+<div class="panel panel-default">
+<div class="panel-body">                                    
+<h5>Guests</h5>
+<ul class="img-list" id="attendees{{event.event_id}}">
+
+</ul>
+</div>
+</div>
+
+                                      </div>
                                       </div>
                                     </div>
                                     <div class="modal-footer">

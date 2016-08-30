@@ -14,8 +14,9 @@ function makePastModal(results){
   var attendees = results;
   console.log(attendees);
   for (var key in attendees) {
-    $("#attend" + attendees[key][0]).append('<li>' + attendees[key][1] + ' ' + attendees[key][2] + '<br>' + 
-      '<img src="/static/images/' + attendees[key][3] + '" class="img-thumbnail img-responsive" width="100">' + 
+    $("#attend" + attendees[key][0]).append('<li>' + 
+      '<img src="/static/images/' + attendees[key][3] + '" class="img-responsive" height="125">' + 
+      '<span class="text-content"><span>' + attendees[key][1] + ' ' + attendees[key][2] + '</span></span>' + 
       '<li>')
 
   };
@@ -45,8 +46,9 @@ function makeRequestModal(results){
    var attendees = results;
   console.log("here");
   for (var key in attendees) {
-    $("#att" + attendees[key][0]).append('<li>' + attendees[key][1] + ' ' + attendees[key][2] + '<br>' + 
-      '<img src="/static/images/' + attendees[key][3] + '" class="img-thumbnail img-responsive" width="100">' + 
+    $("#att" + attendees[key][0]).append('<li>' + 
+      '<img src="/static/images/' + attendees[key][3] + '" class="img-responsive" height="125">' + 
+      '<span class="text-content"><span>' + attendees[key][1] + ' ' + attendees[key][2] + '</span></span>' + 
       '<li>')
   };
 }
@@ -74,8 +76,9 @@ function makeUserModal(results){
   var attendees = results;
   console.log("here");
   for (var key in attendees) {
-    $("#attendees" + attendees[key][0]).append('<li>' + attendees[key][1] + ' ' + attendees[key][2] + '<br>' + 
-      '<img src="/static/images/' + attendees[key][3] + '" class="img-thumbnail img-responsive" width="100">' + 
+    $("#attendees" + attendees[key][0]).append('<li>'  + 
+      '<img src="/static/images/' + attendees[key][3] + '" class="img-responsive" height="125">' + 
+      '<span class="text-content"><span>' + attendees[key][1] + ' ' + attendees[key][2] + '</span></span>' + 
       '<li>')
   };
 }
@@ -102,8 +105,9 @@ function showFriends(results) {
   var attendees = results;
   console.log("attendees");
   for (var key in attendees) {
-    $("#a" + attendees[key][0]).append('<li>' + attendees[key][1] + ' ' + attendees[key][2] + '<br>' + 
-      '<img src="/static/images/' + attendees[key][3] + '" class="img-thumbnail img-responsive" width="100">' + 
+    $("#a" + attendees[key][0]).append('<li>' + 
+       '<img src="/static/images/' + attendees[key][3] + '" class="img-responsive" height="125">' + 
+      '<span class="text-content"><span>' + attendees[key][1] + ' ' + attendees[key][2] + '</span></span>' + 
       '<li>')
   };
 
