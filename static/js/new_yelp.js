@@ -46,15 +46,15 @@ function scheduleEventListerForRestaurantButtons(){
 function displayResults(data) {
     var text = "";
     for (var i = 0; i < data.results.length; i++){
-      text = text  + data.results[i].name + "<button class='restaurant-button btn' type='button'id=" + "'button" + i + "'" + 
+      text = text + "<div style='padding:10px; cursor:pointer;'class='restaurant-button' type='button'id=" + "'button" + i + "'" + 
                              "data-restaurant-name=" + '"' + data.results[i].name + '"' +
                              "data-address=" + "'" + data.results[i].address + "'" +
                              "data-neighborhoods=" + '"' + data.results[i].neighborhoods + '"' +
                              "data-latitude=" + "'" + data.results[i].latitude + "'" +
                              "data-longitude=" + "'" + data.results[i].longitude + "'" + 
-                             ">" +
-                      "<span> View location </span>" + 
-                    "</button>"
+                             " style='boder:none;'>" +
+                      "<span>" +  data.results[i].name  + "</span>" + 
+                    "</div>"
     }
     
     $('#yelpResultsPanel').removeClass('hidden');
@@ -71,7 +71,7 @@ function displayResults(data) {
                              "<tr><td class='title'>Address: " + address + "</td></tr>" + 
                              "<tr><td class='title'>Neighborhood: " + ( neighborhoods ? neighborhoods.join(", ") : "None" ) + 
                              "</td></tr></table>" + 
-                             "<button type='button' class='add-button btn' id='button' " + 
+                             "<button type='button' class='add-button btn btn-default' id='button' " + 
                              "data-restaurant-name=" + '"' + name + '"' +
                              "data-address=" + "'" + address + "'" +
                              "data-neighborhoods=" + '"' + neighborhoods + '"' +

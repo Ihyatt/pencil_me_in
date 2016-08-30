@@ -14,19 +14,6 @@
 }
 
 
-/*upload button for profile image*/
-/*.upload-button {
-border:2px solid black;
-
-margin: 10px;
-}*/
-/*
-.save-button{
-	border:2px solid black;
-
-margin: 10px;
-}*/
-
 
 #my-map.small {
     height: 400px;
@@ -57,7 +44,7 @@ ul.img-list li {
   height: 125px;
   margin: 0 1em 1em 0;
   position: relative;
-  width: 100px;
+  width: 200px;
 }
 
 
