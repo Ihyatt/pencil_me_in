@@ -15,17 +15,17 @@
 
 
 /*upload button for profile image*/
-.upload-button {
+/*.upload-button {
 border:2px solid black;
 
 margin: 10px;
-}
-
+}*/
+/*
 .save-button{
 	border:2px solid black;
 
 margin: 10px;
-}
+}*/
 
 
 #my-map.small {
@@ -60,46 +60,6 @@ ul.img-list li {
   width: 100px;
 }
 
-span.text-content {
- /*  background: rgba(0,0,0,0.5);*/
-  color: white;
-  cursor: pointer;
-  display: table;
-  height: 500px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 50px;
-  opacity: 0;
-}
-
-span.text-content span {
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
-}
-
-ul.img-list li:hover span.text-content {
-  opacity: 1;
-}
-
-span.text-content {
- /* background: rgba(0,0,0,0.5);*/
-  color: white;
-  cursor: pointer;
-  display: table;
-  height: 50px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 50px;
-  opacity: 0;
-  -webkit-transition: opacity 500ms;
-  -moz-transition: opacity 500ms;
-  -o-transition: opacity 500ms;
-  transition: opacity 500ms;
-}
-
 
 /*MODALS*/
 
@@ -121,7 +81,10 @@ span.text-content {
 }
 
 
-
+/*general*/
+img{
+  padding: 10px;
+}
 
 
 

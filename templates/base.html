@@ -70,7 +70,9 @@
 
             <ul class="nav navbar-nav">
             {% if "user_id" in session %}
-            <li><a href="" style="color: white;">Hello, {{user.first_name}}!</a></li>
+              <li><a href="" style="color: white;">Hello, {{user.first_name}}!</a></li>
+            {% else %}
+            
             {% endif %}
           </ul>
 

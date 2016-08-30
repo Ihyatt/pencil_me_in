@@ -53,7 +53,7 @@ function displayResults(data) {
                              "data-latitude=" + "'" + data.results[i].latitude + "'" +
                              "data-longitude=" + "'" + data.results[i].longitude + "'" + 
                              ">" +
-                      "<span> Add location </span>" + 
+                      "<span> View location </span>" + 
                     "</button>"
     }
     

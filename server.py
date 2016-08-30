@@ -213,6 +213,7 @@ def image_update():
 @app.route('/create_event', methods=['GET'])
 def create_event():
     """Show event creation page"""
+    user = User.query.get(session["user_id"])
     event = Event(user_id=session["user_id"], event_title="", date= datetime.today(), end_date= datetime.today(), study_location="", latitude=0.1, longitude=0.1, address="", neighborhood="")
     db.session.add(event)
     db.session.commit()
@@ -227,7 +228,7 @@ def event_page(event_id):
 	event = Event.query.get(event_id)
 	friends = User.query.filter(User.first_name != user.first_name).all()
 	
-	return render_template("event.html", event=event, friends=friends)
+	return render_template("event.html", event=event, friends=friends, user=user)
 
 @app.route("/save_start_date", methods=['POST'])
 def add_start_date():
