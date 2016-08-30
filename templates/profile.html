@@ -146,19 +146,20 @@ initMaps = {};
 <div id="requests-toggle">
 
 {% for event in event_request %}
- <h4 class="results-header">{{ event.event_title }} </h4>
+
+ <!-- <h4 class="results-header">{{ event.event_title }} </h4>
           <h4 style="font-size:13px; text-transform:capitalize;">{{ event.date}}</h4>
           <h6>attending: {{event.request_count() + 1}}</h6>
          
           <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail" alt="Cinque Terre" width="300"> 
           <br>
                   <button type="button"  class="btn btn-primary triggerRequestModal view" data-event-id="{{ event.event_id }}" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-search"></span></button>
-                     <button type="button" class="decline_request" data-event-id="{{event.event_id}}">decline</button> 
+                     <button type="button" class="decline_request" data-event-id="{{event.event_id}}">decline</button>  -->
 
              <!--      <button type="button" class="decline_request" data-event-id="{{event.event_id}}">Decline Event</button> -->
 
 
-                    <div class="modal fade" id="requestModal{{ event.event_id }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-event-id="{{ event.event_id }}">
+                    <!-- <div class="modal fade" id="requestModal{{ event.event_id }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-event-id="{{ event.event_id }}">
                       <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -185,6 +186,74 @@ attendees:
 
                                       </div>
                                     </div>
+                                    <div class="modal-footer"> -->
+                                <!--  <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button> -->
+                                   
+                                  
+                        <!--   </div>
+                        </div>
+                      </div>
+                   </div>  -->
+
+
+              <div class="events-wrapper">
+           <img src="/static/images/{{event.event_image.image}}"alt="Cinque Terre" width="100"> 
+        <div style="display:inline-block;">
+          <div style="text-align:right;"><span class="glyphicon glyphicon-remove delete" data-event-id="{{event.event_id}}"></span></div>
+        <a href="" class="results-header triggerRequestModal view" data-event-id="{{ event.event_id }}" data-toggle="modal" data-target=""><h7>{{ event.event_title }} </h7></a> <br>
+          <h7 style="font-size:13px; text-transform:capitalize;">{{ event.date.strftime("%B %d, %Y %I:%M %p")}}</h7><br>
+          <br>
+
+          <h8 style="color:grey; font-size:10px;">{{event.request_count() + 1}} Attending</h8><br>
+      
+        
+                 <!--  <span  class="triggerUserModal view" data-event-id="{{ event.event_id }}" data-toggle="modal" data-target=""> View Event</span> -->
+                     <!-- <span class="glyphicon glyphicon-remove delete" data-event-id="{{event.event_id}}"></span> -->
+          </div>
+        </div>
+        
+             <!--      <button type="button" class="decline_request" data-event-id="{{event.event_id}}">Decline Event</button> -->
+
+
+                    <div class="modal fade" id="requestModal{{ event.event_id }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-event-id="{{ event.event_id }}">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                             <h5>{{ event.event_title }}</h5>
+
+                               <!--  <h4 class="modal-title" id="myModalLabel"></h4> -->
+                                </div>
+                                  <div class="modal-body">
+                                    
+                                      <div style="height:400px;width:60%px;border:1px solid #ccc;overflow:auto;, font-color:black; background-color:#f7f7f7; background-image: url(/static/images/{{event.event_image.image}});background-repeat: repeat;" >
+
+                                      <div style="padding:10px;">
+
+                                  
+                                 
+                                      
+                                      <div class="panel panel-default">
+                                      <div class="panel-body">
+                                      <h4>{{event.event_title}}!</h4>
+                                      <span class="glyphicon glyphicon-time"></span> {{ event.date.strftime("%B %d, %Y %I:%M %p")}} to {{ event.end_date.strftime("%B %d, %Y %I:%M %p")}}<br>
+                                      <span class="glyphicon glyphicon-map-marker"></span> {{event.study_location}}, {{event.address}} 
+                                       </div>
+                                      </div>
+                                    
+<div class="panel panel-default">
+<div class="panel-body">                                    
+<h5>Guests</h5>
+<ul class="img-list" id="att{{event.event_id}}">
+
+</ul>
+</div>
+</div>
+
+                                      </div>
+                                      </div>
+                                    </div>
                                     <div class="modal-footer">
                                 <!--  <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button> -->
                                    
@@ -193,6 +262,7 @@ attendees:
                         </div>
                       </div>
                    </div> 
+<!-- </div> -->     
 {% endfor %}  
 </div>
  </li>
@@ -203,17 +273,84 @@ attendees:
 
 
 {% for event in past %}
- <h4 class="results-header">{{ event.event_title }} </h4>
+<div class="events-wrapper">
+           <img src="/static/images/{{event.event_image.image}}"alt="Cinque Terre" width="100"> 
+        <div style="display:inline-block;">
+          <div style="text-align:right;"><span class="glyphicon glyphicon-remove delete" data-event-id="{{event.event_id}}"></span></div>
+        <a href="" class="results-header triggerPastModal view" data-event-id="{{ event.event_id }}" data-toggle="modal" data-target=""><h7>{{ event.event_title }} </h7></a> <br>
+          <h7 style="font-size:13px; text-transform:capitalize;">{{ event.date.strftime("%B %d, %Y %I:%M %p")}}</h7><br>
+          <br>
+
+          <h8 style="color:grey; font-size:10px;">{{event.request_count() + 1}} Attending</h8><br>
+      
+        
+                 <!--  <span  class="triggerUserModal view" data-event-id="{{ event.event_id }}" data-toggle="modal" data-target=""> View Event</span> -->
+                     <!-- <span class="glyphicon glyphicon-remove delete" data-event-id="{{event.event_id}}"></span> -->
+          </div>
+        </div>
+        
+             <!--      <button type="button" class="decline_request" data-event-id="{{event.event_id}}">Decline Event</button> -->
+
+
+                    <div class="modal fade" id="pastModal{{ event.event_id }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-event-id="{{ event.event_id }}">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                             <h5>{{ event.event_title }}</h5>
+
+                               <!--  <h4 class="modal-title" id="myModalLabel"></h4> -->
+                                </div>
+                                  <div class="modal-body">
+                                    
+                                      <div style="height:400px;width:60%px;border:1px solid #ccc;overflow:auto;, font-color:black; background-color:#f7f7f7; background-image: url(/static/images/{{event.event_image.image}});background-repeat: repeat;" >
+
+                                      <div style="padding:10px;">
+
+                                  
+                                 
+                                      
+                                      <div class="panel panel-default">
+                                      <div class="panel-body">
+                                      <h4>{{event.event_title}}!</h4>
+                                      <span class="glyphicon glyphicon-time"></span> {{ event.date.strftime("%B %d, %Y %I:%M %p")}} to {{ event.end_date.strftime("%B %d, %Y %I:%M %p")}}<br>
+                                      <span class="glyphicon glyphicon-map-marker"></span> {{event.study_location}}, {{event.address}} 
+                                       </div>
+                                      </div>
+                                    
+<div class="panel panel-default">
+<div class="panel-body">                                    
+<h5>Guests</h5>
+<ul class="img-list" id="attend{{event.event_id}}">
+
+</ul>
+</div>
+</div>
+
+                                      </div>
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                <!--  <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button> -->
+                                   
+                                  
+                          </div>
+                        </div>
+                      </div>
+                   </div> 
+
+<!--  <h4 class="results-header">{{ event.event_title }} </h4>
           <h4 style="font-size:13px; text-transform:capitalize;">{{ event.date}}</h4>
           <h6>attended: {{event.request_count() + 1}}</h6>
          
           <img src="/static/images/{{event.event_image.image}}" class="img-thumbnail" alt="Cinque Terre" width="300"> 
           <br>
-                  <button type="button"  class="btn btn-primary triggerPastModal view" data-event-id="{{ event.event_id }}" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-search"></span></button>
+                  <button type="button"  class="btn btn-primary triggerPastModal view" data-event-id="{{ event.event_id }}" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-search"></span></button> -->
 
              <!--      <button type="button" class="decline_request" data-event-id="{{event.event_id}}">Decline Event</button> -->
 
-
+<!-- 
                     <div class="modal fade" id="pastModal{{ event.event_id }}" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-event-id="{{ event.event_id }}">
                       <div class="modal-dialog">
                         <div class="modal-content">
@@ -234,8 +371,8 @@ attendees:
                                       {{event.study_location}}<br>
                                       {{event.address}}<br>
                                       {{event.neighborhood}}
-                                    
-attendees:
+                                     -->
+<!-- attendees:
 <ul id="attend{{event.event_id}}">
 </ul>
 
@@ -247,7 +384,7 @@ attendees:
                           </div>
                         </div>
                       </div>
-                   </div> 
+                   </div>  -->
 {% endfor %} 
 
 </div>
