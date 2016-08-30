@@ -3,14 +3,6 @@ function requestSent() {
 }
 
 
-function messageChange(evt) {
-    if ($(".request").innerText !== "send request") {
-        $(".request").innerText = "goodbye";
-  } else {
-        $(".request").innerText = "send request";
-    }
-  }
-
 
 function sendRequest(evt) {
 

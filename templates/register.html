@@ -1,31 +1,89 @@
 {% extends 'base.html' %}
 {% block content %}
 
+
+
 <form action="/register" method="POST" enctype="multipart/form-data">   
-	<h1>Sign up!</h1>
+   <div class="container">    
+        <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-1 col-sm-8 col-sm-offset-2">                    
+            <div class="panel panel-info" style="border-color:#dddddd;">
+                    <div class="panel-heading" style="background-color:#2fa4e7; border-color:#dddddd">
+                        <div class="panel-title">Log In</div>
+                        <div style="float:right; font-size: 80%; position: relative; top:-10px"></div>
+                    </div>     
 
-	<img src="/static/img/pinata.jpg" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="300"> 
+                    <div style="padding-top:30px" class="panel-body" >
 
-	<div class="upload-button">Upload Image</div>
-       	<input type="file" name="image-upload" class="file-upload" id="upload" style="display: none;" accept="image/*" > <br>
+                        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                          
+                          <div style="text-align:center;">   
+                       
+                        <img src="/static/img/pinata.jpg" class="img-responsive profile-pic" alt="Cinque Terre" width="300" style ="display: inline-block;"> 
 
-    <h2>First Name</h2>
-    <input type="text" name="first_name"><br>
+ <div class="upload-button btn btn-default" style="margin-bottom: 10px;"> <span class="glyphicon glyphicon-camera"></span> Upload Image</div>
+    <!-- <div class="upload-button">Upload Image</div> -->
+        <input type="file" name="image-upload" class="file-upload" id="upload" style="display: none;" accept="image/*" > <br>
+</div>
 
-    <h2>Last Name</h2>
-    <input type="text" name="last_name"><br>
+       
 
-    <h2>Email</h2>
-    <input type="email" name="email"><br>
 
-    <h2>Password</h2>
-    <input type="password" name="password"><br>
+                                    
+                            <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input id="login-username" type="text" class="form-control" name="first_name" value="" placeholder="first name">                                        
+                                    </div>
 
-    <button type="submit" class="btn btn-default" value="Submit">Submit</button>
+
+                             <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input id="login-username" type="text" class="form-control" name="last_name" value="" placeholder="last name">                                        
+                                    </div>
+                                    
+                             <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input id="login-username" type="email" class="form-control" name="email" value="" placeholder="email">                                        
+                                    </div>                
+                                
+                            <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                        <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
+                                    </div>
+                                    
+
+                          
+
+                                <div style="margin-top:10px" class="form-group">
+                                    
+
+                                    <div class="col-sm-12 controls">
+                                        <button type="submit" class="btn btn-success" value="Submit">Sign In</button>
+                                     
+                                    
+
+                                    </div>
+                                </div>
+
+
+                            
+
+
+
+                        </div>                     
+                    </div>  
+        </div>
+    
+    </div>
+
+
 
 
 </form>
 
+
+
 <script src="/static/js/image.js"></script>
+
+
 
 {% endblock %}
