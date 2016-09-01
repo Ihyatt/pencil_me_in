@@ -1,12 +1,12 @@
 
 "use strict";
-////////////////// ADD ATTRACTION to database///////////////////////////
+
 $(document).ready(function(){
 
 
 console.log("JS Connected");
 
-
+// Populates past event modal
 // ##############################################
 
 function makePastModal(results){
@@ -37,7 +37,7 @@ function populatePastModal(evt){
 
 $('.triggerPastModal').on('click', populatePastModal);
 
-
+// Populates user request's modal
 // ##############################################
 
 function makeRequestModal(results){
@@ -67,7 +67,7 @@ function populateRequestModal(evt){
 
 $('.triggerRequestModal').on('click', populateRequestModal);
 
-
+// populates user's created events
 // ##############################################
 
 function makeUserModal(results){
@@ -97,6 +97,7 @@ function populateUserModal(evt){
 $('.triggerUserModal').on('click', populateUserModal);
 
 
+// populates friends of upcoming events
 // ##############################################
 
 function showFriends(results) {
@@ -125,10 +126,9 @@ function getFriends(evt){
 
 $(".view").click(getFriends);
 
+
+// populates user's event modal with a map
 // ##############################################
-
-
-
 
 function makeEvModalMap(evt){
   var eventId = $(this).data('eventId');

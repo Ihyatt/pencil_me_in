@@ -1,4 +1,6 @@
 // changes image to view as new image
+// #################################################################
+
 
  function readURL(input) {
         if (input.files && input.files[0]) {
@@ -20,6 +22,8 @@
     });
 
 // ajax image request
+// #################################################################
+
 $(function() {
     $('#upload-file-btn').click(function() {
         var form_data = new FormData($('#upload-file')[0]);

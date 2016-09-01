@@ -4,69 +4,51 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-
-
-<form action="/save-event/{{event.event_id}}" method="POST" enctype="multipart/form-data">
-<button type="submit" class="btn btn-default" value="Submit"> Save Event </button> <br>
-
-
-<div style="text-align:center;">
-<img src="/static/img/pinata.jpg" class="img-responsive profile-pic" alt="Cinque Terre" width="300" style="display:inline-block;">
-</div>
-<div style="text-align:center;">
-   <div class="upload-button btn btn-default" style="margin-bottom: 10px;" > <span class="glyphicon glyphicon-camera"></span> Upload Image</div>
-        <input type="file" name="image-upload" class="file-upload" id="upload" style="display: none;" accept="image/*" > 
-</div>
-
-
-
-<div class="row">
- <div class="form-group col-md-6 col-md-offset-3">
-    <label for="formGroupExampleInput">Event Name</label>
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Study Date" name="event_title">
-  </div>
-</div>
-
-
-</form>
-
-  <!--   <div class="container"> -->
+    <form action="/save-event/{{event.event_id}}" method="POST" enctype="multipart/form-data">
+    <button type="submit" class="btn btn-default" value="Submit"> Save Event </button><br>
+    <div style="text-align:center;">
+      <img src="/static/img/pinata.jpg" class="img-responsive profile-pic" alt="Cinque Terre" width="300" style="display:inline-block;">
+    </div>
+    <div style="text-align:center;">
+      <div class="upload-button btn btn-default" style="margin-bottom: 10px;" > <span class="glyphicon glyphicon-camera"></span> Upload Image
+      </div>
+      <input type="file" name="image-upload" class="file-upload" id="upload" style="display: none;" accept="image/*" > 
+    </div>
+    <div class="row">
+      <div class="form-group col-md-6 col-md-offset-3">
+        <label for="formGroupExampleInput">Event Name</label>
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Study Date" name="event_title">
+      </div>
+    </div>
+    </form>
   <div class ="row">
     <div class='col-md-6 col-md-offset-3'>
       <label for="formGroupExampleInput">Start Date and Time</label>
-        <div class="form-group">
-            <div class='input-group date' id='datetimepicker6'>
-                <input type='text' id='start-date'class="form-control" />
-                <span class="input-group-addon"> 
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-                
-            </div>
+      <div class="form-group">
+        <div class='input-group date' id='datetimepicker6'>
+          <input type='text' id='start-date'class="form-control" />
+          <span class="input-group-addon"> 
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
         </div>
-        <button class="start btn btn-default" data-event-id="{{event.event_id}}" type="button">save</button>
+      </div>
+      <button class="start btn btn-default" data-event-id="{{event.event_id}}" type="button">save</button>
     </div>
   </div>
-    
-    <div class ="row">
-    <div class='col-md-6 col-md-offset-3'>
-       <label for="formGroupExampleInput">End Date and Time</label>
-        <div class="form-group">
-            <div class='input-group date' id='datetimepicker7'>
-                <input type='text' id='end-date' class="form-control" />
-                <span class="input-group-addon"> 
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-               
-            </div>
-        </div>
-        <button class="end btn btn-default" data-event-id="{{event.event_id}}" type="button">save</button>
+<div class ="row">
+  <div class='col-md-6 col-md-offset-3'>
+    <label for="formGroupExampleInput">End Date and Time</label>
+    <div class="form-group">
+      <div class='input-group date' id='datetimepicker7'>
+        <input type='text' id='end-date' class="form-control" />
+        <span class="input-group-addon"> 
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+      </div>
     </div>
+    <button class="end btn btn-default" data-event-id="{{event.event_id}}" type="button">save</button>
   </div>
-     
-<!-- </div> -->
-
-
-
+</div>
 <div class="panel panel-default">
   <div class="panel-body">
   
@@ -82,62 +64,47 @@
   </div>
   {% endfor %}
 </div>
- </div>
+</div>
 </div>
 
 <div class="panel panel-default">
   <div class="panel-body">
-  
-
-
-<div class="search-form panel">
-       <label for="formGroupExampleInput">Find Study Locations</label>
-        <form action='/search-location.json' method='POST' id="search">
-          <label for="location">where: </label>
-          <br>
-          <input type="text" name="location" id="location"  placeholder="e.g. San Jose">
-          <br>
-          <label for="term">what: </label>
-          <br>
-          <input type="text" name="term" id="term" placeholder="e.g. Library">
-          <br>
-          <input class="btn btn-default yelp-search" type="submit" value="Search">
-        </form>
-      </div> 
-
-
-
-
-
+    <div class="search-form panel">
+      <label for="formGroupExampleInput">Find Study Locations</label>
+      <form action='/search-location.json' method='POST' id="search">
+      <label for="location">where: </label><br>
+      <input type="text" name="location" id="location"  placeholder="e.g. San Jose"><br>
+      <label for="term">what: </label><br>
+      <input type="text" name="term" id="term" placeholder="e.g. Library">
+      <br>
+      <br>
+      <input class="btn btn-default yelp-search" type="submit" value="Search">
+      </form>
+    </div> 
 <div class="row">
-<div class="col-md-4">  
-<div class="panel hidden results" id="yelpResultsPanel">
-        <div class="panel-body fixed-panel">
-          <div class="tab-content">
-                <div class="tab-pane active" id="results">
-                </div>
-            </div>
+  <div class="col-md-4">  
+    <div class="panel hidden results" id="yelpResultsPanel">
+      <div class="panel-body fixed-panel">
+        <div class="tab-content">
+          <div class="tab-pane active" id="results" style="height:320px;width:60%px;border:1px solid #ccc;overflow:auto;">
+          </div>
         </div>
       </div>
+    </div>
 </div>
 
 <div class="col-md-5 col-md-offset-2">
-<div class="panel" id="my-map" style="margin: 10px;"></div>
-
-
-
+  <div class="panel" id="my-map" style="margin: 10px;"></div>
 <div class="panel hidden title" id="infobox"></div>
 </div>
 </div>
- </div>
+</div>
+</div>
+</div>
 </div>
 
 
- </div>
-</div>
-
-
-<script src="/static/js/new_yelp.js"></script>
+<script src="/static/js/yelp.js"></script>
 <script src="/static/js/googlemaps.js"></script>
 <script src="/static/js/image.js"></script>
 <script src="/static/js/request.js"></script>

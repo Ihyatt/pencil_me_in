@@ -1,3 +1,6 @@
+// send request to other users for upcoming events
+// #################################################################
+
 function requestSent() {
   console.log("request sent");
 }

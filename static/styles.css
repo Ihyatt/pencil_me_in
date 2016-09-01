@@ -13,15 +13,15 @@
   margin-top: 20px;
 }
 
-
+/*event maps*/
 
 #my-map.small {
-    height: 400px;
+    height: 350px;
 }
 
 #my-map {
-    height: 400px;
-    width: 400px;
+    height: 350px;
+    width: 350px;
 
 }
 

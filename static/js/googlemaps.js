@@ -4,9 +4,6 @@ var infoWindow;
 var markers = [];
 
 
-
-
-
 var bounds = new google.maps.LatLngBounds();
 
 function addMarker(latlng, name) {
