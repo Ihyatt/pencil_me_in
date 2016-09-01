@@ -23,7 +23,7 @@ initMaps = {};
   	<div class="wrapper">
   		<img src="/static/images/{{image.image}}" class="img-thumbnail img-responsive" alt="Cinque Terre" width="175"> 
   	</div>​
-    <div class="upload-wrapper"> <a data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-camera"></span> Upload Image  </a></div>
+    <div class="upload-wrapper"> <a data-toggle="modal" data-target="#myModal" style="text-decoration:none;"><span class="glyphicon glyphicon-camera"></span> Upload Image  </a></div>
 <!-- pf image div enf -->
 </div>
 
@@ -60,10 +60,10 @@ initMaps = {};
   <div class="panel-body"> -->
 <ul class="list-group">
   <li class="list-group-item" style="text-align:center;">
-<h5><a href="/create_event"><span class="glyphicon glyphicon-pencil"></span> Create Event </a></h5> 
+<h5><a href="/create_event" style="text-decoration:none;"><span class="glyphicon glyphicon-pencil"></span> Create Event </a></h5> 
  </li>
  <li class="list-group-item">
-<div id="user-events-div"><h5>View Your Events</h5> <h6 style="color:grey;">You have {{user_events|length}} events<h6></div>
+<div id="user-events-div" style="cursor:pointer"><h5>View Your Events</h5> <h6 style="color:grey;">You have {{user_events|length}} events<h6></div>
   <div id="user-toggle">
 
 {% for event in user_events %}  
@@ -121,9 +121,9 @@ initMaps = {};
 <div class="panel panel-default">
 <div class="panel-body">                                    
 <h5>Guests</h5>
-<ul class="img-list" id="attendees{{event.event_id}}">
+<div id="attendees{{event.event_id}}" style="margin-left: 30px;">
 
-</ul>
+</div>
 </div>
 </div>
 
@@ -148,7 +148,7 @@ initMaps = {};
 
 
 <li class="list-group-item">
-<div id="requests-div"><h5> View Event Requests</h5><h6 style="color:grey;">You have {{event_request|length}} events<h6></div>
+<div id="requests-div" style="cursor:pointer"><h5> View Event Requests</h5><h6 style="color:grey;">You have {{event_request|length}} events<h6></div>
 <div id="requests-toggle">
 
 {% for event in event_request %}
@@ -206,9 +206,9 @@ initMaps = {};
 <div class="panel panel-default">
 <div class="panel-body">                                    
 <h5>Guests</h5>
-<ul class="img-list" id="att{{event.event_id}}">
+<div id="att{{event.event_id}}" style="margin-left: 30px;">
 
-</ul>
+</div>
 </div>
 </div>
 
@@ -229,7 +229,7 @@ initMaps = {};
  </li>
 
 <li class="list-group-item">
-<div id="past-div"><h5>View Past Events</h5> <h6 style="color:grey;">You have {{past|length}} events<h6></div>
+<div id="past-div" style="cursor:pointer"><h5>View Past Events</h5> <h6 style="color:grey;">You have {{past|length}} events<h6></div>
 <div id="past-toggle">
 
 
@@ -285,9 +285,9 @@ initMaps = {};
 <div class="panel panel-default">
 <div class="panel-body">                                    
 <h5>Guests</h5>
-<ul class="img-list" id="attend{{event.event_id}}">
+<div id="attend{{event.event_id}}" style="margin-left: 30px;">
 
-</ul>
+</div>
 </div>
 </div>
 
@@ -377,9 +377,9 @@ initMaps = {};
 <div class="panel panel-default">
 <div class="panel-body">                                    
 <h5>Guests</h5>
-<ul class="img-list" id="a{{event.event_id}}">
+<div class="img-list" id="a{{event.event_id}}" style="margin-left: 30px;">
 
-</ul>
+</div>
 </div>
 </div>
 

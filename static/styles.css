@@ -32,20 +32,21 @@
 
 
 /*view friends*/
-ul.img-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  text-align: center;
+
+#wrapper .text {
+position:relative;
+bottom:30px;
+left:20px;
+visibility:hidden;
 }
 
-ul.img-list li {
-  display: inline-block;
-  height: 125px;
-  margin: 0 1em 1em 0;
-  position: relative;
-  width: 200px;
+#wrapper:hover .text {
+visibility:visible;
+
+color:white;
 }
+
+
 
 
 /*MODALS*/
@@ -72,6 +73,18 @@ ul.img-list li {
 img{
   padding: 10px;
 }
+
+a {
+      color: black;
+     text-decoration: none ;
+  }
+a:hover
+  {
+    color:black;
+    text-decoration:none;
+    cursor:pointer;
+   }
+
 
 
 

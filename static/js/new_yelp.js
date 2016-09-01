@@ -7,11 +7,11 @@ function restaurantAdded(){
 function addRestaurant(evt){
   console.log("poop");
     // var id = this.id; // this is the id on the button we clicked, which is the image's id
-    var restaurantName = $(this).data('restaurant-name');
-    var latitude = $(this).data('latitude');
-    var longitude = $(this).data('longitude');
-    var address = $(this).data('address');
-    var neighborhoods = $(this).data('neighborhoods');
+    var restaurantName = $(evt.target).data('restaurant-name');
+    var latitude = $(evt.target).data('latitude');
+    var longitude = $(evt.target).data('longitude');
+    var address = $(evt.target).data('address');
+    var neighborhoods = $(evt.target).data('neighborhoods');
     console.log(restaurantName);
 
     $.post("/add-restaurant", {

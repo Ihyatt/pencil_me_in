@@ -14,10 +14,9 @@ function makePastModal(results){
   var attendees = results;
   console.log(attendees);
   for (var key in attendees) {
-    $("#attend" + attendees[key][0]).append('<li>' + 
-      '<img src="/static/images/' + attendees[key][3] + '" class="img-responsive" height="25" style="display: inline-block">' + 
-      '<span class="text-content"><span>' + attendees[key][1] + ' ' + attendees[key][2] + '</span></span>' + 
-      '<li>')
+    $("#attend" + attendees[key][0]).append(
+      '<div id="wrapper" style="display:inline-block">' + '<img src="/static/images/' + attendees[key][3] + '" class="hover" id="wrapper" width="150">' + 
+      '<p class="text">' + attendees[key][1] + ' ' + attendees[key][2] + '</p>' + '</div>')
 
   };
 }
@@ -46,10 +45,10 @@ function makeRequestModal(results){
    var attendees = results;
   console.log("here");
   for (var key in attendees) {
-    $("#att" + attendees[key][0]).append('<li>' + 
-      '<img src="/static/images/' + attendees[key][3] + '" class="img-responsive" height="25">' + 
-      '<span class="text-content"><span>' + attendees[key][1] + ' ' + attendees[key][2] + '</span></span>' + 
-      '<li>')
+    $("#att" +  + attendees[key][0]).append(
+      '<div id="wrapper" style="display:inline-block">' + '<img src="/static/images/' + attendees[key][3] + '" class="hover" id="wrapper" width="150">' + 
+      '<p class="text">' + attendees[key][1] + ' ' + attendees[key][2] + '</p>' + '</div>')
+
   };
 }
 
@@ -76,10 +75,10 @@ function makeUserModal(results){
   var attendees = results;
   console.log("here");
   for (var key in attendees) {
-    $("#attendees" + attendees[key][0]).append('<li>'  + 
-      '<img src="/static/images/' + attendees[key][3] + '" class="img-responsive" height="25">' + 
-      '<span class="text-content"><span>' + attendees[key][1] + ' ' + attendees[key][2] + '</span></span>' + 
-      '<li>')
+    $("#attendees"  + attendees[key][0]).append(
+      '<div id="wrapper" style="display:inline-block">' + '<img src="/static/images/' + attendees[key][3] + '" class="hover" id="wrapper" width="150">' + 
+      '<p class="text">' + attendees[key][1] + ' ' + attendees[key][2] + '</p>' + '</div>')
+
   };
 }
 
@@ -105,10 +104,10 @@ function showFriends(results) {
   var attendees = results;
   console.log("attendees");
   for (var key in attendees) {
-    $("#a" + attendees[key][0]).append('<li>' + 
-       '<img src="/static/images/' + attendees[key][3] + '" class="img-responsive" height="25">' + 
-      '<span class="text-content"><span>' + attendees[key][1] + ' ' + attendees[key][2] + '</span></span>' + 
-      '<li>')
+    $("#a" +  + attendees[key][0]).append(
+      '<div id="wrapper" style="display:inline-block">' + '<img src="/static/images/' + attendees[key][3] + '" class="hover" id="wrapper" width="150">' + 
+      '<p class="text">' + attendees[key][1] + ' ' + attendees[key][2] + '</p>' + '</div>')
+
   };
 
 }

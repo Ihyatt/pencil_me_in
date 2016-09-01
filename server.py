@@ -316,14 +316,17 @@ def send_request():
 
 	event_id = request.form.get('event_id')
 	friend_id = request.form.get('request')
-	event = EventRequest.query.filter(EventRequest.user_id == friend_id).first()
+	event = EventRequest.query.filter(EventRequest.user_id == friend_id, EventRequest.event_id == event_id).first()
 	print event
-	
-	
-	event_request = EventRequest(user_id=friend_id, event_id=event_id, accepted=True)
+	if event:
+		
+		print"friend already added"
+	else:
+		event_request = EventRequest(user_id=friend_id, event_id=event_id, accepted=True)
 
-	db.session.add(event_request)
-	db.session.commit()
+		db.session.add(event_request)
+		db.session.commit()
+		print "friend added once"
 	return "friend added"
 
 

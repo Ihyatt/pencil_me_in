@@ -71,17 +71,17 @@
   <div class="panel-body">
   
 <label for="formGroupExampleInput">Add Friends</label>
-<ul id="friends" class="img-list">
+<div style="margin-left: 120px;">
   {% for friend in friends %}
-  <li>
-    <div>
-      <img src="/static/images/{{friend.user_image.image}}" class=" img-responsive hover" alt="Cinque Terre" width="300"><br> 
-      {{friend.first_name}} {{friend.last_name}} <br>
-      <button type="button" class="request btn btn-default" data-friend-id="{{friend.user_id}}" data-event-id="{{event.event_id}}">send request</button>
+  <div style="display:inline-block" >
+    <div id="wrapper" style="display:inline-block" style="text-align:center;">
+      <img src="/static/images/{{friend.user_image.image}}" class="hover" id="wrapper" alt="Cinque Terre" width="200"> 
+      <p class="text">{{friend.first_name}} {{friend.last_name}}</p> 
+      <button type="button" class="request btn btn-default" data-friend-id="{{friend.user_id}}" data-event-id="{{event.event_id}}">Send Request</button>
     </div>
-  </li>
+  </div>
   {% endfor %}
-</ul>
+</div>
  </div>
 </div>
 

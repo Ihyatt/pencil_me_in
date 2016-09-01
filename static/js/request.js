@@ -15,7 +15,7 @@ function sendRequest(evt) {
 
 $.post("/send-request", requestItem, requestSent);
 
- $(evt.target).html("remove request");
+ $(evt.target).html("Request Sent");
 
  
  
