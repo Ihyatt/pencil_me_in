@@ -474,7 +474,7 @@ def view_event_friends():
 
 if __name__ == "__main__":
 
-	app.debug = True
+	app.debug = False
 	connect_to_db(app)
 	# Use the DebugToolbar
 	DebugToolbarExtension(app)
