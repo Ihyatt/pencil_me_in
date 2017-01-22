@@ -479,9 +479,8 @@ if __name__ == "__main__":
 	connect_to_db(app, os.environ.get("DATABASE_URL"))
 	# Use the DebugToolbar
 	DebugToolbarExtension(app)
-	DEBUG = "NO_DEBUG" not in os.environ
+	# DEBUG = "NO_DEBUG" not in os.environ
 	PORT = int(os.environ.get("PORT", 5000))
-
     app.run(host="0.0.0.0", port=PORT, debug=DEBUG)
 
 
