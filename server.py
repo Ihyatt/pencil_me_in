@@ -475,10 +475,14 @@ def view_event_friends():
 if __name__ == "__main__":
 
 	app.debug = False
-	connect_to_db(app)
+	app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+	connect_to_db(app, os.environ.get("DATABASE_URL"))
 	# Use the DebugToolbar
 	DebugToolbarExtension(app)
-	app.run()
+	DEBUG = "NO_DEBUG" not in os.environ
+    PORT = int(os.environ.get("PORT", 5000))
+
+    app.run(host="0.0.0.0", port=PORT, debug=DEBUG)
 
 
 	
