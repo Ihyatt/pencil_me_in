@@ -51,9 +51,9 @@ def localhost():
 
 @app.route('/register', methods=['GET'])
 def register_form():
-    """Shows user sign-up"""
+	"""Shows user sign-up"""
 
-    return render_template("register.html")
+	return render_template("register.html")
 
 @app.route('/register', methods=['POST'])
 def register_process():
@@ -151,46 +151,46 @@ def user_page(user_id):
 	"""Users profile page"""
    
 	user = User.query.get(user_id)
- 	image = user.user_image
+	image = user.user_image
 
 
- 	events = []
- 	event_request = []
- 	past = []
- 	today = datetime.today()
+	events = []
+	event_request = []
+	past = []
+	today = datetime.today()
 
- 	user_events = Event.query.filter(Event.user_id == user.user_id).order_by(Event.date).all()
- 	print user_events
+	user_events = Event.query.filter(Event.user_id == user.user_id).order_by(Event.date).all()
+	print user_events
 
- 	upcoming_events = EventRequest.query.filter(EventRequest.user_id == user.user_id).all()
- 	print "here"
- 	print upcoming_events
- 	
- 	for request in upcoming_events:
- 		study_event = request.event
- 		if study_event:
-	 		if study_event.end_date < today:
-	 			past.append(study_event)
-	 		else: 
-	 			event_request.append(study_event)
-	 			events.append(study_event)
+	upcoming_events = EventRequest.query.filter(EventRequest.user_id == user.user_id).all()
+	print "here"
+	print upcoming_events
+	
+	for request in upcoming_events:
+		study_event = request.event
+		if study_event:
+			if study_event.end_date < today:
+				past.append(study_event)
+			else: 
+				event_request.append(study_event)
+				events.append(study_event)
 
- 	for event in user_events:
- 		if event.end_date < today:
- 			past.append(event)
- 		else:
- 			events.append(event)
+	for event in user_events:
+		if event.end_date < today:
+			past.append(event)
+		else:
+			events.append(event)
 
  
- 	event_request = sorted(event_request, key=attrgetter('date'))
- 	events = sorted(events, key=attrgetter('date'))
- 	past = sorted(past, key=attrgetter('date'))
- 	# print sorted_list
+	event_request = sorted(event_request, key=attrgetter('date'))
+	events = sorted(events, key=attrgetter('date'))
+	past = sorted(past, key=attrgetter('date'))
+	# print sorted_list
 
 	return render_template("profile.html", user=user, image=image, user_events=user_events, upcoming_events=upcoming_events, event_request=event_request, events=events, past=past)
 
 
-    
+	
 
 @app.route('/uploadajax', methods=['POST'])
 def image_update():
@@ -212,18 +212,18 @@ def image_update():
 
 @app.route('/create_event', methods=['GET'])
 def create_event():
-    """Show event creation page"""
-    user = User.query.get(session["user_id"])
-    event = Event(user_id=session["user_id"], event_title="", date= datetime.today(), end_date= datetime.today(), study_location="", latitude=0.1, longitude=0.1, address="", neighborhood="")
-    db.session.add(event)
-    db.session.commit()
+	"""Show event creation page"""
+	user = User.query.get(session["user_id"])
+	event = Event(user_id=session["user_id"], event_title="", date= datetime.today(), end_date= datetime.today(), study_location="", latitude=0.1, longitude=0.1, address="", neighborhood="")
+	db.session.add(event)
+	db.session.commit()
 
-    return redirect("/event/%s" % event.event_id)
+	return redirect("/event/%s" % event.event_id)
 
 @app.route("/event/<int:event_id>")
 def event_page(event_id):
 	"""Users event page"""
-   	user = User.query.get(session["user_id"])
+	user = User.query.get(session["user_id"])
 
 	event = Event.query.get(event_id)
 	friends = User.query.filter(User.first_name != user.first_name).all()
@@ -272,42 +272,42 @@ def add_end_date():
 
 @app.route('/search-location.json', methods=['POST'])
 def search_restaurant():
-    """Allows user to search restaurant based on location and food term"""
+	"""Allows user to search restaurant based on location and food term"""
 
-    location = request.form.get('location')
-    term = request.form.get('term')
+	location = request.form.get('location')
+	term = request.form.get('term')
   
    
-    results = yelp.get_results(location=location, term=term)
-    print results
+	results = yelp.get_results(location=location, term=term)
+	print results
    
 
-    return jsonify(results=results)
+	return jsonify(results=results)
 
 
 @app.route('/add-restaurant', methods=['POST'])
 def add_restaurant():
-    """Allows user to add restaurant to a list"""
+	"""Allows user to add restaurant to a list"""
 
-    event_id = request.form.get('event_id')
-    print event_id
-    if event_id[-1] == "#":
-    	event_id = event_id[0:-1]
+	event_id = request.form.get('event_id')
+	print event_id
+	if event_id[-1] == "#":
+		event_id = event_id[0:-1]
  
-    event = Event.query.get(event_id)
-    print event
+	event = Event.query.get(event_id)
+	print event
   
   
-    event.study_location = request.form.get('restaurant_name')
-    event.latitude = request.form.get('latitude')
-    event.longitude = request.form.get('longitude')
-    event.address = request.form.get('address')
-    event.neighborhoods = request.form.get('neighborhoods')
-    
+	event.study_location = request.form.get('restaurant_name')
+	event.latitude = request.form.get('latitude')
+	event.longitude = request.form.get('longitude')
+	event.address = request.form.get('address')
+	event.neighborhoods = request.form.get('neighborhoods')
+	
 
-    db.session.commit()
+	db.session.commit()
 
-    return "success"
+	return "success"
 
 
 @app.route("/send-request", methods=['POST'])
@@ -474,14 +474,13 @@ def view_event_friends():
 
 if __name__ == "__main__":
 
-	app.debug = False
+	app.debug = 
 	app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 	connect_to_db(app, os.environ.get("DATABASE_URL"))
-	# Use the DebugToolbar
-	DebugToolbarExtension(app)
-	# DEBUG = "NO_DEBUG" not in os.environ
+	DEBUG = "NO_DEBUG" not in os.environ
 	PORT = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=PORT)
+	
+	app.run(host="0.0.0.0", port=PORT, debug=DEBUG)
 
 
 	
