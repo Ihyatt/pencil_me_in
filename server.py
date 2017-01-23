@@ -53,7 +53,7 @@ app.jinja_env.undefined = StrictUndefined
 @app.route('/')
 def localhost():
 
-	return render_template("homepage.html")
+	return render_template("login.html")
 
 @app.route('/register', methods=['GET'])
 def register_form():
