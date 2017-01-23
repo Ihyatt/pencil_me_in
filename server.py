@@ -80,7 +80,7 @@ def register_process():
 	last_name = request.form.get("last_name")
 	email = request.form.get("email")
 	password = request.form.get("password")
-	# file_ = request.files.get("image-upload")
+	file_ = request.files.get("image-upload")
 
 	if User.query.filter(User.email == email).all():
 		flash('You are already a user!')
@@ -105,11 +105,11 @@ def register_process():
 	else:
 
 
-		# if file_:
-		# 	print app.config['UPLOAD_FOLDER']
-		# 	filename = secure_filename(file_.filename)
+		if file_:
+			print app.config['UPLOAD_FOLDER']
+			filename = secure_filename(file_.filename)
 
-		# 	file_.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+			file_.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
 		user = User(email=email, password=password, first_name=first_name, last_name=last_name)
 		db.session.add(user)
@@ -117,8 +117,8 @@ def register_process():
 	  
 		session["user_id"] = user.user_id
 
-		# user_image = UserImage(user_id=session["user_id"], image=filename)
-		# db.session.add(user_image)
+		user_image = UserImage(user_id=session["user_id"], image=filename)
+		db.session.add(user_image)
 
 		db.session.commit()
 
