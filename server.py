@@ -25,17 +25,28 @@ from model import User, UserImage, Event, EventImage, EventRequest, connect_to_d
 from werkzeug import secure_filename
 
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = 'staticfiles'
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'pencilmein/static/images'),
-)
 
-# UPLOAD_FOLDER = '/Users/Inashyatt1/desktop/pencilmein/static/images'
-UPLOAD_FOLDER = STATICFILES_DIRS
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# STATIC_ROOT = 'staticfiles'
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'pencilmein/static/images'),
+# )
+
+UPLOAD_FOLDER = 'pencilmein/static/images'
+# UPLOAD_FOLDER = STATICFILES_DIRS
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
