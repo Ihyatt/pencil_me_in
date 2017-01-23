@@ -45,7 +45,7 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 #     os.path.join(BASE_DIR, 'pencilmein/static/images'),
 # )
 
-UPLOAD_FOLDER = 'pencilmein/static/images'
+UPLOAD_FOLDER = '/static/images'
 # UPLOAD_FOLDER = STATICFILES_DIRS
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
