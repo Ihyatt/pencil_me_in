@@ -29,7 +29,7 @@ from werkzeug import secure_filename
 
 
 
-UPLOAD_FOLDER = '/Users/Inashyatt1/desktop/pencilmein/static/images'
+UPLOAD_FOLDER = '/pencilmein/static/images'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
