@@ -117,8 +117,8 @@ def register_process():
 	  
 		session["user_id"] = user.user_id
 
-		user_image = UserImage(user_id=session["user_id"], image=filename)
-		db.session.add(user_image)
+		# user_image = UserImage(user_id=session["user_id"], image=filename)
+		# db.session.add(user_image)
 
 		db.session.commit()
 
