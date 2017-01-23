@@ -27,9 +27,15 @@ from werkzeug import secure_filename
 
 
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'pencilmein/static/images'),
+)
 
-
-UPLOAD_FOLDER = '/pencilmein/static/images'
+# UPLOAD_FOLDER = '/Users/Inashyatt1/desktop/pencilmein/static/images'
+UPLOAD_FOLDER = STATICFILES_DIRS
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
@@ -90,6 +96,7 @@ def register_process():
 
 		if file_:
 			filename = secure_filename(file_.filename)
+
 			file_.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
 		user = User(email=email, password=password, first_name=first_name, last_name=last_name)
