@@ -95,6 +95,7 @@ def register_process():
 
 
 		if file_:
+			print app.config['UPLOAD_FOLDER']
 			filename = secure_filename(file_.filename)
 
 			file_.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
