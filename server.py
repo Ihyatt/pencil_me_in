@@ -38,14 +38,14 @@ STATICFILES_DIRS = (
 )
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# STATIC_ROOT = 'staticfiles'
-# STATIC_URL = '/static/'
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'pencilmein/static/images'),
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'pencilmein/static/images'),
 # 
-UPLOAD_FOLDER = '/Users/Inashyatt1/desktop/pencilmein/static/images'
-# UPLOAD_FOLDER = STATICFILES_DIRS
+# UPLOAD_FOLDER = '/Users/Inashyatt1/desktop/pencilmein/static/images'
+UPLOAD_FOLDER = STATICFILES_DIRS
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
@@ -102,6 +102,7 @@ def register_process():
 		return render_template("register.html")
 
 	else:
+	print BASE_DIR
 
 
 		if file_:
