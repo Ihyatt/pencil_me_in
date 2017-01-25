@@ -42,7 +42,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'pencilmein/static/images'),
+    os.path.join(BASE_DIR, 'static/images')
 )
 # UPLOAD_FOLDER = '/Users/Inashyatt1/desktop/pencilmein/static/images'
 UPLOAD_FOLDER = STATICFILES_DIRS
