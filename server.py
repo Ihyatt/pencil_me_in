@@ -102,7 +102,7 @@ def register_process():
 		return render_template("register.html")
 
 	else:
-	print BASE_DIR
+		print BASE_DIR
 
 
 		if file_:
