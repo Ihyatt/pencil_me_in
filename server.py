@@ -38,12 +38,11 @@ STATICFILES_DIRS = (
 )
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# STATIC_ROOT = 'staticfiles'
-# STATIC_URL = '/static/'
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'pencilmein/static/images'),
-# )
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'pencilmein/static/images'),
 
 UPLOAD_FOLDER = '/Users/Inashyatt1/desktop/pencilmein/static/images'
 # UPLOAD_FOLDER = STATICFILES_DIRS
@@ -104,7 +103,7 @@ def register_process():
 
 	else:
 
-
+	print BASE_DIR
 		if file_:
 			print app.config['UPLOAD_FOLDER']
 			filename = secure_filename(file_.filename)
