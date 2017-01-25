@@ -43,7 +43,7 @@ STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'pencilmein/static/images'),
-# 
+)
 # UPLOAD_FOLDER = '/Users/Inashyatt1/desktop/pencilmein/static/images'
 UPLOAD_FOLDER = STATICFILES_DIRS
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
