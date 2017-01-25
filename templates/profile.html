@@ -16,11 +16,12 @@ initMaps = {};
 <!-- pf image div start -->
   <div class="container">
   <!-- Trigger the modal with a button -->
-  <!-- 
+ 
+<div class="wrapper">
+  <img src="/static/images/{{image.image}}" class="img-thumbnail img-responsive" alt="Cinque Terre" width="175"> 
+  </div>​
 
 
-
-   -->
   <div class="upload-wrapper"> 
     <a data-toggle="modal" data-target="#myModal" style="text-decoration:none;">
       <span class="glyphicon glyphicon-camera"></span> 
@@ -38,9 +39,9 @@ initMaps = {};
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          <!-- 
-           -->
-        <div style="text-align:center; margin-top: 10px;">
+          
+          <img src="/static/images/{{image.image}}" class="img-thumbnail img-responsive profile-pic" alt="Cinque Terre" width="300"> 
+                   <div style="text-align:center; margin-top: 10px;">
           <div class="upload-button btn btn-default" style="cursor:pointer">Upload</div>
           <div id="upload-file-btn" class="btn btn-primary" style="cursor:pointer">Save</div>
         </div>
