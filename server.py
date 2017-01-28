@@ -236,6 +236,7 @@ def create_event():
 	user = User.query.get(session["user_id"])
 	event = Event(user_id=session["user_id"], event_title="", date= datetime.today(), end_date= datetime.today(), study_location="", latitude=0.1, longitude=0.1, address="", neighborhood="")
 	db.session.add(event)
+	image = Image)
 	db.session.commit()
 
 	return redirect("/event/%s" % event.event_id)
