@@ -79,7 +79,6 @@ Through clicking "Create Event," user's are then directed to the new event page 
  	*`source secrets.sh`
  * Create the tables in your database:
     * `python -i model.py`
-    * While in interactive mode, create tables: `db.create_all()`
  * Start up the flask server:
     * `python server.py`
  * Go to localhost:5000 to see the web app
