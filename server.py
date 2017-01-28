@@ -100,6 +100,9 @@ def register_process():
 	elif last_name == '':
 		flash('Please type in your last name')
 		return render_template("register.html")
+	elif not file_:
+		flash('Please add an image')
+		return render_template("register.html")
 
 	else:
 		print BASE_DIR
@@ -238,6 +241,17 @@ def create_event():
 	db.session.add(event)
 	db.session.commit()
 
+	# file_ = imgre
+
+	filename = 'imgres.jpg'
+	
+
+
+	event_image = EventImage(event_id=event.event_id, image=filename)
+	db.session.add(event_image)
+	db.session.commit()
+
+
 	return redirect("/event/%s" % event.event_id)
 
 @app.route("/event/<int:event_id>")
@@ -361,6 +375,8 @@ def save_event_image(event_id):
 	event_title = request.form.get("event_title")
 	print event
 	if file_:
+			print "image"
+			print file_
 			filename = secure_filename(file_.filename)
 			file_.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
