@@ -368,10 +368,12 @@ def send_request():
 def save_event_image(event_id):
 	"""saves event event"""
 	user = User.query.get(session["user_id"])
+
 	
 	file_ = request.files["image-upload"]
 	print event_id
 	event = Event.query.get(event_id)
+	e_image = event.event_image
 	event_title = request.form.get("event_title")
 	print event
 	if file_:
@@ -381,8 +383,9 @@ def save_event_image(event_id):
 			file_.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
 
-			event_image = EventImage(event_id=event.event_id, image=filename)
+			# event_image = EventImage(event_id=event.event_id, image=filename)
 			# db.session.add(event_image)
+			e_image.event_image = = filename
 			print event_title
 			event.event_title = event_title
 
