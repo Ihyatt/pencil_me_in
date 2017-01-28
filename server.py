@@ -385,7 +385,7 @@ def save_event_image(event_id):
 
 			# event_image = EventImage(event_id=event.event_id, image=filename)
 			# db.session.add(event_image)
-			e_image.event_image = = filename
+			e_image.image = filename
 			print event_title
 			event.event_title = event_title
 
