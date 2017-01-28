@@ -381,8 +381,8 @@ def save_event_image(event_id):
 			file_.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
 
-			event_image = EventImage(event_id=event_id, image=filename)
-			db.session.add(event_image)
+			event_image = EventImage(event_id=event.event_id, image=filename)
+			# db.session.add(event_image)
 			print event_title
 			event.event_title = event_title
 
@@ -510,8 +510,8 @@ def view_event_friends():
 
 if __name__ == "__main__":
 
-	app.debug=False
-	app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+	app.debug=True
+	app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = True
 	connect_to_db(app, os.environ.get("DATABASE_URL"))
 	# DEBUG = "NO_DEBUG" not in os.environ
 	PORT = int(os.environ.get("PORT", 5000))
