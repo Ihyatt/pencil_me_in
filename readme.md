@@ -40,7 +40,7 @@ PencilMeIn is a social platform that allows for users to create and share study 
 - [x] Send requests to other users who are in the database
  
 
-####Future
+#### Future
 
 - [ ] Create friends table within the database, so that a user has a set group of friends that they may request to study with them. 
 - [ ] Allow for users to query their friends in order to find the specific friends that they would like to study with.
