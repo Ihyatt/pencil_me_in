@@ -39,12 +39,7 @@ class PencilMeInTests(unittest.TestCase):
 							follow_redirects=True)
     	self.assertIn("Event", result.data)
 
-    # def test_log_out(self):
-    # 	"""tests log out route"""
-    # 	result = self.client.get("/logout", follow_redirects=True)
-    # 	self.assertIn('Login', result.data)
-    	# how to get logout to work???
-		
+
 class TestAPI(unittest.TestCase):
 
     def setUp(self):
