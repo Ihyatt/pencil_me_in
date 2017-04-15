@@ -75,10 +75,10 @@ Through clicking "Create Event," user's are then directed to the new event page 
   * Make sure you have PostgreSQL running. Create a new database in psql named pencilmein:
 * `psql`
   * `createdb pencilmein`
- * Source Secrets
- 	*`source secrets.sh`
- * Create the tables in your database:
+* Source Secrets
+ 	* `source secrets.sh`
+* Create the tables in your database:
     * `python -i model.py`
- * Start up the flask server:
+* Start up the flask server:
     * `python server.py`
- * Go to localhost:5000 to see the web app
+* Go to localhost:5000 to see the web app
