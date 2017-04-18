@@ -72,9 +72,8 @@ Through clicking "Create Event," user's are then directed to the new event page 
 ##### General Setup
 * Set up and activate a python virtualenv, and install all dependencies:
     * `pip install -r requirements.txt`
-  * Make sure you have PostgreSQL running. Create a new database in psql named pencilmein:
-* `psql`
-  * `createdb pencilmein`
+* Make sure you have PostgreSQL running. Create a new database named pencilmein:
+   * `createdb pencilmein`
 * Source Secrets
  	* `source secrets.sh`
 * Create the tables in your database:
