@@ -26,6 +26,7 @@ PencilMeIn is a social platform that allows for users to create and share study 
 * [Sessions](http://www.allaboutcookies.org/cookies/session-cookies-used-for.html)
 * [Google Maps API](https://developers.google.com/maps/)
 * [Yelp API](https://www.yelp.com/developers/documentation/v2/overview)
+* [DJANGO](https://www.djangoproject.com/)
 
 ### <a name="features"></a>Features
 
