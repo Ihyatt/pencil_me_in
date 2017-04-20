@@ -4,15 +4,15 @@
 $(document).ready(function(){
 
 
-console.log("JS Connected");
+
 
 // Populates past event modal
 // ##############################################
 
 function makePastModal(results){
-  console.log("user past event info");
+
   var attendees = results;
-  console.log(attendees);
+
   for (var key in attendees) {
     $("#attend" + attendees[key][0]).append(
       '<div id="wrapper" style="display:inline-block">' + '<img src="/static/images/' + attendees[key][3] + '" class="hover" id="wrapper" width="150">' + 
@@ -29,7 +29,7 @@ function populatePastModal(evt){
   var past_info = {
     "event_id": eventId
   }
-  console.log(past_info);
+
   $.get("/view_past_attendees", past_info, makePastModal);
    $("#attend" + eventId).html("")
   
@@ -41,9 +41,9 @@ $('.triggerPastModal').on('click', populatePastModal);
 // ##############################################
 
 function makeRequestModal(results){
-  console.log("user request event info")
+
    var attendees = results;
-  console.log("here");
+ 
   for (var key in attendees) {
     $("#att" +  + attendees[key][0]).append(
       '<div id="wrapper" style="display:inline-block">' + '<img src="/static/images/' + attendees[key][3] + '" class="hover" id="wrapper" width="150">' + 
@@ -59,7 +59,7 @@ function populateRequestModal(evt){
     var request_info = {
     "event_id": eventId
   }
-  console.log(request_info);
+  
   $.get("/view_request_attendees", request_info, makeRequestModal);
    $("#att" + eventId).html("")
   //map things
@@ -71,9 +71,9 @@ $('.triggerRequestModal').on('click', populateRequestModal);
 // ##############################################
 
 function makeUserModal(results){
-  console.log("user event info")
+  
   var attendees = results;
-  console.log("here");
+  
   for (var key in attendees) {
     $("#attendees"  + attendees[key][0]).append(
       '<div id="wrapper" style="display:inline-block">' + '<img src="/static/images/' + attendees[key][3] + '" class="hover" id="wrapper" width="150">' + 
@@ -103,7 +103,7 @@ $('.triggerUserModal').on('click', populateUserModal);
 function showFriends(results) {
 
   var attendees = results;
-  console.log("attendees");
+ 
   for (var key in attendees) {
     $("#a" +  + attendees[key][0]).append(
       '<div id="wrapper" style="display:inline-block">' + '<img src="/static/images/' + attendees[key][3] + '" class="hover" id="wrapper" width="150">' + 
@@ -132,7 +132,7 @@ $(".view").click(getFriends);
 
 function makeEvModalMap(evt){
   var eventId = $(this).data('eventId');
-  console.log(eventId);
+ 
   initMaps[eventId]();
 }
 

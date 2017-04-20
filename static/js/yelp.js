@@ -5,13 +5,13 @@ function restaurantAdded(){
 }
 
 function addRestaurant(evt){
-  console.log("poop");
+
     var restaurantName = $(evt.target).data('restaurant-name');
     var latitude = $(evt.target).data('latitude');
     var longitude = $(evt.target).data('longitude');
     var address = $(evt.target).data('address');
     var neighborhoods = $(evt.target).data('neighborhoods');
-    console.log(restaurantName);
+  
 
     $.post("/add-restaurant", {
                                'restaurant_name': restaurantName,
@@ -35,7 +35,7 @@ function addRestaurant(evt){
  
 function scheduleEventListerForRestaurantButtons(){
   $('.add-button').click(addRestaurant);
-  console.log("here");
+ 
 }
 
 
@@ -78,7 +78,7 @@ function displayResults(data) {
                              "data-longitude=" + "'" + longitude + "'" 
                              + ">" +
                              "Add " + name +"</button>";
-      console.log(infobox);
+      
       $('#infobox').removeClass('hidden').html(infobox);
       var latlng = {lat: parseFloat(latitude), lng: parseFloat(longitude)};
       // TRYING TO MAKE IT SUCH THAT THE MARKER GETS ADDED AND THEN DISAPPEARS WHEN ANOTHER YELP RESULT IS CLICKED
@@ -107,7 +107,7 @@ function submitSearch(evt) {
         "location": $("#location").val(),
         "term": $("#term").val()
     };
-    console.log(formInputs);
+ 
     $('#yelpResultsPanel').removeClass('hidden');
     $('#results').html("searching...");
     $.post("/search-location.json", formInputs, displayResults);

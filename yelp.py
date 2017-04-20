@@ -46,7 +46,7 @@ def get_results(location, term):
                             'neighborhoods': None,
                             'address': restaurant['location']['address'],
                             'url': restaurant['url']})
-    # print results
+    
     return results
 
-# get_results("San Jose", "library")
+

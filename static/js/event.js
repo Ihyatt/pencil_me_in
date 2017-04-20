@@ -3,7 +3,7 @@
 
 
 function eventDeleted() {
-  console.log("event deleted")
+ 
   location.reload(true);
 }
 
@@ -27,7 +27,7 @@ $(".delete").click(deleteEvent);
 
 
 function eventDeclined(){
-  console.log("request deleted")
+ 
   location.reload(true);
 }
 

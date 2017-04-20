@@ -36,7 +36,7 @@ $(function() {
             processData: false,
             async: false,
             success: function(data) {
-                console.log('Success!');
+               
                 location.reload(true);
             },
         });

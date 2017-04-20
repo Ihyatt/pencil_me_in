@@ -105,12 +105,11 @@ def register_process():
 		return render_template("register.html")
 
 	else:
-		print BASE_DIR
+		
 
 
 		if file_:
-			print "here" 
-			print app.config['UPLOAD_FOLDER']
+
 			filename = secure_filename(file_.filename)
 
 			file_.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
@@ -183,11 +182,10 @@ def user_page(user_id):
 	today = datetime.today()
 
 	user_events = Event.query.filter(Event.user_id == user.user_id).order_by(Event.date).all()
-	print user_events
+	
 
 	upcoming_events = EventRequest.query.filter(EventRequest.user_id == user.user_id).all()
-	print "here"
-	print upcoming_events
+
 	
 	for request in upcoming_events:
 		study_event = request.event
@@ -208,7 +206,7 @@ def user_page(user_id):
 	event_request = sorted(event_request, key=attrgetter('date'))
 	events = sorted(events, key=attrgetter('date'))
 	past = sorted(past, key=attrgetter('date'))
-	# print sorted_list
+	
 
 	return render_template("profile.html", user=user, image=image, user_events=user_events, upcoming_events=upcoming_events, event_request=event_request, events=events, past=past)
 
@@ -221,7 +219,7 @@ def image_update():
 	user = User.query.get(session["user_id"])
 	u_image = user.user_image
 	file_ = request.files["file"]
-	print file_
+
 	if file_:
 		filename = secure_filename(file_.filename)
 		file_.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
@@ -241,7 +239,7 @@ def create_event():
 	db.session.add(event)
 	db.session.commit()
 
-	# file_ = imgre
+	
 
 	filename = 'imgres.jpg'
 	
@@ -267,16 +265,16 @@ def event_page(event_id):
 @app.route("/save_start_date", methods=['POST'])
 def add_start_date():
 	"""updates start date"""
-	print " i am here"
+	
 
 	event_id = request.form.get('event_id')
-	print event_id
+	
 	event = Event.query.get(event_id)
-	print event
+
 
 	start_date = str(request.form.get('date'))
 	dt_obj = datetime.strptime(start_date, '%m/%d/%Y %I:%M %p')
-	print dt_obj
+	
 	
 	event.date = dt_obj
 	db.session.commit()
@@ -286,16 +284,16 @@ def add_start_date():
 @app.route("/save_end_date", methods=['POST'])
 def add_end_date():
 	"""updates start date"""
-	print " i am here"
+	
 
 	event_id = request.form.get('event_id')
-	print event_id
+	
 	event = Event.query.get(event_id)
-	print event
+	
 
 	end_date = str(request.form.get('date'))
 	dt_obj = datetime.strptime(end_date, '%m/%d/%Y %I:%M %p')
-	print dt_obj
+	
 	
 	event.end_date = dt_obj
 	db.session.commit()
@@ -313,7 +311,7 @@ def search_restaurant():
   
    
 	results = yelp.get_results(location=location, term=term)
-	print results
+	
    
 
 	return jsonify(results=results)
@@ -324,12 +322,12 @@ def add_restaurant():
 	"""Allows user to add restaurant to a list"""
 
 	event_id = request.form.get('event_id')
-	print event_id
+	
 	if event_id[-1] == "#":
 		event_id = event_id[0:-1]
  
 	event = Event.query.get(event_id)
-	print event
+	
   
   
 	event.study_location = request.form.get('restaurant_name')
@@ -351,7 +349,7 @@ def send_request():
 	event_id = request.form.get('event_id')
 	friend_id = request.form.get('request')
 	event = EventRequest.query.filter(EventRequest.user_id == friend_id, EventRequest.event_id == event_id).first()
-	print event
+	
 	if event:
 		
 		print"friend already added"
@@ -371,22 +369,19 @@ def save_event_image(event_id):
 
 	
 	file_ = request.files["image-upload"]
-	print event_id
+	
 	event = Event.query.get(event_id)
 	e_image = event.event_image
 	event_title = request.form.get("event_title")
-	print event
+	
 	if file_:
-			print "image"
-			print file_
+
 			filename = secure_filename(file_.filename)
 			file_.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
 
-			# event_image = EventImage(event_id=event.event_id, image=filename)
-			# db.session.add(event_image)
+
 			e_image.image = filename
-			print event_title
 			event.event_title = event_title
 
 			db.session.commit()
@@ -409,8 +404,7 @@ def delete_event():
 def decline_event():
 	"""decline event request"""
 	user = User.query.get(session["user_id"])
-	print user
-	print "ppop"
+
 	event_id = request.form.get("event_id")
 	request_event = EventRequest.query.filter(EventRequest.event_id == event_id, EventRequest.user_id == user.user_id).first()
 	
@@ -425,20 +419,20 @@ def view_friends():
 	
 	attendees = {}
 	event_id = request.args.get("event_id")
-	print event_id
+
 	requests = EventRequest.query.filter(EventRequest.event_id == event_id).all()
-	print requests
+
 	event = Event.query.filter(Event.event_id == event_id).first()
-	print event.user_id
+
 	creator = User.query.filter(User.user_id == event.user_id).first()
-	print creator
+
 
 	for r in requests: 
 		attendee = User.query.filter(User.user_id == r.user_id).first()
 
 		attendees[r.user_id] = [event_id, attendee.first_name, attendee.last_name, attendee.user_image.image ]
 	attendees[creator.user_id] = [event_id, creator.first_name, creator.last_name, creator.user_image.image]
-	print attendees
+
 
 	return jsonify(attendees)
 	
@@ -447,19 +441,19 @@ def view_past_friends():
 	
 	attendees = {}
 	event_id = request.args.get("event_id")
-	print event_id
+
 	requests = EventRequest.query.filter(EventRequest.event_id == event_id).all()
-	print requests
+
 	event = Event.query.filter(Event.event_id == event_id).first()
-	print event.user_id
+
 	creator = User.query.filter(User.user_id == event.user_id).first()
-	print creator
+
 
 	for r in requests: 
 		attendee = User.query.filter(User.user_id == r.user_id).first()
 		attendees[r.user_id] = [event_id, attendee.first_name, attendee.last_name, attendee.user_image.image ]
 	attendees[creator.user_id] = [event_id, creator.first_name, creator.last_name, creator.user_image.image]
-	print attendees
+
 
 	return jsonify(attendees)
 	
@@ -468,19 +462,19 @@ def view_request_friends():
 	
 	attendees = {}
 	event_id = request.args.get("event_id")
-	print event_id
+
 	requests = EventRequest.query.filter(EventRequest.event_id == event_id).all()
-	print requests
+
 	event = Event.query.filter(Event.event_id == event_id).first()
-	print event.user_id
+
 	creator = User.query.filter(User.user_id == event.user_id).first()
-	print creator
+
 
 	for r in requests: 
 		attendee = User.query.filter(User.user_id == r.user_id).first()
 		attendees[r.user_id] = [event_id, attendee.first_name, attendee.last_name, attendee.user_image.image ]
 	attendees[creator.user_id] = [event_id, creator.first_name, creator.last_name, creator.user_image.image]
-	print attendees
+
 
 	return jsonify(attendees)
 
@@ -489,19 +483,19 @@ def view_event_friends():
 	
 	attendees = {}
 	event_id = request.args.get("event_id")
-	print event_id
+
 	requests = EventRequest.query.filter(EventRequest.event_id == event_id).all()
-	print requests
+
 	event = Event.query.filter(Event.event_id == event_id).first()
-	print event.user_id
+
 	creator = User.query.filter(User.user_id == event.user_id).first()
-	print creator
+
 
 	for r in requests: 
 		attendee = User.query.filter(User.user_id == r.user_id).first()
 		attendees[r.user_id] = [event_id, attendee.first_name, attendee.last_name, attendee.user_image.image]
 	attendees[creator.user_id] = [event_id, creator.first_name, creator.last_name, creator.user_image.image]
-	print attendees
+
 
 	return jsonify(attendees)
 
