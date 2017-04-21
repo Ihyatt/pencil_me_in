@@ -1,7 +1,7 @@
 "use strict";
 
 function restaurantAdded(){
-  console.log("study location added YAY");
+//   write a check to test success
 }
 
 function addRestaurant(evt){
