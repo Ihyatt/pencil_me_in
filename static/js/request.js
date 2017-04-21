@@ -2,7 +2,7 @@
 // #################################################################
 
 function requestSent() {
-  console.log("request sent");
+//   write a test to check success
 }
 
 
