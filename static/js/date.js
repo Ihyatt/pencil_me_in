@@ -1,4 +1,3 @@
-
 // calendar JS
 // #################################################################
 
@@ -18,7 +17,7 @@ $('#datetimepicker6').datetimepicker();
 // #################################################################
 
 function startDateAdded() {
-	console.log("start date added")
+	// write a test to check success of function
 }
 
 
@@ -42,7 +41,7 @@ $(".start").click(saveStartDate);
 // add end date
 // #################################################################
 function endDateAdded() {
-	console.log("end date added")
+	// write a test to check success of function
 }
 
 
