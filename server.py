@@ -3,8 +3,6 @@
 import os
 from datetime import datetime
 from jinja2 import StrictUndefined
-# from flask import send_from_directory
-# using Katie L. info
 import psycopg2
 import urlparse
 import yelp
