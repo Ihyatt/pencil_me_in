@@ -18,7 +18,7 @@ from operator import attrgetter
 
 from flask import Flask, render_template, redirect, request, flash, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
-# using to hash passwords
+
 
 
 from model import User, UserImage, Event, EventImage, EventRequest, connect_to_db, db
@@ -27,12 +27,11 @@ from werkzeug import secure_filename
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
+
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
 
-# Extra places for collectstatic to find static files.
+# Extra places for collect static to find static files.
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
@@ -44,7 +43,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static/images')
 )
-# UPLOAD_FOLDER = '/Users/Inashyatt1/desktop/pencilmein/static/images'
+
 UPLOAD_FOLDER = STATICFILES_DIRS
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
@@ -350,15 +349,12 @@ def send_request():
 	friend_id = request.form.get('request')
 	event = EventRequest.query.filter(EventRequest.user_id == friend_id, EventRequest.event_id == event_id).first()
 	
-	if event:
-		
-		print"friend already added"
-	else:
+	if not event:
 		event_request = EventRequest(user_id=friend_id, event_id=event_id, accepted=True)
 
 		db.session.add(event_request)
 		db.session.commit()
-		print "friend added once"
+	
 	return "friend added"
 
 
