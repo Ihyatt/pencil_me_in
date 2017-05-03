@@ -64,7 +64,7 @@ class TestAPI(unittest.TestCase):
     def test_yelp_search(self):
     	"""tests route using yelp API"""
 
-        result = self.client.post('/search-restaurant.json',
+        result = self.client.post('/search-location.json',
                                   {'location': 'San Francisco',
                                    'term': 'library'})
 
