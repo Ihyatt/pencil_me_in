@@ -49,18 +49,6 @@ class TestAPI(unittest.TestCase):
         # Connect to the database
         connect_to_db(app)
 
-    def _mock_search_restaurant(location, term):
-        """mock yelp API results"""
-        return [{'name': 'El Farolito',
-                 'rating': 4.0,
-                 'latitude': 37.774136,
-                 'longitude': -122.424819,
-                 'categories': ['Restaurant', 'restaurant'],
-                 'neighborhoods': ['Mission'],
-                 'address': ['2222 Mission Street'],
-                 'url': 'yelp.com'}]
-    yelp.get_results = _mock_search_restaurant
-
     def test_yelp_search(self):
     	"""tests route using yelp API"""
 
